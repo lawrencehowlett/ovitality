@@ -1,5 +1,5 @@
 <?php
-class RecipeCategory extends DataObject {
+class ProductCategory extends DataObject {
 	
 	private static $db = array(
 		"Title" => "Varchar(255)",
@@ -8,7 +8,7 @@ class RecipeCategory extends DataObject {
 	);
 
 	private static $belongs_many_many = array(
-		"Recipes" => "Recipe",
+		"Products" => "Product",
 	);
 
 	private static $singular_name = 'Category';
@@ -18,7 +18,7 @@ class RecipeCategory extends DataObject {
 	public function getCMSFields() {
 		$fields = parent::getCMSFields();
 
-		$fields->removeByName('Recipes');
+		$fields->removeByName('Products');
 		$fields->removeFieldsFromTab(
 			'Root.Main', 
 			array('URLSegment', 'SortOrder')
@@ -33,7 +33,7 @@ class RecipeCategory extends DataObject {
 		if (!$this->URLSegment) {
 			$urlSegment = str_replace(' ', '-', strtolower(preg_replace("/[^a-zA-Z0-9\/_|+ -]/", '', $this->Title)));
 			$urlSegment = str_replace('%20', '', $urlSegment);
-			$job = Recipe::get()->filter(array('URLSegment' => $urlSegment))->First();
+			$job = ProductCategory::get()->filter(array('URLSegment' => $urlSegment))->First();
 			if ($job) {
 				$this->URLSegment .= $urlSegment . '-' . substr(md5(microtime()),rand(0,26),5);
 			} else {
@@ -43,6 +43,6 @@ class RecipeCategory extends DataObject {
     }
 
 	public function AbsoluteLink() {
-		return Controller::join_links(RecipesPage::get()->First()->Link(), "category", $this->URLSegment);
+		return Controller::join_links(ProductPage::get()->First()->Link(), "category", $this->URLSegment);
 	}
 }

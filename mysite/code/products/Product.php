@@ -1,24 +1,25 @@
 <?php
-class Recipe extends DataObject {
+class Product extends DataObject {
 
 	private static $db = array(
 		'Title' => 'Text', 
+		'PurchaseLink' => 'Text', 
 		'Content' => 'HTMLText', 
 		'URLSegment' => 'Text', 
 		'SortOrder' => 'Int'
 	);
 
 	private static $has_many = array(
-		'GalleryImages' => 'RecipeGalleryImage'
+		'GalleryImages' => 'ProductGalleryImage'
 	);
 
 	private static $many_many = array(
-		'Categories' => 'RecipeCategory'
+		'Categories' => 'ProductCategory'
 	);
 
-	private static $singular_name = 'Video';
+	private static $singular_name = 'Product';
 
-	private static $plural_name = 'Videos';		
+	private static $plural_name = 'Product';		
 
 	private static $summary_fields = array(
 		'Title' => 'Title'
@@ -39,21 +40,26 @@ class Recipe extends DataObject {
 		);
 
 		$fields->dataFieldbyName('Content')
-			->setRows(20);		
+			->setRows(20);
+
+		$fields->replaceField(
+			'PurchaseLink', 
+			TextField::create('PurchaseLink', 'Purchase Link')
+		);
 
 		if ($this->ID) {
 			$fields->insertAfter(
 				TagField::create(
 					'Categories',
 					'Categories',
-					RecipeCategory::get(),
+					ProductCategory::get(),
 					$this->Categories()
 				)->setShouldLazyLoad(true)->setCanCreate(true), 
 				'Title'	
 			);
 
 			$gridFieldBulkUpload = new GridFieldBulkUpload();
-			$gridFieldBulkUpload->setUfSetup('setFolderName', 'Recipes/ ' .$this->ID. '/GalleryImages/');
+			$gridFieldBulkUpload->setUfSetup('setFolderName', 'Products/' .$this->ID. '/GalleryImages/');
 			$fields->dataFieldByName('GalleryImages')
 				->getConfig()
 				->addComponent(new GridFieldSortableRows('SortOrder'))
@@ -69,7 +75,7 @@ class Recipe extends DataObject {
 		if (!$this->URLSegment) {
 			$urlSegment = str_replace(' ', '-', strtolower(preg_replace("/[^a-zA-Z0-9\/_|+ -]/", '', $this->Title)));
 			$urlSegment = str_replace('%20', '', $urlSegment);
-			$job = Recipe::get()->filter(array('URLSegment' => $urlSegment))->First();
+			$job = Product::get()->filter(array('URLSegment' => $urlSegment))->First();
 			if ($job) {
 				$this->URLSegment .= $urlSegment . '-' . substr(md5(microtime()),rand(0,26),5);
 			} else {
@@ -80,8 +86,8 @@ class Recipe extends DataObject {
 
     public function AbsoluteLink() {
 		return Controller::join_links(
-            RecipesPage::get()->First()->Link(),
-            'recipe',
+            ProductPage::get()->First()->Link(),
+            'product',
             $this->URLSegment
         );
     }	

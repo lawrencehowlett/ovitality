@@ -33,7 +33,7 @@ class WorkoutVideoCategory extends DataObject {
 		if (!$this->URLSegment) {
 			$urlSegment = str_replace(' ', '-', strtolower(preg_replace("/[^a-zA-Z0-9\/_|+ -]/", '', $this->Title)));
 			$urlSegment = str_replace('%20', '', $urlSegment);
-			$job = WorkoutVideo::get()->filter(array('URLSegment' => $urlSegment))->First();
+			$job = WorkoutVideoCategory::get()->filter(array('URLSegment' => $urlSegment))->First();
 			if ($job) {
 				$this->URLSegment .= $urlSegment . '-' . substr(md5(microtime()),rand(0,26),5);
 			} else {
