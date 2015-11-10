@@ -7,8 +7,9 @@ class ReferralReport extends SS_Report {
 
     public function columns() {
         $fields = array(
-            'Member.FullName' => 'Member', 
-            'Member.Email' => 'Email'
+        	'FullName' => 'Name', 
+        	'Email' => 'Email', 
+        	'NumberOfReferrals' => 'Number of referrals'
         );
 
         return $fields;
@@ -25,11 +26,11 @@ class ReferralReport extends SS_Report {
 		);
 
 		return $fields;
-	}  
+	}
 
     public function sourceRecords($params = null) {
-        $referrals = Referral::get();
-        echo $referrals->Count('MemberID');
+    	$result = new ArrayList();
+        $referrals = Referral::get()->sort('MemberID');
 
 		if (isset($params['DateFrom']) && $params['DateFrom']) {
 			$referrals = $referrals->filter(array('Created:GreaterThan' => $params['DateFrom'] . ' 00:00:00'));
@@ -39,15 +40,20 @@ class ReferralReport extends SS_Report {
 			$referrals = $referrals->filter(array('Created:LessThan' => $params['DateTo'] . ' 23:59:59'));
 		}
 
-		//$referrals->sort('Count(*) DESC');
+		$groupedReferrals = GroupedList::create($referrals);
+		$groupedReferrals = $groupedReferrals->GroupedBy('MemberID');
 
-		/*foreach ($referrals as $referral) {
-			$isReferral = $result->filter(array('MemberID' => $referral->MemberID))->First();
-			if (!$isReferral) {
-				$result->push($referral);
-			}
-		}*/
+		foreach ($groupedReferrals as $referral) {
+			$member = Member::get()->byID($referral->MemberID);
+			$result->push(new ArrayData(array(
+				'FullName' => $member->FirstName . ' ' . $member->Surname, 
+				'Email' => $member->Email,
+				'NumberOfReferrals' => $referrals->filter(array('MemberID' => $referral->MemberID))->Count()
+			)));
+		}
 
-		return $referrals;
+		$result = $result->sort('NumberOfReferrals DESC');
+
+		return $result;
     }
 }

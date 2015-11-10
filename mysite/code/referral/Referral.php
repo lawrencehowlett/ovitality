@@ -19,4 +19,8 @@ class Referral extends DataObject {
 	public function NumberOfReferrals($from = null, $to = null) {
 		return 0;
 	}
+
+	public function MemberInstance() {
+		Member::get()->byID($this->MemberID);
+	}
 }

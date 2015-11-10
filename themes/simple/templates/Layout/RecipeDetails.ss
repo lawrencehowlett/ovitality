@@ -5,3 +5,6 @@
 		$Content
 	</article>
 </div>
+<section>
+	<% include Disqus %>
+</section>
