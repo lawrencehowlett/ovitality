@@ -1,0 +1,21 @@
+
+##
+# Host Database
+#
+# localhost is used to configure the loopback interface
+# when the system is booting.  Do not change this entry.
+##
+127.0.0.1       localhost
+255.255.255.255 broadcasthost
+::1             localhost
+
+#127.0.0.1      www.facebook.com
+
+# ADOBE CS6 BLOCK
+127.0.0.1 3dns.adobe.com 3dns-1.adobe.com 3dns-2.adobe.com 3dns-3.adobe.com 3dns-4.a$
+127.0.0.1 activate.wip1.adobe.com activate.wip2.adobe.com activate.wip3.adobe.com ac$
+127.0.0.1 adobeereg.com practivate.adobe practivate.adobe.com practivate.adobe.newoa$
+127.0.0.1 ereg.wip2.adobe.com ereg.wip3.adobe.com ereg.wip4.adobe.com hl2rcv.adobe.c$
+127.0.0.1 www.adobeereg.com wwis-dubc1-vip60.adobe.com www.wip.adobe.com www.wip1.ad$
+127.0.0.1 www.wip2.adobe.com www.wip3.adobe.com www.wip4.adobe.com wwis-dubc1-vip60.$
+# END OF ADOBE CS6
