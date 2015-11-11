@@ -18,3 +18,14 @@ Member:
 SiteConfig:
   extensions:
     - ReferralSetting
+
+Page:
+  extensions:
+    - 'AdvancedWidgetPageExtension'
+
+Blog:
+  extensions:
+    - Blog_Extension
+BlogPost:
+  extensions:
+    - BlogPost_Extension
