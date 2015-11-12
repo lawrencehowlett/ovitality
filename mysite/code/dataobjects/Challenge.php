@@ -28,5 +28,5 @@ class Challenge extends DataObject {
 			->addComponent(new GridFieldSortableRows('SortOrder'));
 
 		return $fields;
-	}	
+	}
 }

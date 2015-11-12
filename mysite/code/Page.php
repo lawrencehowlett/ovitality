@@ -15,15 +15,15 @@ class Page extends SiteTree {}
  */
 class Page_Controller extends ContentController implements PermissionProvider {
 
+	private static $allowed_actions = array(
+		'RegisterForm'
+	);
+
 	/**
 	 * Initialise the controller
 	 */
 	public function init() {
 		parent::init();
-
-		/*$rand = new RandomGenerator();
-		echo substr($rand->randomToken(), 0, -100);
-		exit();*/
 	}
 
 	/**
@@ -40,4 +40,32 @@ class Page_Controller extends ContentController implements PermissionProvider {
 			'LEVEL_3' => 'Points + Recipes + Workout videos'
 		);
 	}
+
+	public function RegisterForm() {
+		$form = new Form (
+			$this,
+			'RegisterForm',
+			singleton('Member')->getRegisterFields(),
+			new FieldList(
+				new FormAction('register', 'Join Now')
+			)
+		);
+
+		return $form;		
+	}
+
+	public function register($data, Form $form) {
+		$member = new Member();
+		$form->saveInto($member);
+
+		try {
+			$member->write();
+			$member->login();
+		} catch(ValidationException $e) {
+			$form->sessionMessage($e->getResult()->message(), 'bad');
+			return $this->redirectBack();
+		}
+
+		return $this->redirect(MemberStartPage::get()->First()->Link());	
+	}	
 }
