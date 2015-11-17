@@ -17,6 +17,7 @@ Member:
 
 SiteConfig:
   extensions:
+    - SiteConfig_Extension
     - ReferralSetting
 
 Page:

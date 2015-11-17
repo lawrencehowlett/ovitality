@@ -16,7 +16,7 @@ class Page extends SiteTree {}
 class Page_Controller extends ContentController implements PermissionProvider {
 
 	private static $allowed_actions = array(
-		'RegisterForm'
+		'RegisterForm', 'SearchForm'
 	);
 
 	/**
@@ -24,6 +24,29 @@ class Page_Controller extends ContentController implements PermissionProvider {
 	 */
 	public function init() {
 		parent::init();
+
+		Requirements::css('themes/ovitality/css/bootstrap.css');
+		Requirements::css('themes/ovitality/css/themify-icons.css');
+		Requirements::css('themes/ovitality/css/flexslider.css');
+		Requirements::css('themes/ovitality/css/lightbox.min.css');
+		Requirements::css('themes/ovitality/css/ytplayer.css');
+		Requirements::css('themes/ovitality/css/theme.css');
+		Requirements::css('themes/ovitality/css/custom.css');
+		Requirements::css('http://fonts.googleapis.com/css?family=Lato:300,400%7CRaleway:100,400,300,500,600,700%7COpen+Sans:400,500,600');
+	
+		Requirements::javascript('themes/acs/js/jquery.min.js');
+		Requirements::javascript('themes/acs/js/bootstrap.min.js');
+		Requirements::javascript('themes/acs/js/flickr.js');
+		Requirements::javascript('themes/acs/js/flexslider.min.js');
+		Requirements::javascript('themes/acs/js/lightbox.min.js');
+		Requirements::javascript('themes/acs/js/masonry.min.js');
+		Requirements::javascript('themes/acs/js/twitterfetcher.min.js');
+		Requirements::javascript('themes/acs/js/spectragram.min.js');
+		Requirements::javascript('themes/acs/js/ytplayer.min.js');
+		Requirements::javascript('themes/acs/js/countdown.min.js');
+		Requirements::javascript('themes/acs/js/smooth-scroll.min.js');
+		Requirements::javascript('themes/acs/js/parallax.js');
+		Requirements::javascript('themes/acs/js/scripts.js');
 	}
 
 	/**
@@ -40,6 +63,30 @@ class Page_Controller extends ContentController implements PermissionProvider {
 			'LEVEL_3' => 'Points + Recipes + Workout videos'
 		);
 	}
+
+	public function CurrentUser() {
+		return Member::currentUser();
+	}
+
+	public function getIsAdminLoginPage() {
+		if ($this->owner->URLSegment == 'Security') {
+			return true;
+		}
+
+		return false;
+	}	
+
+	public function SearchForm() {
+		$form = parent::SearchForm();
+		$form->addExtraClass('search-form');
+
+		$fields = $form->Fields();
+		$fields->dataFieldByName('Search')
+			->setAttribute('placeholder', 'Type here')
+			->setValue('');
+
+		return $form;
+	}	
 
 	public function RegisterForm() {
 		$form = new Form (

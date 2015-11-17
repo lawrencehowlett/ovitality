@@ -13,10 +13,6 @@ class MemberPage_Controller extends Page_Controller {
 		}
 	}
 
-	public function CurrentUser() {
-		return Member::currentUser();
-	}
-
 	public function getChallenges() {
 		return Challenge::get();
 	}

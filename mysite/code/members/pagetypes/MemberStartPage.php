@@ -46,5 +46,9 @@ class MemberStartPage_Controller extends MemberPage_Controller {
 		);
 
 		return $this->redirectBack();	
-	}	
+	}
+
+	public function getChallenges() {
+		return Challenge::getInProgressChallenges();
+	}
 } 
