@@ -1,5 +1,7 @@
 <?php
-class ProductPage extends Page {}
+class ProductPage extends Page {
+	private static $icon = 'mysite/images/shopping-icon.png';
+}
 
 class ProductPage_Controller extends Page_Controller {
 
@@ -9,6 +11,12 @@ class ProductPage_Controller extends Page_Controller {
 
 	public function init() {
 		parent::init();
+
+		/*$product = $this->getCurrentProduct();
+		foreach ($product->GalleryImages() as $gallery) {
+			echo $gallery->Image()->Link() . "<br>";
+		}
+		exit();*/
 	}
 
 	public function index() {
@@ -23,7 +31,7 @@ class ProductPage_Controller extends Page_Controller {
 			'Content'   => $details->Content
 		);
 
-		return $this->customise($data)->renderWith(array('ProductDetails', 'ProductPage', 'Page'));
+		return $this->customise($data)->renderWith(array('ProductPage_details', 'ProductPage', 'Page'));
 	}
 
 	public function category() {
@@ -51,6 +59,17 @@ class ProductPage_Controller extends Page_Controller {
 		return ProductCategory::get();
 	}
 
+	public function getCurrentProduct() {
+		$product = $this->request->param("ID");
+		if($product) {
+			return $this->getProducts()
+				->filter("URLSegment", $product)
+				->first();
+		}
+
+		return null;
+	}
+
 	public function getCurrentCategory() {
 		$category = $this->request->param("ID");
 		if($category) {
@@ -58,6 +77,7 @@ class ProductPage_Controller extends Page_Controller {
 				->filter("URLSegment", $category)
 				->first();
 		}
+
 		return null;
 	}	
 }

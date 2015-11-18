@@ -34,19 +34,19 @@ class Page_Controller extends ContentController implements PermissionProvider {
 		Requirements::css('themes/ovitality/css/custom.css');
 		Requirements::css('http://fonts.googleapis.com/css?family=Lato:300,400%7CRaleway:100,400,300,500,600,700%7COpen+Sans:400,500,600');
 	
-		Requirements::javascript('themes/acs/js/jquery.min.js');
-		Requirements::javascript('themes/acs/js/bootstrap.min.js');
-		Requirements::javascript('themes/acs/js/flickr.js');
-		Requirements::javascript('themes/acs/js/flexslider.min.js');
-		Requirements::javascript('themes/acs/js/lightbox.min.js');
-		Requirements::javascript('themes/acs/js/masonry.min.js');
-		Requirements::javascript('themes/acs/js/twitterfetcher.min.js');
-		Requirements::javascript('themes/acs/js/spectragram.min.js');
-		Requirements::javascript('themes/acs/js/ytplayer.min.js');
-		Requirements::javascript('themes/acs/js/countdown.min.js');
-		Requirements::javascript('themes/acs/js/smooth-scroll.min.js');
-		Requirements::javascript('themes/acs/js/parallax.js');
-		Requirements::javascript('themes/acs/js/scripts.js');
+		Requirements::javascript('themes/ovitality/js/jquery.min.js');
+		Requirements::javascript('themes/ovitality/js/bootstrap.min.js');
+		Requirements::javascript('themes/ovitality/js/flickr.js');
+		Requirements::javascript('themes/ovitality/js/flexslider.min.js');
+		Requirements::javascript('themes/ovitality/js/lightbox.min.js');
+		Requirements::javascript('themes/ovitality/js/masonry.min.js');
+		Requirements::javascript('themes/ovitality/js/twitterfetcher.min.js');
+		Requirements::javascript('themes/ovitality/js/spectragram.min.js');
+		Requirements::javascript('themes/ovitality/js/ytplayer.min.js');
+		Requirements::javascript('themes/ovitality/js/countdown.min.js');
+		Requirements::javascript('themes/ovitality/js/smooth-scroll.min.js');
+		Requirements::javascript('themes/ovitality/js/parallax.js');
+		Requirements::javascript('themes/ovitality/js/scripts.js');
 	}
 
 	/**

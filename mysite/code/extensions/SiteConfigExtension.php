@@ -15,8 +15,8 @@ class SiteConfig_Extension extends DataExtension {
 	);
 
 	private static $has_many = array(
-		//'FooterMenus' => 'FooterMenu', 
-		//'SocialMediaServices' => 'SocialMediaService'
+		'FooterMenus' => 'FooterMenu', 
+		'SocialMediaServices' => 'SocialMediaService'
 	);
 
 	public function updateCMSFields(FieldList $fields) {
@@ -34,7 +34,7 @@ class SiteConfig_Extension extends DataExtension {
 			UploadField::create('Logo', 'Logo')
 		);		
 
-		/*$fields->addFieldToTab(
+		$fields->addFieldToTab(
 			'Root.FooterMenus', 
 			GridField::create(
 				'FooterMenus', 
@@ -54,7 +54,7 @@ class SiteConfig_Extension extends DataExtension {
 				GridFieldConfig_RecordEditor::create()
 					->addComponent(new GridFieldSortableRows('SortOrder'))
 			)
-		);*/
+		);
 	}
 
 	private function getContactfields(&$fields) {

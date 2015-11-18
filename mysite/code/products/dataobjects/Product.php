@@ -4,6 +4,7 @@ class Product extends DataObject {
 	private static $db = array(
 		'Title' => 'Text', 
 		'PurchaseLink' => 'Text', 
+		'Summary' => 'HTMLText', 
 		'Content' => 'HTMLText', 
 		'URLSegment' => 'Text', 
 		'SortOrder' => 'Int'
@@ -25,6 +26,13 @@ class Product extends DataObject {
 		'Title' => 'Title'
 	);
 
+	private static $searchable_fields = array(
+		'Title' => 'Title', 
+		'Categories.ID' => array(
+			'title' => 'Categories'
+		)
+	);
+
 	public function getCMSFields() {
 		$fields = parent::getCMSFields();
 
@@ -41,6 +49,8 @@ class Product extends DataObject {
 
 		$fields->dataFieldbyName('Content')
 			->setRows(20);
+		$fields->dataFieldbyName('Summary')
+			->setRows(10);
 
 		$fields->replaceField(
 			'PurchaseLink', 

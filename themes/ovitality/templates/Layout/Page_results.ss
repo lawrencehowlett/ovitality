@@ -4,7 +4,7 @@
             <div class="col-md-12">
                 <h3 class="uppercase mb0">$Title</h3>
                 <% if $Query %>
-                    <h4><strong>You searched for &quot;{$Query}&quot;</strong></h4>
+                   <p class="lead mb0">You searched for &quot;{$Query}&quot;</strong></p>
                 <% end_if %>
             </div>
         </div>

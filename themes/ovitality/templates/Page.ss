@@ -17,7 +17,7 @@
 <% include Header %>
 	<div class="main-container">
 		<% if not $IsAdminLoginPage %>
-			$Layout		
+			$Layout
 		<% else %>
             <section class="cover fullscreen image-bg overlay">
                 <div class="background-image-holder">
@@ -32,12 +32,10 @@
                             </div>
                         </div>
                     </div>
-                    <!--end of row-->
                 </div>
-                <!--end of container-->
             </section>			
 		<% end_if %>
+        <% include Footer %>
 	</div>
-<% include Footer %>
 </body>
 </html>
