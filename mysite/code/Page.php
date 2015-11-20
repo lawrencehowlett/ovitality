@@ -46,7 +46,38 @@ class Page_Controller extends ContentController implements PermissionProvider {
 		Requirements::javascript('themes/ovitality/js/countdown.min.js');
 		Requirements::javascript('themes/ovitality/js/smooth-scroll.min.js');
 		Requirements::javascript('themes/ovitality/js/parallax.js');
+		Requirements::javascript('https://maps.googleapis.com/maps/api/js?key=AIzaSyD0jji5gjOj_ImX4uSgNd0dwIy09yL7kbQ');
 		Requirements::javascript('themes/ovitality/js/scripts.js');
+
+		$blockMap = $this->getBlockMap();
+		$title = '';
+		$lat = '';
+		$long = '';
+		Requirements::customScript(<<<JS
+			var googleMapTitle = '';
+			var googleMapMarker = '';
+			var googleLat = '';
+			var googleLong = '';
+JS
+		);	
+		if ($blockMap) {
+			$marker = $this->getBlockMap()->Marker()->Link();
+			if ($blockMap) {
+				if ($blockMap->RegionalOffices()->First()) {
+					$title = $blockMap->RegionalOffices()->First()->Title;
+					$lat = $blockMap->RegionalOffices()->First()->GoogleMapLat;
+					$long = $blockMap->RegionalOffices()->First()->GoogleMapLong;
+				}
+
+				Requirements::customScript(<<<JS
+					var googleMapTitle = '$title';
+					var googleMapMarker = '$marker';
+					var googleLat = '$lat';
+					var googleLong = '$long';
+JS
+				);			
+			}	
+		}	
 	}
 
 	/**
@@ -114,5 +145,9 @@ class Page_Controller extends ContentController implements PermissionProvider {
 		}
 
 		return $this->redirect(MemberStartPage::get()->First()->Link());	
+	}	
+
+	public function getBlockMap() {
+		return $this->Blocks()->filter(array('ClassName' => 'BlockMap'))->first();
 	}	
 }

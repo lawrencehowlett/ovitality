@@ -1,5 +1,6 @@
 <?php
-class HomePage extends Page {
+class HomePage extends GenericPage {
+	private static $icon = 'mysite/images/home-icon.png';
 }
 
-class HomePage_Controller extends Page_Controller {}
+class HomePage_Controller extends GenericPage_Controller {}

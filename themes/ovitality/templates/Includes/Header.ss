@@ -91,7 +91,7 @@
         </div>
         <% if $SiteConfig.Logo %>
             <div class="text-center">
-                 <a href="index.html">
+                 <a href="$BaseHref">
                     <img class="logo logo-dark" alt="$SiteConfig.Title" src="$SiteConfig.Logo.Link">
                 </a>
             </div>

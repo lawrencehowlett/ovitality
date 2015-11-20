@@ -1,6 +1,6 @@
 <?php
-class ContactPage extends Page {
+class ContactPage extends GenericPage {
 	private static $icon = 'mysite/images/phone-icon.png';
 }
 
-class ContactPage_Controller extends Page_Controller {}
+class ContactPage_Controller extends GenericPage_Controller {}

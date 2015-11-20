@@ -1694,6 +1694,7 @@ textarea {
   font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 input[type="text"],
+input[type="email"], 
 button,
 textarea,
 select,
@@ -1703,6 +1704,7 @@ input[type="password"] {
   appearance: none;
 }
 .bg-secondary input[type="text"],
+.bg-secondary input[type="email"], 
 .bg-secondary textarea,
 .bg-secondary select {
   background: #fff;
@@ -1724,6 +1726,7 @@ input[type="password"] {
   cursor: default;
 }
 input[type="text"],
+input[type="email"],
 input[type="password"] {
   background: #f5f5f5;
   border: none;
@@ -1735,6 +1738,7 @@ input[type="password"] {
   border-radius: 0;
 }
 .image-bg input[type="text"],
+.image-bg input[type="email"],
 .image-bg textarea {
   color: #555;
 }
@@ -1749,6 +1753,7 @@ button.transparent {
   color: #fff !important	;
 }
 input[type="text"]:focus,
+input[type="email"]:focus,
 input[type="password"]:focus {
   outline: 1px solid #ccc;
 }
