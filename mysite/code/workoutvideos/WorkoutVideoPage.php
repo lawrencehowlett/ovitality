@@ -22,10 +22,11 @@ class WorkoutVideoPage_Controller extends Page_Controller {
 		$details = WorkoutVideo::get()->filter(array('URLSegment' => $request->param('ID')))->First();
 		$data = array (
 			'Title' => $details->Title, 
-			'Content'   => $details->Content
+			'Content'   => $details->Content, 
+			'VideoURL' => $details->Link
 		);
 
-		return $this->customise($data)->renderWith(array('WorkoutVideoDetails', 'WorkoutVideoPage', 'Page'));
+		return $this->customise($data)->renderWith(array('WorkoutVideoPage_details', 'WorkoutVideoPage', 'Page'));
 	}
 
 	public function category() {
