@@ -3,6 +3,7 @@ class RecipesPage extends Page {
 
 	private static $icon = 'mysite/images/recipes-icon.png';
 }
+
 class RecipesPage_Controller extends Page_Controller {
 
 	private static $allowed_actions = array(
@@ -22,10 +23,12 @@ class RecipesPage_Controller extends Page_Controller {
 		$details = Recipe::get()->filter(array('URLSegment' => $request->param('ID')))->First();
 		$data = array (
 			'Title' => $details->Title, 
-			'Content'   => $details->Content
+			'Content'   => $details->Content, 
+			'RecipeCategories' => $details->Categories(),
+			'GalleryImages' => $details->GalleryImages()
 		);
 
-		return $this->customise($data)->renderWith(array('RecipeDetails', 'RecipesPage', 'Page'));
+		return $this->customise($data)->renderWith(array('RecipesPage_details', 'RecipesPage', 'Page'));
 	}
 
 	public function category() {
