@@ -1704,6 +1704,7 @@ input[type="password"] {
   appearance: none;
 }
 .bg-secondary input[type="text"],
+.bg-secondary input[type="password"], 
 .bg-secondary input[type="email"], 
 .bg-secondary textarea,
 .bg-secondary select {

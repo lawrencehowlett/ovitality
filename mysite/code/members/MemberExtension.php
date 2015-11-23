@@ -66,8 +66,16 @@ class MemberExtension extends DataExtension {
 		$fields = new Fieldlist();
 		$memberFields = $this->owner->getMemberFormFields();
 
-		$fields->push($memberFields->dataFieldByName('ActivityNotification'));
-		$fields->push($memberFields->dataFieldByName('NewsNotification'));
+		$fields->push(
+			$memberFields
+				->dataFieldByName('ActivityNotification')
+				->setTitle('Send me activity notification')
+		);
+		$fields->push(
+			$memberFields
+				->dataFieldByName('NewsNotification')
+				->setTitle('Keep me up to date with new content')
+		);
 
 		return $fields;		
 	}

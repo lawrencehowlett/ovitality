@@ -1,7 +1,7 @@
 <div id="$HolderID" class="field<% if $extraClass %> $extraClass<% end_if %> input-with-label text-left">
 
 	<% if $Title %>
-		<span >$Title</label>
+		<span >$Title</span>
 	<% end_if %>
 		$Field
 	<% if $RightTitle %><label class="right" for="$ID">$RightTitle</label><% end_if %>

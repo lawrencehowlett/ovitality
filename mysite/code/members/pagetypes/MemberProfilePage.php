@@ -27,11 +27,16 @@ class MemberProfilePage_Controller extends MemberPage_Controller {
 			)
 		);
 		$form->loadDataFrom($member);
+		$form->setTemplate('ProfileForm');
 
 		return $form;		
 	}
 
 	public function updateProfile($data, Form $form) {
+		if (!$data['ProfileImage']['size']['Uploads'][0]) {
+			$form->Fields()->removeByName('ProfileImage');
+		}
+
 		$member = Member::currentUser();
 
 		$form->saveInto($member);
@@ -63,6 +68,7 @@ class MemberProfilePage_Controller extends MemberPage_Controller {
 		);
 
 		$form->loadDataFrom($member);
+		$form->setTemplate('ProfilePasswordForm');
 
 		return $form;		
 	}
@@ -88,7 +94,7 @@ class MemberProfilePage_Controller extends MemberPage_Controller {
 	}
 
 	public function ProfileNotificationForm() {
-		$member = Member::currentUser(); 
+		$member = Member::currentUser();
 		$form = new Form (
 			$this,
 			'ProfileNotificationForm',
@@ -98,6 +104,7 @@ class MemberProfilePage_Controller extends MemberPage_Controller {
 			)
 		);
 		$form->loadDataFrom($member);
+		$form->setTemplate('ProfileNotificationForm');
 
 		return $form;		
 	}

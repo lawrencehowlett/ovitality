@@ -33,14 +33,12 @@ class Page_Controller extends ContentController implements PermissionProvider {
 		Requirements::css('themes/ovitality/css/theme.css');
 		Requirements::css('themes/ovitality/css/custom.css');
 		Requirements::css('http://fonts.googleapis.com/css?family=Lato:300,400%7CRaleway:100,400,300,500,600,700%7COpen+Sans:400,500,600');
-	
+
 		Requirements::javascript('themes/ovitality/js/jquery.min.js');
 		Requirements::javascript('themes/ovitality/js/bootstrap.min.js');
-		Requirements::javascript('themes/ovitality/js/flickr.js');
 		Requirements::javascript('themes/ovitality/js/flexslider.min.js');
 		Requirements::javascript('themes/ovitality/js/lightbox.min.js');
 		Requirements::javascript('themes/ovitality/js/masonry.min.js');
-		Requirements::javascript('themes/ovitality/js/twitterfetcher.min.js');
 		Requirements::javascript('themes/ovitality/js/spectragram.min.js');
 		Requirements::javascript('themes/ovitality/js/ytplayer.min.js');
 		Requirements::javascript('themes/ovitality/js/countdown.min.js');
@@ -48,6 +46,8 @@ class Page_Controller extends ContentController implements PermissionProvider {
 		Requirements::javascript('themes/ovitality/js/parallax.js');
 		Requirements::javascript('https://maps.googleapis.com/maps/api/js?key=AIzaSyD0jji5gjOj_ImX4uSgNd0dwIy09yL7kbQ');
 		Requirements::javascript('themes/ovitality/js/scripts.js');
+
+		Requirements::block('framework/thirdparty/jquery/jquery.js');
 
 		$blockMap = $this->getBlockMap();
 		$title = '';
@@ -149,5 +149,13 @@ JS
 
 	public function getBlockMap() {
 		return $this->Blocks()->filter(array('ClassName' => 'BlockMap'))->first();
+	}
+
+	public function getMyProfilePage() {
+		return MemberProfilePage::get()->First();
+	}
+
+	public function getMyRecipesPage() {
+		return RecipesPage::get()->First();
 	}	
 }
