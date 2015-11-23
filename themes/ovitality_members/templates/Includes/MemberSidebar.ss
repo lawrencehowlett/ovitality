@@ -41,14 +41,20 @@
                         <% if $ID == $MyRecipesPage.ID %>
                             $MyRecipesPage.Title
                         <% else %>
-                            <a href="$MyRecipesPage.Link" title="Go to my profile page">$MyRecipesPage.Title</a>
+                            <a href="$MyRecipesPage.Link" title="Go to my recipes page">$MyRecipesPage.Title</a>
                         <% end_if %>
                     </span>
                 </div>
             </li>
-            <li>
+            <li class="<% if $ID == $MyWorkoutVideosPage.ID %>active<% end_if %>">
                 <div class="tab-title">
-                    <span>Workout Videos</span>
+                    <span>
+                        <% if $ID == $MyWorkoutVideosPage.ID %>
+                            $MyWorkoutVideosPage.Title
+                        <% else %>
+                            <a href="$MyWorkoutVideosPage.Link" title="Go to my workout videos page">$MyWorkoutVideosPage.Title</a>
+                        <% end_if %>
+                    </span>
                 </div>
             </li>
             <li>

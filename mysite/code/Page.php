@@ -157,5 +157,9 @@ JS
 
 	public function getMyRecipesPage() {
 		return RecipesPage::get()->First();
+	}
+
+	public function getMyWorkoutVideosPage() {
+		return WorkoutVideoPage::get()->First();
 	}	
 }

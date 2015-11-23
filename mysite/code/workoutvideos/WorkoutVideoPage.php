@@ -11,6 +11,16 @@ class WorkoutVideoPage_Controller extends Page_Controller {
 
 	public function init() {
 		parent::init();
+		Requirements::customScript(<<<JS
+			(function($) {
+			    $(document).ready(function(){
+			    	$('#VideoCategorySelection').change(function(){
+			    		window.location = $(this).val();
+			    	});
+			    });
+			})(jQuery);
+JS
+		);		
 	}
 
 	public function index() {
