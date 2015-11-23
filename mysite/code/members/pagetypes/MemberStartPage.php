@@ -24,11 +24,16 @@ class MemberStartPage_Controller extends MemberPage_Controller {
 			)
 		);
 		$form->loadDataFrom($member);
+		$form->setTemplate('ProfileImageForm');
 
 		return $form;		
 	}
 
 	public function updateImage($data, Form $form) {
+		if (!$data['ProfileImage']['size']['Uploads'][0]) {
+			$form->Fields()->removeByName('ProfileImage');
+		}
+
 		$member = Member::currentUser();
 
 		$form->saveInto($member);

@@ -1,4 +1,4 @@
-<div id="$HolderID" class="field<% if $extraClass %> $extraClass<% end_if %> input-with-label text-left">
+<div id="$HolderID" class="field<% if $extraClass %> $extraClass<% end_if %> text-left">
 	<span>$Title</span>
 	<div class="checkbox-option pull-right">
 	    <div class="inner"></div>

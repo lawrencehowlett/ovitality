@@ -11,7 +11,7 @@
 				<div class="line">
 					<div class="unit size1of1">
 						<h2>1. Complete your profile by uploading a picture of yourself</h2>				
-						$ProfileImageForm				
+						$ProfileImageForm
 					</div>
 				</div>
 				<div class="line">
