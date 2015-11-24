@@ -125,9 +125,13 @@ JS
 			'RegisterForm',
 			singleton('Member')->getRegisterFields(),
 			new FieldList(
-				new FormAction('register', 'Join Now')
-			)
+				new FormAction('register', 'Join OVitality')
+			), 
+			new RequiredFields('FirstName', 'Surname', 'Email', 'EmailConfirm', 'Phone', 'Password', 'ReasonForJoining')
 		);
+
+		$form->addExtraClass('text-left');
+		$form->setTemplate('RegisterForm');
 
 		return $form;		
 	}
@@ -161,5 +165,9 @@ JS
 
 	public function getMyWorkoutVideosPage() {
 		return WorkoutVideoPage::get()->First();
-	}	
+	}
+
+	public function getSignupPage() {
+		return SignupPage::get()->First();
+	}
 }

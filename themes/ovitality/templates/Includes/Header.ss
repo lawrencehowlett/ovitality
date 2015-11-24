@@ -84,7 +84,7 @@
                     <a href="#" class="btn btn-sm btn-filled">Go to your member area</a>
                 <% else %>
                     <a href="Security/login" class="btn btn-sm hidden-xs hidden-sm hidden-md">Sign In</a>
-                    <a href="#" class="btn btn-sm btn-filled">Sign Up</a>
+                    <a href="$SignupPage.Link" title="Go to signup page" class="btn btn-sm btn-filled">$SignupPage.Title</a>
                 <% end_if %>
             </div>            
 

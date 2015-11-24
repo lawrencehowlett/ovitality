@@ -3,7 +3,7 @@
     <div class="widget bg-secondary">
         <div class="image-tile outer-title text-center">
             <% if $CurrentUser.ProfileImage %>
-                <img src="$CurrentUser.ProfileImage.Link" alt="$CurrentUser.ProfileImage.Title">
+                <img src="$CurrentUser.ProfileImage.CroppedImage(150, 150).Link" alt="$CurrentUser.ProfileImage.Title">
             <% end_if %>
             <div class="title mb16">
                 <h5 class="uppercase mb0">$CurrentUser.FullName</h5>

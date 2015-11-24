@@ -5,7 +5,7 @@ class MemberExtension extends DataExtension {
 		'FreeTrialStartDate' => 'Date', 
 		'Phone' => 'Varchar', 
 		'Address' => 'Text', 
-		'ReasonForJoining' => 'Text', 
+		'ReasonForJoining' => 'Enum(array("On Radio", "Seminar", "Google / Web Search", "Television", "Other"))', 
 		'ActivityNotification' => 'Boolean', 
 		'NewsNotification' => 'Boolean'
 	);
@@ -20,7 +20,7 @@ class MemberExtension extends DataExtension {
 
 	public function updateMemberFormFields(FieldList $fields) {
 		$fields->push(new TextareaField('Address', 'Address'));
-		$fields->push(new TextareaField('ReasonForJoining', 'Reason for joining'));
+		//$fields->push(new TextareaField('ReasonForJoining', 'Reason for joining'));
 
 		$fields->push(UploadField::create('ProfileImage', 'Profile image')->setFolderName('Members/' .$this->owner->ID. '/ProfileImages'));
 	}
@@ -85,10 +85,24 @@ class MemberExtension extends DataExtension {
 		$memberFields = $this->owner->getMemberFormFields();
 
 		$fields->push($memberFields->dataFieldByName('FirstName'));
-		$fields->push($memberFields->dataFieldByName('Surname'));
+		$fields->push(
+			$memberFields
+				->dataFieldByName('Surname')
+				->setTitle('Last Name')
+		);
 		$fields->push($memberFields->dataFieldByName('Email'));
-		$fields->push($memberFields->dataFieldByName('Phone'));
-		$fields->push($memberFields->dataFieldByName('ReasonForJoining'));
+		$fields->push(
+			$memberFields
+				->dataFieldByName('Phone')
+				->setTitle('Phone Number (preferably a mobile phone)')
+		);
+
+		$fields->push(
+			$memberFields
+				->dataFieldByName('ReasonForJoining')
+				->setTitle('How did you hear about us?')
+				->setEmptyString('Select one')
+		);
 
 		$password = $memberFields->dataFieldByName('Password');
 		if ($password) {
@@ -99,6 +113,8 @@ class MemberExtension extends DataExtension {
 
 			$fields->push($password);
 		}
+
+		$fields->push(EmailField::create('EmailConfirm', 'Email (Again)'));
 		
 		return $fields;		
 	}
