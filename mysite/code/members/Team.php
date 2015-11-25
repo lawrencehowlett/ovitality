@@ -10,7 +10,8 @@ class Team extends DataObject {
 	);
 
 	private static $has_one = array(
-		'TeamLeader' => 'Member'
+		'TeamLeader' => 'Member', 
+		'Challenge' => 'Challenge'
 	);
 
 	private static $many_many = array(
@@ -24,25 +25,16 @@ class Team extends DataObject {
 	public function getCMSFields() {
 		$fields = parent::getCMSFields();
 
+		$fields->removeFieldsFromTab(
+			'Root.Main', 
+			array('ChallengeID')
+		);
 		$fields->replaceField(
 			'Title', 
 			TextField::create('Title', 'Title')
 		);
 
 		return $fields;
-	}
-
-	public static function getAutoAllocationTeam() {
-		$teams = Team::get()->sort('Created ASC');
-		if ($teams) {
-			foreach ($teams as $team) {
-				if ($team->IsNotFull()) {
-					return $team;
-				}
-			}
-		}
-
-		return null;
 	}
 
 	public function IsNotFull() {

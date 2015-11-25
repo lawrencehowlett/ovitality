@@ -14,9 +14,15 @@
 
     <div class="button-tabs vertical">
         <ul>
-            <li>
+            <li class="<% if $ID == $MyDashboardPage.ID %>active<% end_if %>">
                 <div class="tab-title">
-                    <span>My Ovitality</span>
+                    <span>
+                        <% if $ID == $MyDashboardPage.ID %>
+                            My OVitality
+                        <% else %>
+                            <a href="$MyDashboardPage.Link" title="Go to my OVitality page">My OVitality</a>
+                        <% end_if %>
+                    </span>
                 </div>
             </li>
             <li class="<% if $ID == $MyProfilePage.ID %>active<% end_if %>">

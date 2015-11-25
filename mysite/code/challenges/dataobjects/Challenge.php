@@ -11,7 +11,12 @@ class Challenge extends DataObject {
 
 	private static $has_many = array(
 		'MembershipPlans' => 'ChallengeMembershipPlan', 
-		'DailyChallenges' => 'DailyChallenge'
+		'DailyChallenges' => 'DailyChallenge', 
+		'Teams' => 'Team'
+	);
+
+	private static $many_many = array(
+		'Members' => 'Member'
 	);
 
 	public function getCMSFields() {
@@ -52,6 +57,53 @@ class Challenge extends DataObject {
 			->setConfig('dateformat', 'dd/MM/yyy');
 
 		return $fields;
+	}
+
+	public function getAutoTeamAllocation($category = null) {
+		$teams = ($category) ? $this->Teams()->sort('Created ASC') : $this->Teams()->filter(array('Type' => $category))->sort('Created ASC');
+		if ($teams) {
+			foreach ($teams as $team) {
+				if ($team->IsNotFull()) {
+					return $team;
+				}
+			}
+		}
+
+		return null;
+	}
+
+	public function getAvailableTeams($category = null) {
+		$result = new ArrayList();
+		$teams = $this->Teams();
+		if ($category) {
+			$teams = $teams->filter(array('Type' => $category));
+		}
+
+		if ($teams->Count() > 0) {
+			foreach ($teams as $team) {
+				if ($team->Limit > $team->Members()->Count()) {
+					$result->push($team);
+				}
+			}
+		}
+
+		return $result;
+	}
+
+	public function HasAvailableTeams() {
+		if ($this->Teams()->Count() > 0) {
+			foreach ($this->Teams() as $team) {
+				if (!$team->Limit) {
+					return true;
+				}
+
+				if ($team->Limit > $team->Members()->Count()) {
+					return true;
+				}
+			}
+		}
+
+		return false;
 	}
 
 	public static function getInProgressChallenges() {

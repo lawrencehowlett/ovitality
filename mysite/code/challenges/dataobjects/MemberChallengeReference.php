@@ -3,8 +3,10 @@ class MemberChallengeReference extends DataObject {
 
 	private static $db = array(
 		'Title' => 'Varchar', 
-		'Motivation' => 'Text', 
-		'TeamAssignment' => 'Enum(array("Auto", "Manual", "New"), "Auto")', 
+		'Category' => 'Text', 
+		'AutoAssignedTeam' => 'Boolean', 
+		'ManuallyJoinedTeam' => 'Boolean', 
+		'CreatedTeam' => 'Boolean', 
 		'IndividualOrTeam' => 'Enum(array("Individual", "Team"), "Individual")'
 	);
 

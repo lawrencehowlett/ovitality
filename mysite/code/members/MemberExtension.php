@@ -15,12 +15,12 @@ class MemberExtension extends DataExtension {
 	);
 
 	private static $belongs_many_many = array(
-		'Teams' => 'Team'
+		'Teams' => 'Team', 
+		'Challenges' => 'Challenge'
 	);
 
 	public function updateMemberFormFields(FieldList $fields) {
 		$fields->push(new TextareaField('Address', 'Address'));
-		//$fields->push(new TextareaField('ReasonForJoining', 'Reason for joining'));
 
 		$fields->push(UploadField::create('ProfileImage', 'Profile image')->setFolderName('Members/' .$this->owner->ID. '/ProfileImages'));
 	}
@@ -128,5 +128,40 @@ class MemberExtension extends DataExtension {
 		$fields->push($uploadField);
 
 		return $fields;		
+	}
+
+	public function IsFreeTrial() {
+		$member = Member::currentUser();
+		$freeTrialDate = new DateTime($member->FreeTrialStartDate);
+		$nowDate = new DateTime();
+		$difference = $nowDate->diff($freeTrialDate);
+
+		if ($difference->format('%a') < 7) {
+			return true;
+		}
+
+		return false;
+	}
+
+	public function HasCurrentChallenge() {
+		return true;
+	}
+
+	public function sendWelcomeEmail($optionalData = null) {
+		$email = new Email('no-reply@ovitality.com', $this->owner->Email, 'Welcome to OVitality', null);
+		$email->setTemplate('WelcomeEmail');
+		$email->populateTemplate($this->owner);
+		$email->populateTemplate(array(
+			'BaseURL' => Director::absoluteBaseURL(),
+			'Logo' => SiteConfig::current_site_config()->Logo(), 
+			'ContactNumber' => SiteConfig::current_site_config()->ContactNumber, 
+			'DashboardPage' => MemberDashboardPage::get()->First()
+		));
+
+		if (count($optionalData)) {
+			$email->populateTemplate($optionalData);
+		}
+
+		$email->send();
 	}
 }

@@ -25,6 +25,8 @@ class Page_Controller extends ContentController implements PermissionProvider {
 	public function init() {
 		parent::init();
 
+		$member = Member::currentUser();
+
 		Requirements::css('themes/ovitality/css/bootstrap.css');
 		Requirements::css('themes/ovitality/css/themify-icons.css');
 		Requirements::css('themes/ovitality/css/flexslider.css');
@@ -143,6 +145,9 @@ JS
 		try {
 			$member->write();
 			$member->login();
+			$member->sendWelcomeEmail(
+				array('GeneratedPassword' => $data['Password']['_ConfirmPassword'])
+			);
 		} catch(ValidationException $e) {
 			$form->sessionMessage($e->getResult()->message(), 'bad');
 			return $this->redirectBack();
@@ -154,6 +159,10 @@ JS
 	public function getBlockMap() {
 		return $this->Blocks()->filter(array('ClassName' => 'BlockMap'))->first();
 	}
+
+	public function getMyDashboardPage() {
+		return MemberDashboardPage::get()->First();
+	}	
 
 	public function getMyProfilePage() {
 		return MemberProfilePage::get()->First();

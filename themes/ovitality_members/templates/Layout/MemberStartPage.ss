@@ -37,7 +37,7 @@
                                     <div class="col-md-6">
                                         <div class="feature feature-1 boxed text-center">
                                             <div>
-                                                <h5 class="uppercase">Challenge 1</h5>
+                                                <h5 class="uppercase">$Title</h5>
                                             </div>
                                             <p>Join a challenge</p>
                                             <a href="$JoinIndividualChallengeLink" class="btn">As Individual</a>
