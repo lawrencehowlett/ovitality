@@ -156,7 +156,7 @@ class Challenge extends DataObject {
 	public function getJoinIndividualChallengeLink() {
         return Controller::join_links(
             MemberJoinChallengePage::get()->First()->Link(),
-            'individual',
+            'SelectChallenge/individual',
             $this->ID
         );
 	}
@@ -164,7 +164,7 @@ class Challenge extends DataObject {
 	public function getJoinTeamChallengeLink() {
         return Controller::join_links(
             MemberJoinChallengePage::get()->First()->Link(),
-            'team',
+            'SelectChallenge/team',
             $this->ID
         );
 	}	

@@ -3,15 +3,13 @@ class ChallengeMembershipPlan extends DataObject {
 
 	private static $db = array(
 		'Title' => 'Text', 
-		'Price' => 'Currency'
+		'Price' => 'Currency', 
+		'Features' => 'HTMLText'
 	);
 
 	private static $has_one = array(
-		'Challenge' => 'Challenge'
-	);
-
-	private static $has_many = array(
-		'Features' => 'ChallengeMembershipPlanFeature'
+		'Challenge' => 'Challenge', 
+		'Level' => 'MembershipLevel'
 	);
 
 	public function getCMSFields() {
@@ -25,7 +23,22 @@ class ChallengeMembershipPlan extends DataObject {
 			'Title', 
 			TextField::create('Title', 'Title')
 		);
+		$fields->dataFieldByName('Features')
+			->setRows(20);
+
+		$fields->insertBefore(
+			'Features', 
+			$fields->dataFieldByName('LevelID')
+		);
 
 		return $fields;
+	}
+
+	public function SelectMembershipPlanLink() {
+		return Controller::join_links(
+            MemberJoinChallengePlanPage::get()->First()->Link(),
+            'SelectMembershipPlan',
+            $this->ID
+        );		
 	}
 }

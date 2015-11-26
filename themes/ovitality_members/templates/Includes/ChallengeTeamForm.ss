@@ -6,18 +6,28 @@
 		</div>
 	<% end_if %>
 
-	<div class="input-with-label">
-		<span>$Fields.dataFieldByName(Category).Title</span>
-		$Fields.dataFieldByName(Category)
-	</div>
+	<% if $Fields.dataFieldByName(Category) %>
+		<div class="input-with-label">
+			<span>$Fields.dataFieldByName(Category).Title</span>			
+			$Fields.dataFieldByName(Category)
+		</div>
+	<% end_if %>
 
-	$Fields.dataFieldByName(AutoAssignedTeam)
+	<% if $Fields.dataFieldByName(AutoAssignedTeam) %>
+		<span>$Fields.dataFieldByName(AutoAssignedTeam).Title</span>
+		<div class="checkbox-option pull-right">
+		    <div class="inner"></div>
+			$Fields.dataFieldByName(AutoAssignedTeam)
+		</div>
+	<% end_if %>
 
-	<h5 class="uppercase">Choose a method below to join a team</h5>
-	<div id="Form_Form_TeamAssignment" class="input-with-label">
-		<span>$Fields.dataFieldByName(TeamAssignment).Title</span>
-		$Fields.dataFieldByName(TeamAssignment)
-	</div>
+	<% if $Fields.dataFieldByName(TeamAssignment) %>
+		<h5 class="uppercase">Choose a method below to join a team</h5>
+		<div id="Form_Form_TeamAssignment" class="input-with-label">
+			<span>$Fields.dataFieldByName(TeamAssignment).Title</span>
+			$Fields.dataFieldByName(TeamAssignment)
+		</div>
+	<% end_if %>
 
 	<div id="JoinExistingTeam" class="input-with-label mt16" style="display: none;">
 		<span>$Fields.dataFieldByName(SuggestTeam).Title</span>

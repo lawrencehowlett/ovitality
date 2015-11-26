@@ -13,7 +13,8 @@ class MemberChallengeReference extends DataObject {
 	private static $has_one = array(
 		'Member' => 'Member', 
 		'Team' => 'Team', 
-		'Challenge' => 'Challenge'
+		'Challenge' => 'Challenge', 
+		'MembershipPlan' => 'MembershipPlan'
 	);
 
 	public function onBeforeWrite() {
@@ -29,6 +30,12 @@ class MemberChallengeReference extends DataObject {
 			'Root.Main', 
 			array('Title')
 		);
+
+		return $fields;
+	}
+
+	public function getReferenceFields() {
+		$fields = parent::getFrontendFields();
 
 		return $fields;
 	}

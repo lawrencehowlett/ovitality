@@ -30,3 +30,6 @@ Blog:
 BlogPost:
   extensions:
     - BlogPost_Extension
+
+Currency:
+  currency_symbol: '&#163;'
