@@ -3,7 +3,7 @@ class MemberChallengeReference extends DataObject {
 
 	private static $db = array(
 		'Title' => 'Varchar', 
-		'Category' => 'Text', 
+		'Category' => 'Enum(array("Competitive", "Motivation"))', 
 		'AutoAssignedTeam' => 'Boolean', 
 		'ManuallyJoinedTeam' => 'Boolean', 
 		'CreatedTeam' => 'Boolean', 
@@ -13,8 +13,8 @@ class MemberChallengeReference extends DataObject {
 	private static $has_one = array(
 		'Member' => 'Member', 
 		'Team' => 'Team', 
-		'Challenge' => 'Challenge', 
-		'MembershipPlan' => 'MembershipPlan'
+		'Challenge' => 'Challenge'//, 
+		//'MembershipPlan' => 'MembershipPlan'
 	);
 
 	public function onBeforeWrite() {
@@ -36,6 +36,15 @@ class MemberChallengeReference extends DataObject {
 
 	public function getReferenceFields() {
 		$fields = parent::getFrontendFields();
+
+		/*$fields->replaceField(
+			'Category', 
+			DropdownField::create(
+				'CategoryID', 
+				'What is your motivation', 
+				$this->dbObject('Category')->enumValues()
+			)
+		);*/
 
 		return $fields;
 	}

@@ -45,27 +45,34 @@ class MemberJoinChallengePage_Controller extends MemberPage_Controller {
 	}
 
 	public function Form() {
-		$fields = new FieldList();
-		if ($this->getChallenge()->HasAvailableTeams()) {
-			$fields->push(
-				DropdownField::create(
-					'Category', 
-					'What is your motivation', 
-					array(
-						'Competitive' => 'Competitive', 
-						'Motivation' => 'Motivation', 
-					)
-				)->setEmptyString('Select one')				
-			);
+		$reference = ($this->getReference()) ? $this->getReference() : singleton('MemberChallengeReference');
 
-			$fields->push(
-				CheckboxField::create(
-					'AutoAssignedTeam', 
-					'Yes please automatically assign me to a team.'
-				)				
-			);
+		$fields = $reference->getReferenceFields();
+		foreach ($fields as $field) {
+			if ($field->Title() == 'Category') {
+				Debug::dump($field);
+			}
 		}
-		
+
+		exit();
+		$fields->push(
+			DropdownField::create(
+				'Category', 
+				'What is your motivation', 
+				array(
+					'Competitive' => 'Competitive', 
+					'Motivation' => 'Motivation', 
+				)
+			)->setEmptyString('Select one')				
+		);
+
+		$fields->push(
+			CheckboxField::create(
+				'AutoAssignedTeam', 
+				'Yes please automatically assign me to a team.'
+			)				
+		);
+
         if ($this->getSesJoinChallenge()->IndividualOrTeam == 'team') {
         	$fields->removeByName('AutoAssignedTeam');
         	$fields->push(
@@ -179,8 +186,8 @@ class MemberJoinChallengePage_Controller extends MemberPage_Controller {
 			$form->sessionMessage($e->getResult()->message(), 'bad');
 			return $this->redirectBack();
 		}
-		exit();
-		return $this->redirect(MemberJoinChallengePlanPage::get()->First()->Link());
+		return $this->redirectBack();
+		//return $this->redirect(MemberJoinChallengePlanPage::get()->First()->Link());
 	}
 
 	public function getChallenge() {
@@ -189,5 +196,14 @@ class MemberJoinChallengePage_Controller extends MemberPage_Controller {
 
 	public function getSesJoinChallenge() {
 		return unserialize(Session::get('JoinChallenge'));
+	}
+
+	public function getReference() {
+		$sesJoinChallenge = $this->getSesJoinChallenge();
+		if ($sesJoinChallenge->ChallengeReferenceID) {
+			return MemberChallengeReference::get()->byID($sesJoinChallenge->ChallengeReferenceID);
+		}
+
+		return null;
 	}
 }
