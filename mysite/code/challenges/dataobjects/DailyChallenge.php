@@ -3,47 +3,56 @@ class DailyChallenge extends DataObject {
 
 	private static $db = array(
 		'Title' => 'Text', 
-		'Description' => 'Text', 
-		'Type' => 'Enum(array("slider", "number", "yesorno", "slider"))',
-		'Points' => 'Int', 
-		'SortOrder' => 'Int'
+		'Content' => 'HTMLText', 
+		'Date' => 'Date'
 	);
 
 	private static $has_one = array(
-		'Challenge' => 'Challenge'
+		'Challenge' => 'Challenge', 
+		'Image' => 'Image'
 	);
 
-	private static $has_many = array(
-		'FeaturedImages' => 'DailyChallengeImage'
+	private static $many_many = array(
+		'DailyActivities' => 'DailyActivity'
 	);
 
-	private static $default_sort = 'SortOrder';
+	private static $default_sort = 'Date ASC';
 
 	public function getCMSFields() {
 		$fields = parent::getCMSFields();
 
 		$fields->removeFieldsFromTab(
 			'Root.Main', 
-			array('ChallengeID', 'SortOrder')
+			array('ChallengeID')
 		);
-
 		$fields->replaceField(
 			'Title', 
 			TextField::create('Title', 'Title')
 		);
+		$fields->dataFieldByName('Content')
+			->setRows(20);
 
-		$fields->dataFieldByName('Type')
-			->setEmptyString('choose a type');
+		$fields->dataFieldByName('Date')
+			->setConfig('showcalendar', true)
+			->setConfig('dateformat', 'dd/MM/YYYY')
+			->setTitle('Choose the date of the challenge');
 
-		if ($this->ID) {
-			$gridFieldBulkUpload = new GridFieldBulkUpload();
-			$gridFieldBulkUpload->setUfSetup('setFolderName', 'Challenges/' . $this->Challenge()->ID . '/DailyChallenges/' . $this->ID . '/Images');
-			$fields->dataFieldByName('FeaturedImages')
-				->getConfig()
-				->addComponent(new GridFieldSortableRows('SortOrder'))
-				->addComponent($gridFieldBulkUpload);
+
+		if (!$this->ID) {
+			$fields->removeFieldsFromTab(
+				'Root.Main', 
+				array('ChallengeID', 'Image', 'Description', 'Type', 'Points')
+			);
+		} else {
+
+			$fields->dataFieldByName('Image')
+				->setFolderName('Challenge/' . $this->ChallengeID . '/DailyChallenges/');
 		}
 
 		return $fields;
+	}
+
+	public function onBeforeWrite() {
+		parent::onBeforeWrite();
 	}
 }

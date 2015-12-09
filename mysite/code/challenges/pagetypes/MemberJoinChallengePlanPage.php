@@ -14,15 +14,20 @@ class MemberJoinChallengePlanPage_Controller extends MemberPage_Controller {
 	}
 
 	public function SelectMembershipPlan(SS_HTTPRequest $request) {
-		$planID = $request->param('ID');
-		if ($planID) {
-			
+		$reference = MemberChallengeReference::get()->byID($this->getSesJoinChallenge()->ChallengeReferenceID);
+		if ($reference) {
+			$reference->MembershipPlanID = $request->param('ID');
+			$reference->write();
 		}
-		exit();
+
+		$this->redirect(MemberJoinChallengePayPage::get()->First()->Link());
 	}
 
 	public function getChallenge() {
-		$id = Session::get('EnteredChallengeID');
-		return Challenge::get()->byID($id);
+		return Challenge::get()->byID($this->getSesJoinChallenge()->ChallengeID);
+	}
+
+	public function getSesJoinChallenge() {
+		return unserialize(Session::get('JoinChallenge'));
 	}
 }

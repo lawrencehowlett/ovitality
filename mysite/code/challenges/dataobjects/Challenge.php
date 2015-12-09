@@ -5,6 +5,7 @@ class Challenge extends DataObject {
 		'Title' => 'Text', 
 		'Content' => 'HTMLText', 
 		'Summary' => 'HTMLText', 
+		'Status' => 'Enum(array("Unpublished", "Published"), "Unpublished")', 
 		'StartDate' => 'Date', 
 		'EndDate' => 'Date'
 	);
@@ -12,6 +13,7 @@ class Challenge extends DataObject {
 	private static $has_many = array(
 		'MembershipPlans' => 'ChallengeMembershipPlan', 
 		'DailyChallenges' => 'DailyChallenge', 
+		'DailyActivities' => 'DailyActivity', 
 		'Teams' => 'Team'
 	);
 
@@ -34,8 +36,7 @@ class Challenge extends DataObject {
 
 		if ($this->ID) {
 			$fields->dataFieldByName('DailyChallenges')
-				->getConfig()
-				->addComponent(new GridFieldSortableRows('SortOrder'));
+				->getConfig();
 		}
 
 		$fields->dataFieldByName('Content')
@@ -81,7 +82,7 @@ class Challenge extends DataObject {
 
 		if ($teams->Count() > 0) {
 			foreach ($teams as $team) {
-				if ($team->Limit > $team->Members()->Count()) {
+				if ($team->IsNotFull()) {
 					$result->push($team);
 				}
 			}

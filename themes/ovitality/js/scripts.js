@@ -292,8 +292,16 @@ $(document).ready(function() {
         directionNav: false
     });
     $('.slider-arrow-controls').flexslider({
-        controlNav: false
+        controlNav: false, 
     });
+    $('.challenge-today-slider').flexslider({
+        controlNav: false, 
+        slideshow: false, 
+        start: function(slider) {
+            slider.flexAnimate(dailyChallengePos, true);
+        }
+    });                 
+    
     $('.slider-thumb-controls .slides li').each(function() {
         var imgSrc = $(this).find('img').attr('src');
         $(this).attr('data-thumb', imgSrc);

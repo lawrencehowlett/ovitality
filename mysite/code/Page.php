@@ -160,6 +160,10 @@ JS
 		return $this->Blocks()->filter(array('ClassName' => 'BlockMap'))->first();
 	}
 
+	public function getMyChallengesListPage() {
+		return MemberChallengesListPage::get()->First();
+	}
+
 	public function getMyDashboardPage() {
 		return MemberDashboardPage::get()->First();
 	}	

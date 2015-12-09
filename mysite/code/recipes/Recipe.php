@@ -16,9 +16,9 @@ class Recipe extends DataObject {
 		'Categories' => 'RecipeCategory'
 	);
 
-	private static $singular_name = 'Video';
+	private static $singular_name = 'Recipe';
 
-	private static $plural_name = 'Videos';		
+	private static $plural_name = 'Recipes';		
 
 	private static $summary_fields = array(
 		'Title' => 'Title'

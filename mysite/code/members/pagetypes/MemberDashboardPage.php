@@ -1,5 +1,6 @@
 <?php
 class MemberDashboardPage extends MemberPage {
+
 	private static $icon = 'mysite/images/dashboard-icon.png';
 }
 
@@ -8,34 +9,60 @@ class MemberDashboardPage_Controller extends MemberPage_Controller {
 	public function init() {
 		parent::init();
 
+		$currentDailyChallegePos = $this->getActiveDailyChallengePosition();
 		Requirements::customScript(<<<JS
-			(function($) {
-			    $(document).ready(function(){
-					$('.challenge-today-slider').flexslider({
-					    controlNav: false, 
-					    slideshow: false
-					});			    	
-			    });
-			})(jQuery);	
+			var dailyChallengePos = '$currentDailyChallegePos';
 JS
 		);
 	}
 
 	public function index() {
 		$template = '';
-		if (!Member::currentUser()->HasCurrentChallenge()) {
-			$template = '_no_current_challenge';
+		if (Member::currentUser()->HasActiveChallenge()) {
+			$template = '_current';
 		}
+
 		return $this->renderWith(array(
 			'MemberDashboardPage' . $template, 'Page'
 		));
 	}
 
-	public function getInProgressChallenges() {
-		return Challenge::getInProgressChallenges();
+	public function getActiveChallenge() {
+		$currentUser = Member::currentUser();
+		if ($currentUser) {
+			return $currentUser->getActiveChallenge();
+		}
+
+		return null;
+	}
+
+	public function getActiveDailyChallengePosition() {
+		$position = 0;
+		if ($this->getActiveChallenge()) {
+			$dailyChallenges = $this->getActiveChallenge()->DailyChallenges();
+			if ($dailyChallenges) {
+				foreach ($dailyChallenges as $dailyChallenge) {
+					if (DBField::create_field('Date', $dailyChallenge->Date)->IsToday()) {
+						return $position;
+					}
+					$position++;
+				}
+			}
+		}
+
+		return $position;
+	}
+
+	public function getAvailableChallenges() {
+		$challengeIDS = Member::currentUser()->ChallengeReferences()->column('ChallengeID');
+		if (count($challengeIDS)) {
+			return Challenge::get()->filter(array('Status' => 'Published'))->exclude('ID', $challengeIDS);
+		}
+
+		return Challenge::get()->filter(array('Status' => 'Published'));
 	}
 
 	public function getCompletedChallenges() {
-		return Challenge::getCompletedChallenges();
+		return Member::currentUser()->getCompletedChallenges();
 	}
 }

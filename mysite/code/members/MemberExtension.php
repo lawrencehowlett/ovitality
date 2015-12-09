@@ -14,6 +14,10 @@ class MemberExtension extends DataExtension {
 		'ProfileImage' => 'Image'
 	);
 
+	private static $has_many = array(
+		'ChallengeReferences' => 'MemberChallengeReference'
+	);
+
 	private static $belongs_many_many = array(
 		'Teams' => 'Team', 
 		'Challenges' => 'Challenge'
@@ -143,8 +147,37 @@ class MemberExtension extends DataExtension {
 		return false;
 	}
 
-	public function HasCurrentChallenge() {
-		return true;
+	public function getCompletedChallenges() {
+		return $this->owner->ChallengeReferences()->filter(array(
+			'Status' => 'Completed', 
+			'PaymentStatus' => 'Paid'
+		));
+	}
+
+	public function getActiveChallenge() {
+		$reference = $this->owner->ChallengeReferences()->filter(array(
+			'Status' => 'Active', 
+			'PaymentStatus' => 'Paid'
+		))->First();
+
+		if ($reference) {
+			return $reference->Challenge();
+		}
+
+		return null;
+	}
+
+	public function HasActiveChallenge() {
+		$references = $this->owner->ChallengeReferences()->filter(array(
+			'Status' => 'Active', 
+			'PaymentStatus' => 'Paid'
+		));
+
+		if ($references->exists()) {
+			return true;
+		}
+
+		return false;
 	}
 
 	public function sendWelcomeEmail($optionalData = null) {

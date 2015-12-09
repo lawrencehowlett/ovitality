@@ -45,11 +45,13 @@ class ReferralReport extends SS_Report {
 
 		foreach ($groupedReferrals as $referral) {
 			$member = Member::get()->byID($referral->MemberID);
-			$result->push(new ArrayData(array(
-				'FullName' => $member->FirstName . ' ' . $member->Surname, 
-				'Email' => $member->Email,
-				'NumberOfReferrals' => $referrals->filter(array('MemberID' => $referral->MemberID))->Count()
-			)));
+			if ($member) {
+				$result->push(new ArrayData(array(
+					'FullName' => $member->FirstName . ' ' . $member->Surname, 
+					'Email' => $member->Email,
+					'NumberOfReferrals' => $referrals->filter(array('MemberID' => $referral->MemberID))->Count()
+				)));
+			}
 		}
 
 		$result = $result->sort('NumberOfReferrals DESC');

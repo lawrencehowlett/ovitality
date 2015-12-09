@@ -12,6 +12,7 @@ class MemberJoinChallengePage_Controller extends MemberPage_Controller {
 
 	public function init() {
 		parent::init();
+
 		Requirements::javascript('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/3.1.1/bootstrap3-typeahead.min.js');
 		Requirements::javascript(THEMES_DIR . '/ovitality_members/js/join-challenge.js');
 	}
@@ -23,8 +24,8 @@ class MemberJoinChallengePage_Controller extends MemberPage_Controller {
 		))));
 
 		$reference = MemberChallengeReference::get()->filter(array(
-			'ChallengeID' => 4, 
-			'MemberID' => 10
+			'ChallengeID' => $request->param('OtherID'), 
+			'MemberID' => Member::currentUserID()
 		))->First();
 
 		if ($reference) {
@@ -48,54 +49,35 @@ class MemberJoinChallengePage_Controller extends MemberPage_Controller {
 		$reference = ($this->getReference()) ? $this->getReference() : singleton('MemberChallengeReference');
 
 		$fields = $reference->getReferenceFields();
-		foreach ($fields as $field) {
-			if ($field->Title() == 'Category') {
-				Debug::dump($field);
-			}
-		}
-
-		exit();
-		$fields->push(
-			DropdownField::create(
-				'Category', 
-				'What is your motivation', 
-				array(
-					'Competitive' => 'Competitive', 
-					'Motivation' => 'Motivation', 
-				)
-			)->setEmptyString('Select one')				
-		);
-
-		$fields->push(
-			CheckboxField::create(
-				'AutoAssignedTeam', 
-				'Yes please automatically assign me to a team.'
-			)				
-		);
 
         if ($this->getSesJoinChallenge()->IndividualOrTeam == 'team') {
-        	$fields->removeByName('AutoAssignedTeam');
-        	$fields->push(
-        		OptionsetField::create(
-        			'TeamAssignment', 
-        			false, 
-        			array(
-        				'AutoAssignedTeam' => 'Automatically assign me to a team', 
-        				'JoinExistingTeam' => 'Join an existing team', 
-        				'CreateNewTeam' => 'Create a new team and invite members'
-        			), 
-        			'AutoAssignedTeam'
-        		)
-        	);
-        	$fields->push(
-        			TextField::create('SuggestTeam', 'Start typing the team name below to find the join your team')
-        				->setAttribute('autocomplete', 'off')
-        	);
 
-        	$fields->push(HiddenField::create('TeamID', false));
-        	$fields->push(TextField::create('TeamName', 'Team name'));
+        	$suggestTeamField = TextField::create(
+        		'SuggestTeam', 
+        		'Start typing the team name below to find the join your team')
+    			->setAttribute('autocomplete', 'off');
+        	$teamIDField = HiddenField::create('TeamID', false);
+        	$teamNameField = TextField::create('TeamName', 'Team name');
+
+        	if ($reference) {
+        		$teamIDField->setValue($reference->TeamID);
+        		
+        		if ($reference->JoinExistingTeam) {
+	        		$suggestTeamField->setValue($reference->Team()->Title);
+        		}
+
+        		if ($reference->CreateNewTeam) {
+	        		$teamNameField->setValue($reference->Team()->Title);
+        		}
+        	}
+
+        	$fields->push($teamIDField);
+        	$fields->push($suggestTeamField);
+        	$fields->push($teamNameField);
         	$fields->push(TextField::create('TeamMemberName[]', 'Name'));
         	$fields->push(EmailField::create('TeamMemberEmail[]', 'Email'));
+        } else {
+        	$fields->removeByName('JoinExistingTeam');
         }
 
         $actions = new FieldList(
@@ -104,9 +86,12 @@ class MemberJoinChallengePage_Controller extends MemberPage_Controller {
         );
 
         $required = new RequiredFields('Category');
-
         $form = new Form($this, 'Form', $fields, $actions, $required);
         $form->setTemplate('ChallengeTeamForm');
+
+        if ($reference) {
+	        $form->loadDataFrom($reference);
+        }
 
         return $form;	
 	}
@@ -120,57 +105,60 @@ class MemberJoinChallengePage_Controller extends MemberPage_Controller {
 			$reference->ChallengeID = $this->getChallenge()->ID;
 		}
 
-		if (isset($data['TeamAssignment'])) {
-			if ($data['TeamAssignment'] == 'AutoAssignedTeam') {
-				$reference->TeamID = $this->getChallenge()->getAutoTeamAllocation($data['Category'])->ID;
-			}
-
-			if ($data['TeamAssignment'] == 'JoinExistingTeam') {
-				$reference->TeamID = $data['TeamID'];
-			}
-
-			if ($data['TeamAssignment'] == 'CreateNewTeam') {
-				$team = new Team();
-				$team->Title = $data['TeamName'];
-				$team->write();
-
-				$this->getChallenge()->Teams()->add($team);
-
-				$reference->TeamID = $team->ID;
-
-				if (count($data['TeamMemberName']) > 0) {
-					for ($i=0; $i < count($data['TeamMemberName']); $i++) { 
-						$email = new Email();
-						$email
-							->setFrom('no-reply@ovitality.com')
-							->setTo($data['TeamMemberEmail'][$i])
-							->setSubject('You are invited to join the ' . $this->getChallenge()->Title)
-							->setTemplate('TeamInvitationEmail')
-							->populateTemplate(new ArrayData(array(
-				        		'Logo' => SiteConfig::current_site_config()->Logo(),
-				            	'Name' => $data['TeamMemberName'][$i], 
-				            	'Challenge' => $this->getChallenge()->Title,
-				            	'Member' => Member::currentUser(), 
-				            	'Link' => 'http://www.facebook.com'
-				            )));
-
-						$email->send();
-					}
-				}
-			}
-		} else {
-			if (isset($data['AutoAssignedTeam']) && $data['AutoAssignedTeam']) {
-				$reference->TeamID = $this->getChallenge()->getAutoTeamAllocation($data['Category'])->ID;
-			} else {
-				$this->getChallenge()->Members()->add(Member::currentUser());
-			}
-		}
-
 		$form->saveInto($reference);
 
 		try {
-			$reference->write();
-			
+			if (isset($data['AutoAssignTeam']) && $data['AutoAssignTeam']) {
+				$reference->CreateNewTeam = false;
+				$autoTeam = $this->getChallenge()->getAutoTeamAllocation($data['Category']);
+				if ($autoTeam) {
+					$reference->TeamID = $autoTeam->ID;
+				} else {
+					$form->sessionMessage('All teams are full. Join as individual', 'bad');
+					return $this->redirectBack();
+				}
+				$reference->write();
+			} elseif (isset($data['JoinExistingTeam']) && $data['JoinExistingTeam']) {
+				$reference->CreateNewTeam = false;
+				$reference->TeamID = $data['TeamID'];
+				$reference->write();
+			} else {
+				if (isset($data['TeamName']) && $data['TeamName']) {
+					$reference->CreateNewTeam = true;
+					$team = new Team();
+					$team->TeamLeaderID = Member::currentUserID();
+					$team->Title = $data['TeamName'];
+					$team->write();
+
+					$team->Members()->add(Member::currentUser());
+
+					$this->getChallenge()->Teams()->add($team);
+
+					$reference->TeamID = $team->ID;
+					$reference->write();
+
+					if (count($data['TeamMemberName']) > 0) {
+						for ($i=0; $i < count($data['TeamMemberName']); $i++) { 
+							$email = new Email();
+							$email
+								->setFrom('no-reply@ovitality.com')
+								->setTo($data['TeamMemberEmail'][$i])
+								->setSubject('You are invited to join the ' . $this->getChallenge()->Title)
+								->setTemplate('TeamInvitationEmail')
+								->populateTemplate(new ArrayData(array(
+					        		'Logo' => SiteConfig::current_site_config()->Logo(),
+					            	'Name' => $data['TeamMemberName'][$i], 
+					            	'Challenge' => $this->getChallenge()->Title,
+					            	'Member' => Member::currentUser(), 
+					            	'Link' => $reference->getReferralSignupLink()
+					            )));
+
+							$email->send();
+						}
+					}
+				}
+			}
+
 			$sesJoinChallenge = $this->getSesJoinChallenge();
 			$sesJoinChallenge->ChallengeReferenceID = $reference->ID;
 			Session::set('JoinChallenge', serialize($sesJoinChallenge));
@@ -179,15 +167,23 @@ class MemberJoinChallengePage_Controller extends MemberPage_Controller {
 				$team = Team::get()->byID($reference->TeamID);
 				if ($team) {
 					$team->Members()->add(Member::currentUser());
+					if ($reference->CreateNewTeam) {
+						$team->TeamLeaderID = Member::currentUserID();
+						$team->write();
+					}
 				}
+			}
+
+			if ($reference->IsJoiningIndividual()) {
+				$reference->Challenge()->Members()->add(Member::currentUser());
 			}
 
 		} catch(ValidationException $e) {
 			$form->sessionMessage($e->getResult()->message(), 'bad');
 			return $this->redirectBack();
 		}
-		return $this->redirectBack();
-		//return $this->redirect(MemberJoinChallengePlanPage::get()->First()->Link());
+
+		return $this->redirect(MemberJoinChallengePlanPage::get()->First()->Link());
 	}
 
 	public function getChallenge() {

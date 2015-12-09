@@ -38,6 +38,10 @@ class Team extends DataObject {
 	}
 
 	public function IsNotFull() {
+		if (!$this->Limit) {
+			return true;
+		}
+
 		if ($this->Limit > $this->Members()->Count()) {
 			return true;
 		}

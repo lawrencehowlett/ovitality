@@ -36,11 +36,19 @@
                     </span>
                 </div>
             </li>
-            <li>
+
+            <li class="<% if $ID == $MyChallengesListPage.ID %>active<% end_if %>">
                 <div class="tab-title">
-                    <span>Challenges</span>
+                    <span>
+                        <% if $ID == $MyChallengesListPage.ID %>
+                            $MyChallengesListPage.Title
+                        <% else %>
+                            <a href="$MyChallengesListPage.Link" title="Go to my profile page">$MyChallengesListPage.Title</a>
+                        <% end_if %>
+                    </span>
                 </div>
             </li>
+
             <li class="<% if $ID == $MyRecipesPage.ID %>active<% end_if %>">
                 <div class="tab-title">
                     <span>

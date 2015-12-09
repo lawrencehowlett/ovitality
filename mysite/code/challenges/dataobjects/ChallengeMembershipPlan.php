@@ -12,6 +12,10 @@ class ChallengeMembershipPlan extends DataObject {
 		'Level' => 'MembershipLevel'
 	);
 
+	private static $singular_name = 'Membership Plan';
+
+	private static $plural_name = 'Membership Plans';
+
 	public function getCMSFields() {
 		$fields= parent::getCMSFields();
 

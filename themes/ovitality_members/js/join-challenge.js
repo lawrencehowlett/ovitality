@@ -1,18 +1,15 @@
 (function($) {
     $(document).ready(function(){
-    	$('#Form_Form_TeamAssignment .radio-option').click(function(){
-    		var option = $(this).find('input');
-    		if (option.val() == 'JoinExistingTeam') {
-    			$('#JoinExistingTeam').show();
-    			$('#CreateNewTeam').hide();
-    		} else if (option.val() == 'CreateNewTeam') {
-    			$('#CreateNewTeam').show();
-    			$('#JoinExistingTeam').hide();
-    		} else {
-    			$('#CreateNewTeam').hide();
-    			$('#JoinExistingTeam').hide();
-    		}
-    	});
+
+        $('.checkbox-option').click(function(){
+            if ($(this).find('input').attr('name') == 'JoinExistingTeam') {
+                $('#Form_Form_AutoAssignTeam').val(0).parent('.checkbox-option').removeClass('checked');
+                $('#Form_Form_SuggestTeam').attr('required', true);
+            } else {
+                $('#Form_Form_JoinExistingTeam').val(0).parent('.checkbox-option').removeClass('checked');
+                $('#Form_Form_SuggestTeam').attr('required', false);
+            };
+        });
 
 		$('#Form_Form_SuggestTeam').typeahead({
 			autoSelect: true, 

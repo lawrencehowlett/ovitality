@@ -3,17 +3,26 @@ class MemberChallengesListPage extends MemberPage {
 
 }
 
-class MemberChallengesListPage_Controller extends MemberPage {
+class MemberChallengesListPage_Controller extends MemberPage_Controller {
 
 	public function init() {
 		parent::init();
 	}
 
-	public function ActiveChallenges() {
-		return Challenge::get();
+	public function getAvailableChallenges() {
+		$challengeIDS = Member::currentUser()->ChallengeReferences()->column('ChallengeID');
+		if (count($challengeIDS)) {
+			return Challenge::get()->filter(array('Status' => 'Published'))->exclude('ID', $challengeIDS);
+		}
+
+		return Challenge::get()->filter(array('Status' => 'Published'));
+	}	
+
+	public function getActiveChallenge() {
+		return Member::currentUser()->getActiveChallenge();
 	}
 
 	public function getCompletedChallenges() {
-
-	}
+		return Member::currentUser()->getCompletedChallenges();
+	}	
 }
