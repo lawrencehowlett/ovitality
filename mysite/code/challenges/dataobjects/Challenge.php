@@ -5,7 +5,9 @@ class Challenge extends DataObject {
 		'Title' => 'Text', 
 		'Content' => 'HTMLText', 
 		'Summary' => 'HTMLText', 
+		'FeaturedVideo' => 'Varchar', 
 		'Status' => 'Enum(array("Unpublished", "Published"), "Unpublished")', 
+		'URLSegment' => 'Text', 
 		'StartDate' => 'Date', 
 		'EndDate' => 'Date'
 	);
@@ -14,7 +16,8 @@ class Challenge extends DataObject {
 		'MembershipPlans' => 'ChallengeMembershipPlan', 
 		'DailyChallenges' => 'DailyChallenge', 
 		'DailyActivities' => 'DailyActivity', 
-		'Teams' => 'Team'
+		'Teams' => 'Team', 
+		'Attachments' => 'ChallengeAttachment'
 	);
 
 	private static $many_many = array(
@@ -26,7 +29,7 @@ class Challenge extends DataObject {
 
 		$fields->removeFieldsFromTab(
 			'Root.Main', 
-			array('SortOrder', 'Summary')
+			array('SortOrder', 'URLSegment', 'Summary')
 		);
 
 		$fields->replaceField(
@@ -57,7 +60,29 @@ class Challenge extends DataObject {
 			->setConfig('showcalendar', true)
 			->setConfig('dateformat', 'dd/MM/yyy');
 
+		$fields->dataFieldByName('FeaturedVideo')
+			->setRightTitle('Place the id of the video from Vimeo');
+
+		$fields->dataFieldByName('Attachments')
+			->getConfig()
+			->addComponent(new GridFieldSortableRows('SortOrder'));
+
 		return $fields;
+	}
+
+	public function onBeforeWrite() {
+		parent::onBeforeWrite();
+
+		if (!$this->URLSegment) {
+			$urlSegment = str_replace(' ', '-', strtolower(preg_replace("/[^a-zA-Z0-9\/_|+ -]/", '', $this->Title)));
+			$urlSegment = str_replace('%20', '', $urlSegment);
+			$job = Product::get()->filter(array('URLSegment' => $urlSegment))->First();
+			if ($job) {
+				$this->URLSegment .= $urlSegment . '-' . substr(md5(microtime()),rand(0,26),5);
+			} else {
+				$this->URLSegment .= $urlSegment;
+			}
+		}
 	}
 
 	public function getAutoTeamAllocation($category = null) {
@@ -167,6 +192,15 @@ class Challenge extends DataObject {
             MemberJoinChallengePage::get()->First()->Link(),
             'SelectChallenge/team',
             $this->ID
+        );
+	}
+
+	public function getChallengeDetailsPageLink() {
+
+        return Controller::join_links(
+            MemberChallengeDetailPage::get()->First()->Link(),
+            'details',
+            $this->URLSegment
         );
 	}	
 }

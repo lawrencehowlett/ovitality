@@ -32,7 +32,7 @@
                 <div class="col-md-5 col-md-offset-1">
                     <div class="feature feature-1 boxed bordered text-center">
                         <div>
-                            <h5 class="uppercase">$ActiveChallenge.Title</h5>
+                            <h5 class="uppercase"><a href="$ActiveChallenge.ChallengeDetailsPageLink">$ActiveChallenge.Title</a></h5>
                         </div>
                         <a href="" class="btn" title="Go Log Points">Log Points</a>
                         <a href="" class="btn" title="Checkout individual leaderboard">Individual Leaderboard</a>

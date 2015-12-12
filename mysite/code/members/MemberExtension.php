@@ -167,6 +167,19 @@ class MemberExtension extends DataExtension {
 		return null;
 	}
 
+	public function getActiveTeam() {
+		$reference = $this->owner->ChallengeReferences()->filter(array(
+			'Status' => 'Active', 
+			'PaymentStatus' => 'Paid'
+		))->First();
+
+		if ($reference->exists()) {
+			return $reference->Team();
+		}
+
+		return null;
+	}
+
 	public function HasActiveChallenge() {
 		$references = $this->owner->ChallengeReferences()->filter(array(
 			'Status' => 'Active', 

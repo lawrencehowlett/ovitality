@@ -91,7 +91,7 @@ class Product extends DataObject {
 			} else {
 				$this->URLSegment .= $urlSegment;
 			}
-		}	
+		}
     }
 
     public function AbsoluteLink() {

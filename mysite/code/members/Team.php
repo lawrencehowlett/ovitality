@@ -37,6 +37,31 @@ class Team extends DataObject {
 		return $fields;
 	}
 
+	public function getTeamFormFields() {
+		$fields = parent::getFrontendFields();
+
+		$fields->removeByName('Limit');
+		$fields->removeByName('TeamLeaderID');
+		$fields->removeByName('ChallengeID');
+		$fields->removeByName('Type');
+
+		$fields->replaceField(
+			'Title', 
+			TextField::create('Title', 'Team Name')
+		);
+
+		$fields->replaceField(
+			'FacebookURL', 
+			TextField::create('FacebookURL', 'Team Facebook Group URL')
+		);
+
+		return $fields;
+	}
+
+	public function getTeamMembers() {
+		return $this->Members()->exclude('ID', Member::currentUserID());
+	}
+
 	public function IsNotFull() {
 		if (!$this->Limit) {
 			return true;
@@ -47,5 +72,11 @@ class Team extends DataObject {
 		}
 
 		return false;
+	}
+
+	public function getTeamManagementLink() {
+		return Controller::join_links(
+            MemberTeamManagementPage::get()->First()->Link()
+        );		
 	}
 }
