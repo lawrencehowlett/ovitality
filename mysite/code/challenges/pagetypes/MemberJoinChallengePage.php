@@ -58,6 +58,7 @@ class MemberJoinChallengePage_Controller extends MemberPage_Controller {
     			->setAttribute('autocomplete', 'off');
         	$teamIDField = HiddenField::create('TeamID', false);
         	$teamNameField = TextField::create('TeamName', 'Team name');
+        	$teamNumberField = TextField::create('TeamLimit', 'Number of members');
 
         	if ($reference) {
         		$teamIDField->setValue($reference->TeamID);
@@ -74,6 +75,7 @@ class MemberJoinChallengePage_Controller extends MemberPage_Controller {
         	$fields->push($teamIDField);
         	$fields->push($suggestTeamField);
         	$fields->push($teamNameField);
+        	$fields->push($teamNumberField);
         	$fields->push(TextField::create('TeamMemberName[]', 'Name'));
         	$fields->push(EmailField::create('TeamMemberEmail[]', 'Email'));
         } else {
@@ -128,6 +130,7 @@ class MemberJoinChallengePage_Controller extends MemberPage_Controller {
 					$team = new Team();
 					$team->TeamLeaderID = Member::currentUserID();
 					$team->Title = $data['TeamName'];
+					$team->Title = $data['TeamLimit'];
 					$team->write();
 
 					$team->Members()->add(Member::currentUser());

@@ -43,13 +43,20 @@
 	<% if $Fields.dataFieldByName(TeamName) %>
 		<div id="CreateNewTeam" class="row mt16">
 			<div class="col-md-12">
-			<p class="input-with-label"><span>OR Create a new team and invite your friends to earn extra points!</span></p>
+				<p class="input-with-label"><span>OR Create a new team and invite your friends to earn extra points!</span></p>
 				<div>
 					<span>$Fields.dataFieldByName(TeamName).Title</span>
 					$Fields.dataFieldByName(TeamName)
 				</div>
+
+				<div>
+					<span>$Fields.dataFieldByName(TeamLimit).Title * <small>Leave blank to allow unlimited number of members</small></span>
+					$Fields.dataFieldByName(TeamLimit)
+				</div>
+
 				<p class="input-with-label"><span>Invite your team members</span></p>
 			</div>
+
 			<div class="col-md-6">
 				<div>
 					<span>$Fields.dataFieldByName(TeamMemberName[]).Title</span>

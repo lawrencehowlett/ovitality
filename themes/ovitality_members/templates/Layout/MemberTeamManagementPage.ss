@@ -21,7 +21,7 @@
                     <% loop $Team.TeamLeaders %>
                         <div class="col-md-4 col-sm-6">
                             <div class="image-tile outer-title text-center">
-                                <img src="$ProfileImage.PaddedImage(350, 350, #000000).Link" alt="$ProfileImage.Title">
+                                <img src="$ProfileImage.PaddedImage(350, 350).Link" alt="$ProfileImage.Title">
                                 <div class="title mb16">
                                     <h5 class="uppercase mb0">$FullName</h5>
                                     <a href="mailto:$Email"><span>$Email</span></a> <br>
@@ -45,7 +45,7 @@
                     <% loop $Team.TeamMembersForFrontend %>
                         <div class="col-md-4 col-sm-6">
                             <div class="image-tile outer-title text-center">
-                                <img src="$ProfileImage.PaddedImage(350, 350, #000000).Link" alt="$ProfileImage.Title">
+                                <img src="$ProfileImage.PaddedImage(350, 350).Link" alt="$ProfileImage.Title">
                                 <div class="title mb16">
                                     <h5 class="uppercase mb0">$FullName</h5>
                                     <a href="mailto:$Email"><span>$Email</span></a> <br>
