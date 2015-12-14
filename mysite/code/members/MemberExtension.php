@@ -147,6 +147,17 @@ class MemberExtension extends DataExtension {
 		return false;
 	}
 
+	public function getActiveChallengeReference() {
+		$reference = $this->owner->ChallengeReferences()->filter(array(
+			'Status' => 'Active', 
+			'PaymentStatus' => 'Paid'
+		));
+
+		if ($reference->exists()) {
+			return $reference->First();
+		}
+	}
+
 	public function getCompletedChallenges() {
 		return $this->owner->ChallengeReferences()->filter(array(
 			'Status' => 'Completed', 
@@ -178,6 +189,16 @@ class MemberExtension extends DataExtension {
 		}
 
 		return null;
+	}
+
+	public function LeaderActiveTeam() {
+		$team = $this->getActiveTeam();
+		$isLeader = $team->Leaders()->find('ID', $this->owner->ID);
+		if ($isLeader) {
+			return true;
+		}
+
+		return false;
 	}
 
 	public function HasActiveChallenge() {

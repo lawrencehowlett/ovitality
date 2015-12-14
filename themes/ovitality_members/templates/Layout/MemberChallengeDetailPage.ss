@@ -70,7 +70,11 @@
 
                     <div class="feature">
                         <h4 class="uppercase">My Team</h4>
-                        <a href="$Team.TeamManagementLink" class="btn">Manage Team</a>
+
+                        <% if $CurrentUser.LeaderActiveTeam %>
+                            <a href="$Team.TeamManagementLink" class="btn">Manage Team</a>
+                        <% end_if %>
+
                         <% if $Team.FacebookURL %>
                             <a href="$Team.FacebookURL" target="_blank" class="btn">Go to Team Facebook Group</a>
                         <% end_if %>

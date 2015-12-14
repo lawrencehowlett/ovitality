@@ -2,7 +2,7 @@
 
 	<% if $Message %>
 		<div class="col-md-12">
-			<div id="{$FormName}_error" class="alert alert-success alert-dismissible $MessageType" role="alert">
+			<div id="{$FormName}_error" class="alert alert-info alert-dismissible $MessageType" role="alert">
 				$Message
 			</div>
 		</div>
@@ -13,6 +13,12 @@
 			<span>$Fields.dataFieldByName(Title).Title</span>			
 			$Fields.dataFieldByName(Title)
 		</div>
+
+		<div class="input-with-label">
+			<span>$Fields.dataFieldByName(Limit).Title</span>			
+			$Fields.dataFieldByName(Limit)
+		</div>
+
 
 		<div class="input-with-label">
 			<span>$Fields.dataFieldByName(FacebookURL).Title</span>			

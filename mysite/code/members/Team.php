@@ -10,12 +10,12 @@ class Team extends DataObject {
 	);
 
 	private static $has_one = array(
-		'TeamLeader' => 'Member', 
 		'Challenge' => 'Challenge'
 	);
 
 	private static $many_many = array(
-		'Members' => 'Member'
+		'Members' => 'Member', 
+		'Leaders' => 'Member'
 	);
 
 	private static $summary_fields = array(
@@ -40,10 +40,12 @@ class Team extends DataObject {
 	public function getTeamFormFields() {
 		$fields = parent::getFrontendFields();
 
-		$fields->removeByName('Limit');
 		$fields->removeByName('TeamLeaderID');
 		$fields->removeByName('ChallengeID');
 		$fields->removeByName('Type');
+
+		$fields->dataFieldByName('Limit')
+			->setTitle('Number of team members');
 
 		$fields->replaceField(
 			'Title', 
@@ -62,6 +64,22 @@ class Team extends DataObject {
 		return $this->Members()->exclude('ID', Member::currentUserID());
 	}
 
+	public function getTeamMembersForFrontend() {
+		$leaderIds = $this->getTeamLeaders()->column('ID');
+		$members = $this->Members()->exclude('ID', Member::currentUserID());
+		if (count($leaderIds) > 0) {
+			foreach ($leaderIds as $id) {
+				$members = $members->exclude('ID', $id);
+			}
+		}
+
+		return $members;
+	}
+
+	public function getTeamLeaders() {
+		return $this->Leaders()->exclude('ID', Member::currentUserID());
+	}
+
 	public function IsNotFull() {
 		if (!$this->Limit) {
 			return true;
@@ -78,5 +96,21 @@ class Team extends DataObject {
 		return Controller::join_links(
             MemberTeamManagementPage::get()->First()->Link()
         );		
+	}
+
+	public function getNumberMemberSpacesLeft() {
+		return $this->Limit - $this->Members()->Count();
+	}
+
+	public function CanInviteMembers() {
+		if ($this->Limit == 0) {
+			return true;
+		}
+
+		if ($this->Limit > $this->Members()->Count()) {
+			return true;
+		}
+
+		return false;
 	}
 }

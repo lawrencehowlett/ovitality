@@ -13,10 +13,10 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="embed-video-container embed-responsive embed-responsive-16by9">
-                    <iframe class="embed-responsive-item" src="http://player.vimeo.com/video/25737856?badge=0&title=0&byline=0&title=0"></iframe>
+                    <iframe class="embed-responsive-item" src="http://player.vimeo.com/video/{$Challenge.FeaturedVideo}?badge=0&title=0&byline=0&title=0"></iframe>
                 </div>
                 <div class="mt16">
-                    <p>JOIN NOW Healthy Living HomeNutritionCleaningFitnessProducts You've been invited to join a challenge! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem. Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu condimentum sed.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem. Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu condimentum sed.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem. Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu condimentum sed.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem. Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu condimentum sed.</p>
+                    $Challenge.Content
                 </div>
             </div>
             <div class="col-sm-6 feature boxed text-center">
