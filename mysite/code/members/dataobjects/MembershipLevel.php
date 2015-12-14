@@ -14,6 +14,8 @@ class MembershipLevel extends DataObject {
 	public function getCMSFields() {
 		$fields = parent::getCMSFields();
 
+		$fields->removeByName('MembershipPlan');
+
 		$fields->replaceField(
 			'Title', 
 			TextField::create('Title', 'Title')

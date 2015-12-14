@@ -1,6 +1,20 @@
 <?php
 class MemberStartPage extends MemberPage {
-	
+
+	private static $db = array(
+		'FeaturedVideo' => 'Varchar'
+	);
+
+	public function getCMSFields() {
+		$fields = parent::getCMSFields();
+
+		$fields->addFieldToTab(
+			'Root.Main', 
+			TextField::create('FeaturedVideo')
+		);
+
+		return $fields;
+	}
 }
 
 class MemberStartPage_Controller extends MemberPage_Controller {

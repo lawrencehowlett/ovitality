@@ -12,11 +12,13 @@
             	</div>
 
                 <div class="col-md-5 mt16">
-                    <div class="embed-video-container embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item" src="http://player.vimeo.com/video/25737856?badge=0&title=0&byline=0&title=0"></iframe>
-                    </div>                    
+                    <% if $FeaturedVideo %>
+                        <div class="embed-video-container embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="http://player.vimeo.com/video/$FeaturedVideo?badge=0&title=0&byline=0&title=0"></iframe>
+                        </div>
+                    <% end_if %>
                 </div>
-                <div class="col-md-7 mt16">
+                <div class="col-md-6 col-md-offset-1 mt16">
                     <div class="row">
                         <div class="col-md-2">
                             <h3 class="uppercase">1.</h3>
