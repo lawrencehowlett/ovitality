@@ -60,7 +60,7 @@
     </nav>
 </div>-->
 
-<div class="nav-container">
+<div class="nav-container" style="min-height: 184px;">
     <nav class="nav-centered">
         <div class="nav-utility">
 

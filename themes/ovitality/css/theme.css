@@ -915,7 +915,7 @@ nav .btn,
 }
 nav.nav-centered .logo {
   max-height: 64px;
-  margin: 64px 0 40px 0;
+  margin: 10px 0 10px 0;
 }
 nav.bg-dark .logo-light {
   display: inline;
