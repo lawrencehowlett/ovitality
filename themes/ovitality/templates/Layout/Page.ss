@@ -4,7 +4,7 @@
             <section>
                 <div class="container">
                     <div class="row">
-                        <div class="col-sm-12 text-center">
+                        <div class="col-sm-12">
                             <h4 class="uppercase mb16">$Title</h4>
                             $Content
                         </div>
@@ -12,14 +12,15 @@
                     <div class="row">
                         <% loop $PriceTables %>
                             <div class="col-md-4 col-sm-6">
-                                <div class="pricing-table pt-2 <% if $MultipleOf(2) %>boxed<% else_if $MultipleOf(3) %>emphasis<% end_if %>">
+                                <div class="pricing-table pt-2 <% if $MultipleOf(2) %>boxed<% else_if $MultipleOf(3) %>emphasis<% end_if %> text-center">
                                     <h5 class="uppercase">$Title</h5>
                                     <span class="price">$Price</span>
                                     <% if $RedirectPage %>
                                         <a class="btn <% if $MultipleOf(3) %>btn-white<% else %>btn-filled<% end_if %> btn-lg" href="$RedirectPage.Link">$ButtonText</a>
                                     <% end_if %>
-
-                                    $Content
+                                    <div class="text-left">
+                                        $Content
+                                    </div>
                                 </div>
                             </div>
                         <% end_loop %>
