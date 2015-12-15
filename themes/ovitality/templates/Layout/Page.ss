@@ -128,11 +128,11 @@
                 <div class="container">
                     <div class="row v-align-children">
                         <% if $Position == 'Left' %>
-                            <div class="col-md-7 col-sm-6 text-center mb-xs-24">
+                            <div class="col-md-4 col-sm-5 text-center mb-xs-24">
                                 <img class="cast-shadow" alt="Screenshot" src="$Image.Link" />
                             </div>
 
-                            <div class="col-md-4 col-md-offset-1 col-sm-5 col-sm-offset-1">
+                            <div class="col-md-7 col-md-offset-1 col-sm-6 col-sm-offset-1">
                                 <h3>$Title</h3>
                                 $Content
                                 <% if $RedirectPage %>
@@ -140,14 +140,14 @@
                                 <% end_if %>
                             </div>
                         <% else %>
-                            <div class="col-md-4 col-sm-5 mb-xs-24">
+                            <div class="col-md-7 col-md-offset-1 col-sm-6 col-sm-offset-1">
                                 <h3>$Title</h3>
                                 $Content
                                 <% if $RedirectPage %>
                                     <a class="btn" href="$RedirectPage.Link">$ButtonText</a>
                                 <% end_if %>
                             </div>
-                            <div class="col-md-7 col-md-offset-1 col-sm-6 col-sm-offset-1 text-center">
+                            <div class="col-md-4 col-sm-5 text-center mb-xs-24">
                                 <img class="cast-shadow" alt="Screenshot" src="$Image.Link" />
                             </div>
                         <% end_if %>

@@ -1,7 +1,4 @@
-<section class="page-title page-title-2 image-bg overlay parallax">
-    <div class="background-image-holder">
-        <img alt="Background Image" class="background-image" src="$ThemeDir/img/wide-1.jpg" />
-    </div>
+<section class="page-title page-title-4 bg-secondary">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -16,6 +13,7 @@
         </div>
     </div>
 </section>
+
 <section>
     <div class="container">
         <div class="row">
