@@ -11,12 +11,6 @@ class ProductPage_Controller extends Page_Controller {
 
 	public function init() {
 		parent::init();
-
-		/*$product = $this->getCurrentProduct();
-		foreach ($product->GalleryImages() as $gallery) {
-			echo $gallery->Image()->Link() . "<br>";
-		}
-		exit();*/
 	}
 
 	public function index() {
@@ -50,7 +44,7 @@ class ProductPage_Controller extends Page_Controller {
 
 	public function PaginatedProducts() {
 		$list = new PaginatedList($this->products, $this->getRequest());
-		$list->setPageLength(3);
+		$list->setPageLength(15);
 
 		return $list;
 	}
