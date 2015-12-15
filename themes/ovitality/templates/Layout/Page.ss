@@ -270,6 +270,10 @@
                         <div class="col-sm-12">
                             <h4 class="uppercase mb16">$Title</h4>
                             $Content
+
+                            <% if $RedirectPage %>
+                                <a href="$RedirectPage.Link" class="btn">$ButtonText</a>
+                            <% end_if %>
                         </div>
                     </div>                    
                 </div>
