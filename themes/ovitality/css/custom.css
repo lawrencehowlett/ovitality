@@ -1,1 +1,14 @@
 /****** PLACE YOUR CUSTOM STYLES HERE ******/
+.accordion-1 .content p {
+    margin-bottom: 0;
+}
+.accordion-1 .content ul {
+	padding: 13px;
+}
+.accordion-1 ul {
+    list-style: disc;
+    margin-left: 13px;
+}
+.accordion-1 ul li {
+    margin-left: 13px;
+}

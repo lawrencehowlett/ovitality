@@ -12,7 +12,7 @@
                     <div class="row">
                         <% loop $PriceTables %>
                             <div class="col-md-4 col-sm-6">
-                                <div class="pricing-table pt-2 text-center <% if $MultipleOf(2) %>boxed<% else_if $MultipleOf(3) %>emphasis<% end_if %>">
+                                <div class="pricing-table pt-2 <% if $MultipleOf(2) %>boxed<% else_if $MultipleOf(3) %>emphasis<% end_if %>">
                                     <h5 class="uppercase">$Title</h5>
                                     <span class="price">$Price</span>
                                     <% if $RedirectPage %>
@@ -180,7 +180,7 @@
             <section>
                 <div class="container">
                     <div class="row">
-                        <div class="col-sm-12 text-center">
+                        <div class="col-sm-12">
                             <h4 class="uppercase mb16">$Title</h4>
                             $Content
                         </div>
