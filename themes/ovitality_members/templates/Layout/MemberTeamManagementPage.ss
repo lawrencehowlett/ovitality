@@ -6,6 +6,11 @@
                     <h3 class="uppercase mb16">My Team > $Team.Title</h3>
                     <hr>
                 </div>
+                <% if $FeedbackMessage %>
+                    <div class="col-md-12">
+                        <p class="alert alert-success">$FeedbackMessage</p>
+                    </div>
+                <% end_if %>
                 $TeamForm
 
                 <div class="col-md-12 mt64">

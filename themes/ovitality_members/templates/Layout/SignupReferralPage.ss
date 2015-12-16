@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="embed-video-container embed-responsive embed-responsive-16by9">
-                    <iframe class="embed-responsive-item" src="http://player.vimeo.com/video/{$Challenge.FeaturedVideo}?badge=0&title=0&byline=0&title=0"></iframe>
+                    <iframe class="embed-responsive-item" src="{$Challenge.FeaturedVideo}?badge=0&title=0&byline=0&title=0"></iframe>
                 </div>
                 <div class="mt16">
                     $Challenge.Content

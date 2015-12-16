@@ -153,6 +153,8 @@ class MemberTeamManagementPage_Controller extends MemberPage_Controller {
 
 					$email->send();
 				}
+
+				Session::set('SesFeedbackMessage', 'We have successfully sent your team invitation');
 			}
 		} catch(ValidationException $e) {
 			$form->sessionMessage($e->getResult()->message(), 'bad');
@@ -178,5 +180,11 @@ class MemberTeamManagementPage_Controller extends MemberPage_Controller {
 		}
 
 		return null;
+	}
+
+	public function getFeedbackMessage() {
+		$feedbackMessage = Session::get('SesFeedbackMessage');
+		Session::clear('SesFeedbackMessage');
+		return $feedbackMessage;
 	}
 }

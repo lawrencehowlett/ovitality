@@ -3,8 +3,10 @@ class Challenge extends DataObject {
 
 	private static $db = array(
 		'Title' => 'Text', 
+		'AttachmentsTitle' => 'Text', 
 		'Content' => 'HTMLText', 
 		'Summary' => 'HTMLText', 
+		'AttachmentsText' => 'HTMLText', 
 		'FeaturedVideo' => 'Varchar', 
 		'Status' => 'Enum(array("Unpublished", "Published"), "Unpublished")', 
 		'URLSegment' => 'Text', 
@@ -66,6 +68,17 @@ class Challenge extends DataObject {
 		$fields->dataFieldByName('Attachments')
 			->getConfig()
 			->addComponent(new GridFieldSortableRows('SortOrder'));
+
+		$fields->addFieldToTab(
+			'Root.Attachments', 
+			TextField::create('AttachmentsTitle', 'Title')
+		);
+		$fields->addFieldToTab(
+			'Root.Attachments', 
+			$fields->dataFieldByName('AttachmentsText')
+				->setRows(20)
+				->setTitle('Description')
+		);
 
 		return $fields;
 	}
@@ -196,11 +209,20 @@ class Challenge extends DataObject {
 	}
 
 	public function getChallengeDetailsPageLink() {
-
         return Controller::join_links(
             MemberChallengeDetailPage::get()->First()->Link(),
             'details',
             $this->URLSegment
         );
-	}	
+	}
+
+	public function ShowCountdown() {
+		$now = new DateTime(date('Y-m-d'));
+		$startDate = new DateTime($this->StartDate);
+		if ($now <= $startDate) {
+			return true;
+		}
+
+		return false;
+	}
 }

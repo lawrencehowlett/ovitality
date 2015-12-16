@@ -19,20 +19,19 @@
 			$Fields.dataFieldByName(Limit)
 		</div>
 
-
 		<div class="input-with-label">
 			<span>$Fields.dataFieldByName(FacebookURL).Title</span>			
 			$Fields.dataFieldByName(FacebookURL)
 		</div>
+
+		$Fields.dataFieldByName(SecurityID)
+		<% loop $Actions %>$Field<% end_loop %>		
 	</div>
 	<div class="col-md-6">
 		<div class="input-with-label">
 			<span>$Fields.dataFieldByName(Description).Title</span>			
 			$Fields.dataFieldByName(Description)
 		</div>
-
-		$Fields.dataFieldByName(SecurityID)
-		<% loop $Actions %>$Field<% end_loop %>    
 	</div>
 
 </form>

@@ -4,7 +4,7 @@ global $project;
 $project = 'mysite';
 
 global $database;
-$database = 'ovitality';
+$database = 'stagingo_db';
 
 require_once("conf/ConfigureFromEnv.php");
 
