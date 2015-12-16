@@ -282,13 +282,13 @@
         <% end_if %>
 
         <% if $ClassName == 'BlockSpinningBanner' %>
-            <section class="pt0 pb0">
+            <!--<section class="pt0 pb0 mt0">
                 <div class="slider-all-controls">
                     <ul class="slides">
                         <% loop $SpinningBanners %>
                             <li class="img-bg image-bg overlay pt240 pb240">
                                 <div class="background-image-holder">
-                                    <img alt="Background Image" class="background-image" src="$Image.CroppedImage(1080, 720).Link">
+                                    <img alt="Background Image" class="background-image" src="$Image.CroppedImage(1080, 677).Link">
                                 </div>
                                 <div class="container">
                                     <div class="row">
@@ -305,7 +305,30 @@
                         <% end_loop %>
                     </ul>
                 </div>
-            </section>        
+            </section>-->
+            <section class="cover fullscreen image-slider slider-all-controls controls-inside parallax">
+                <ul class="slides">
+                    <% loop $SpinningBanners %>
+                        <li class="overlay image-bg bg-light">
+                            <div class="background-image-holder">
+                                <img alt="image" class="background-image" src="$Image.Link" />
+                            </div>
+                            <div class="container v-align-transform">
+                                <div class="row">
+                                    <div class="col-sm-10 col-sm-offset-1">
+                                        <h1 class="mb40 mb-xs-16 large">$Title</h1>
+                                        $Description
+
+                                        <% if $RedirectPage %>
+                                            <a href="$RedirectPage.Link" class="btn">$RedirectButtonText</a>
+                                        <% end_if %>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    <% end_loop %>
+                </ul>
+            </section>
         <% end_if %>
 
         <% if $ClassName == 'BlockBanner' %>
