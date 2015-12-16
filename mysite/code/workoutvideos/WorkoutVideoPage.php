@@ -55,7 +55,7 @@ JS
 
 	public function PaginatedVideos() {
 		$list = new PaginatedList($this->videos, $this->getRequest());
-		$list->setPageLength(3);
+		$list->setPageLength(15);
 		return $list;
 	}
 

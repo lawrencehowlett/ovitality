@@ -58,7 +58,7 @@ JS
 
 	public function PaginatedRecipes() {
 		$list = new PaginatedList($this->recipes, $this->getRequest());
-		$list->setPageLength(3);
+		$list->setPageLength(15);
 
 		return $list;
 	}
