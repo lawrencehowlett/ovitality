@@ -69,18 +69,20 @@ class Challenge extends DataObject {
 			$fields->dataFieldByName('Attachments')
 				->getConfig()
 				->addComponent(new GridFieldSortableRows('SortOrder'));
-		}
 
-		$fields->addFieldToTab(
-			'Root.Attachments', 
-			TextField::create('AttachmentsTitle', 'Title')
-		);
-		$fields->addFieldToTab(
-			'Root.Attachments', 
-			$fields->dataFieldByName('AttachmentsText')
-				->setRows(20)
-				->setTitle('Description')
-		);
+			$fields->addFieldToTab(
+				'Root.Attachments', 
+				TextField::create('AttachmentsTitle', 'Title')
+			);
+
+			$fields->addFieldToTab(
+				'Root.Attachments', 
+				$fields->dataFieldByName('AttachmentsText')
+					->setRows(20)
+					->setTitle('Description')
+			);
+
+		}
 
 		return $fields;
 	}
