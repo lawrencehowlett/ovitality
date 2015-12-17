@@ -3,7 +3,8 @@ class BlockVideo extends Block {
 
 	private static $db = array(
 		'VideoURL' => 'Text', 
-		'ButtonText' => 'Varchar'		
+		'VideoChannel' => 'Enum(array("Vimeo", "Youtube"), "Vimeo")', 
+		'ButtonText' => 'Varchar'
 	);
 
 	private static $has_one = array(
@@ -30,6 +31,13 @@ class BlockVideo extends Block {
 			'RedirectPageID', 
 			TreedropdownField::create('RedirectPageID', 'Choose a redirect page', 'SiteTree')
 		);
+
+		$fields->insertAfter(
+			'Content', 
+			$fields->dataFieldByName('VideoChannel')
+				->setEmptyString('select video channel')
+		);
+
 		$fields->insertAfter(
 			'VideoURL', 
 			$fields->dataFieldByName('ButtonText')

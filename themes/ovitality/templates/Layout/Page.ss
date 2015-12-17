@@ -115,7 +115,13 @@
                         <div class="col-md-7 col-md-offset-1 col-sm-6 col-sm-offset-1 text-center">
                             <% if $VideoURL %>
                                 <div class="embed-video-container embed-responsive embed-responsive-16by9">
-                                    <iframe src="$VideoURL?badge=0&amp;title=0&amp;byline=0&amp;title=0" class="embed-responsive-item"></iframe>
+                                    <% if $VideoChannel == 'Youtube' %>
+                                        <iframe src="$VideoURL" frameborder="0" allowfullscreen></iframe>
+                                    <% end_if %>
+
+                                    <% if $VideoChannel == 'Vimeo' %>
+                                        <iframe class="embed-responsive-item" src="$VideoURL?badge=0&title=0&byline=0&title=0"></iframe>
+                                    <% end_if %>
                                 </div>
                             <% end_if %>
                         </div>
