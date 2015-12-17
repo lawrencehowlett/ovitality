@@ -65,9 +65,11 @@ class Challenge extends DataObject {
 		$fields->dataFieldByName('FeaturedVideo')
 			->setRightTitle('Place the id of the video from Vimeo');
 
-		$fields->dataFieldByName('Attachments')
-			->getConfig()
-			->addComponent(new GridFieldSortableRows('SortOrder'));
+		if ($this->ID) {
+			$fields->dataFieldByName('Attachments')
+				->getConfig()
+				->addComponent(new GridFieldSortableRows('SortOrder'));
+		}
 
 		$fields->addFieldToTab(
 			'Root.Attachments', 
