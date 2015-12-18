@@ -984,7 +984,7 @@ nav.bg-dark .logo-dark {
   right: 100%;
 }
 .menu > li ul {
-  width: 200px;
+  width: 350px;
   padding: 8px 0;
   background: #292929;
   position: absolute;
@@ -2903,7 +2903,6 @@ button[type="submit"] .form-loading {
   line-height: 32px;
 }
 .link-list a:after {
-  content: "\e628";
   font-family: 'themify';
   speak: none;
   font-style: normal;
@@ -4952,6 +4951,9 @@ footer.bg-dark a {
 }
 .footer-1 .sub {
   opacity: .5;
+}
+.footer-1 .sub p {
+  margin-bottom: 0;
 }
 .social-list {
   margin: 0;
