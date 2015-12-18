@@ -33,7 +33,7 @@
             <section>
                 <div class="container">
                     <div class="row">
-                        <div class="col-sm-12 text-center">
+                        <div class="col-sm-12">
                             <h4 class="uppercase mb16">$Title</h4>
                             $Content
                         </div>
@@ -73,7 +73,7 @@
             <section>
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-8 col-md-offset-2 text-center">
+                        <div class="col-md-8 col-md-offset-2">
                             <h4 class="uppercase mb80">$Title</h4>
                             <div class="tabbed-content icon-tabs">
                                 <ul class="tabs">
@@ -112,7 +112,7 @@
                                 <a class="btn" href="$RedirectPage.Link">$ButtonText</a>
                             <% end_if %>
                         </div>
-                        <div class="col-md-7 col-md-offset-1 col-sm-6 col-sm-offset-1 text-center">
+                        <div class="col-md-7 col-md-offset-1 col-sm-6 col-sm-offset-1">
                             <% if $VideoURL %>
                                 <div class="embed-video-container embed-responsive embed-responsive-16by9">
                                     <% if $VideoChannel == 'Youtube' %>
@@ -216,7 +216,7 @@
 <section>
                 <div class="container">
                     <div class="row">
-                        <div class="col-sm-12 text-center">
+                        <div class="col-sm-12">
                             <h4 class="uppercase mb16">Scrolling Carousel</h4>
                             <p class="lead mb64">
                                 Initialize a carousel using the '.logo-carousel' class.
