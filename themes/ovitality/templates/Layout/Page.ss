@@ -333,7 +333,7 @@
             <section>
                 <div class="container">
                     <div class="row">
-                        <div class="col-sm-12 text-center">
+                        <div class="col-sm-12">
                             <h4 class="uppercase mb16">$Title</h4>
                         </div>
                     </div>
