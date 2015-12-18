@@ -1,12 +1,9 @@
 <footer class="footer-1 bg-dark">
     <div class="container">
         <div class="row">
-            <div class="col-md-2 col-sm-6">
-                <img alt="Logo" class="logo" src="$SiteConfig.Logo.Link" />
-            </div>
             <% if $SiteConfig.FooterMenus %>
                 <% loop $SiteConfig.FooterMenus %>
-                    <div class="col-md-3 col-sm-6">
+                    <div class="col-md-4 col-sm-6">
                         <div class="widget">
                             <h6 class="title">$Title</h6>
                             <hr>
