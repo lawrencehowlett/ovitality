@@ -30,7 +30,6 @@
                                         <h5 class="mb0">$Title</h5>
                                         $Summary
                                         <a href="$AbsoluteLink" class="btn btn-sm">Read More</a>
-                                        <a href="$PurchaseLink" class="btn btn-sm btn-filled" target="_blank">Buy</a>
                                     </div>
                                 </div>
                             </div>
