@@ -164,6 +164,14 @@ JS
 		return MemberChallengesListPage::get()->First();
 	}
 
+	public function getMyLogPointsPage() {
+		return MemberLogPointsPage::get()->First();
+	}
+
+	public function getMyChallengesDetailsPage() {
+		return MemberChallengeDetailPage::get()->First();
+	}	
+
 	public function getMyDashboardPage() {
 		return MemberDashboardPage::get()->First();
 	}	

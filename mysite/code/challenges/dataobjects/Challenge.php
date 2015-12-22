@@ -70,6 +70,9 @@ class Challenge extends DataObject {
 				->getConfig()
 				->addComponent(new GridFieldSortableRows('SortOrder'));
 
+			$fields->dataFieldByName('DailyActivities')
+				->setConfig(GridFieldConfig_RecordEditor::create());
+
 			$fields->addFieldToTab(
 				'Root.Attachments', 
 				TextField::create('AttachmentsTitle', 'Title')
@@ -81,7 +84,6 @@ class Challenge extends DataObject {
 					->setRows(20)
 					->setTitle('Description')
 			);
-
 		}
 
 		return $fields;

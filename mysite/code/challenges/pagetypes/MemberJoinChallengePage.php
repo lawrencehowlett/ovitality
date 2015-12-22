@@ -119,48 +119,51 @@ class MemberJoinChallengePage_Controller extends MemberPage_Controller {
 					$form->sessionMessage('All teams are full. Join as individual', 'bad');
 					return $this->redirectBack();
 				}
+				$reference->IndividualOrTeam = 'Team';
 				$reference->write();
 			} elseif (isset($data['JoinExistingTeam']) && $data['JoinExistingTeam']) {
 				$reference->CreateNewTeam = false;
 				$reference->TeamID = $data['TeamID'];
+				$reference->IndividualOrTeam = 'Team';
 				$reference->write();
-			} else {
-				if (isset($data['TeamName']) && $data['TeamName']) {
-					$reference->CreateNewTeam = true;
-					$team = new Team();
-					$team->TeamLeaderID = Member::currentUserID();
-					$team->Title = $data['TeamName'];
-					$team->TeamLimit = $data['TeamLimit'];
-					$team->write();
+			} elseif (isset($data['TeamName']) && $data['TeamName']) {
+				$reference->CreateNewTeam = true;
+				$team = new Team();
+				$team->TeamLeaderID = Member::currentUserID();
+				$team->Title = $data['TeamName'];
+				$team->TeamLimit = $data['TeamLimit'];
+				$reference->IndividualOrTeam = 'Team';
+				$team->write();
 
-					$team->Members()->add(Member::currentUser());
-					$team->Leaders()->add(Member::currentUser());
+				$team->Members()->add(Member::currentUser());
+				$team->Leaders()->add(Member::currentUser());
 
-					$this->getChallenge()->Teams()->add($team);
+				$this->getChallenge()->Teams()->add($team);
 
-					$reference->TeamID = $team->ID;
-					$reference->write();
+				$reference->TeamID = $team->ID;
+				$reference->write();
 
-					if (count($data['TeamMemberName']) > 0) {
-						for ($i=0; $i < count($data['TeamMemberName']); $i++) { 
-							$email = new Email();
-							$email
-								->setFrom('no-reply@ovitality.com')
-								->setTo($data['TeamMemberEmail'][$i])
-								->setSubject('You are invited to join the ' . $this->getChallenge()->Title)
-								->setTemplate('TeamInvitationEmail')
-								->populateTemplate(new ArrayData(array(
-					        		'Logo' => SiteConfig::current_site_config()->Logo(),
-					            	'Name' => $data['TeamMemberName'][$i], 
-					            	'Challenge' => $this->getChallenge()->Title,
-					            	'Member' => Member::currentUser(), 
-					            	'Link' => $reference->getReferralSignupLink()
-					            )));
+				if (count($data['TeamMemberName']) > 0) {
+					for ($i=0; $i < count($data['TeamMemberName']); $i++) { 
+						$email = new Email();
+						$email
+							->setFrom('no-reply@ovitality.com')
+							->setTo($data['TeamMemberEmail'][$i])
+							->setSubject('You are invited to join the ' . $this->getChallenge()->Title)
+							->setTemplate('TeamInvitationEmail')
+							->populateTemplate(new ArrayData(array(
+				        		'Logo' => SiteConfig::current_site_config()->Logo(),
+				            	'Name' => $data['TeamMemberName'][$i], 
+				            	'Challenge' => $this->getChallenge()->Title,
+				            	'Member' => Member::currentUser(), 
+				            	'Link' => $reference->getReferralSignupLink()
+				            )));
 
-							$email->send();
-						}
+						$email->send();
 					}
 				}
+			} else {
+				$reference->write();
 			}
 
 			$sesJoinChallenge = $this->getSesJoinChallenge();
@@ -180,6 +183,8 @@ class MemberJoinChallengePage_Controller extends MemberPage_Controller {
 
 			if ($reference->IsJoiningIndividual()) {
 				$reference->Challenge()->Members()->add(Member::currentUser());
+				$reference->IndividualOrTeam = 'individual';
+				$reference->write();
 			}
 
 		} catch(ValidationException $e) {

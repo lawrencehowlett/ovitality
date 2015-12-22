@@ -59,6 +59,10 @@ JS
 	}
 
 	public function getTeamMembers() {
-		return $this->getTeam()->Members()->exclude('ID', Member::currentUserID());
+		if (Member::currentUser()->getActiveChallengeReference()->IsTeam()) {
+			return $this->getTeam()->Members()->exclude('ID', Member::currentUserID());
+		}
+
+		return null;
 	}
 }

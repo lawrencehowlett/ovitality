@@ -1,7 +1,8 @@
 <section>
     <div class="container">
         <div class="row">
-            <div class="col-md-9 col-md-push-3 mb-xs-24">
+            <% include MemberSidebar %>
+            <div class="col-md-10 mb-xs-24">
                 <div class="col-md-12">
                     <h3 class="uppercase mb16">$ActiveChallenge.Title</h3>
                     <hr>
@@ -16,7 +17,7 @@
                     $ActiveChallenge.Content
 
                     <div>
-                        <a href="#" class="btn btn-sm btn-filled">Log Points</a> 
+                        <a href="$MyLogPointsPage.Link" title="Go to Log Points Page" class="btn btn-sm btn-filled">Log Points</a> 
                         <a href="#" class="btn btn-sm btn-filled">Individual Leaderboard</a> 
                         <a href="#" class="btn btn-sm btn-filled">Team Leaderboard</a>
                     </div>
@@ -78,19 +79,21 @@
                         </div>
                     <% end_if %>
 
-                    <div class="feature">
-                        <h4 class="uppercase">My Team</h4>
+                    <% if $CurrentUser.ActiveChallengeReference.IsTeam %>
+                        <div class="feature">
+                            <h4 class="uppercase">My Team</h4>
 
-                        <% if $CurrentUser.LeaderActiveTeam %>
-                            <a href="$Team.TeamManagementLink" class="btn btn-sm"><i class="ti-user"></i> Manage Team</a>
-                        <% end_if %>
+                            <% if $CurrentUser.LeaderActiveTeam %>
+                                <a href="$Team.TeamManagementLink" class="btn btn-sm"><i class="ti-user"></i> Manage Team</a>
+                            <% end_if %>
 
-                        <% if $Team.FacebookURL %>
-                            <a href="$Team.FacebookURL" target="_blank" class="btn btn-sm">
-                                <i class="ti-facebook"></i> Go to Team Facebook Group
-                            </a>
-                        <% end_if %>
-                    </div>
+                            <% if $Team.FacebookURL %>
+                                <a href="$Team.FacebookURL" target="_blank" class="btn btn-sm">
+                                    <i class="ti-facebook"></i> Go to Team Facebook Group
+                                </a>
+                            <% end_if %>
+                        </div>
+                    <% end_if %>
 
                     <% if $TeamMembers %>
                          <% loop $TeamMembers %>
@@ -121,7 +124,6 @@
                     <% end_if %>
                 </div>
             </div>
-            <% include MemberSidebar %>
         </div>
     </div>
 </section>

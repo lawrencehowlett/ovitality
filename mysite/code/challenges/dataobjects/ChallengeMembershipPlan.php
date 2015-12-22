@@ -38,6 +38,14 @@ class ChallengeMembershipPlan extends DataObject {
 		return $fields;
 	}
 
+	public function WholePrice() {
+		return number_format($this->Price, 0);
+	}
+
+	public function WholePriceInCents() {
+		return $this->WholePrice() * 100;
+	}
+
 	public function SelectMembershipPlanLink() {
 		return Controller::join_links(
             MemberJoinChallengePlanPage::get()->First()->Link(),

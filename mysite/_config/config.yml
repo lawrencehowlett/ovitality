@@ -33,3 +33,14 @@ BlogPost:
 
 Currency:
   currency_symbol: '&#163;'
+
+PaymentProcessor:
+    supported_methods:
+        dev:
+            - 'StripePaymentGateway'
+        live:
+            - 'StripePaymentGateway'
+
+StripeGateway:
+    test_api_secret: "sk_test_h2HmvDNkMDOyQWOFgtk6IMaS"
+    api_secret: "sk_live_kcLqvPTYnCUSJ0q2IsVC0i6A"

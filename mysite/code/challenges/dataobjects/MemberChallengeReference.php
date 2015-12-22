@@ -84,4 +84,21 @@ class MemberChallengeReference extends DataObject {
 	public function HasActiveChallenge() {
 		return ($this->Status == 'Active') ? true : false; 
 	}
+
+	public function IsIndividual() {
+		if ($this->IndividualOrTeam == 'Individual') {
+			return true;
+		}
+
+		return false;
+	}
+
+	public function IsTeam() {
+		if ($this->IndividualOrTeam == 'Team') {
+			return true;
+		}
+
+		return false;
+	}
+
 }
