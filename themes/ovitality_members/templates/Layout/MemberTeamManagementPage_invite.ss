@@ -1,7 +1,8 @@
 <section>
     <div class="container">
         <div class="row">
-            <div class="col-md-9 col-md-push-3 mb-xs-24">
+            <% include MemberSidebar %>        
+            <div class="col-md-10 mb-xs-24">
                 <div class="col-md-12">
                     <h3 class="uppercase mb16">Invite new team members</h3>
                     <hr>
@@ -11,7 +12,6 @@
                 </div>
                 $InviteTeamMemberForm
             </div>
-            <% include MemberSidebar %>
         </div>
     </div>
 </section>

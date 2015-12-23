@@ -131,7 +131,7 @@ class MemberJoinChallengePage_Controller extends MemberPage_Controller {
 				$team = new Team();
 				$team->TeamLeaderID = Member::currentUserID();
 				$team->Title = $data['TeamName'];
-				$team->TeamLimit = $data['TeamLimit'];
+				$team->Limit = $data['TeamLimit'];
 				$reference->IndividualOrTeam = 'Team';
 				$team->write();
 

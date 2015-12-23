@@ -11,6 +11,15 @@ class WorkoutVideoPage_Controller extends Page_Controller {
 
 	public function init() {
 		parent::init();
+
+		if (Member::currentUser()) {
+			if (!Member::currentUser()->IsLevelThreeAccess()) {
+				$this->redirect(MemberDashboardPage::get()->First()->Link());
+			}			
+		} else {
+			Security::permissionFailure();
+		}
+
 		Requirements::customScript(<<<JS
 			(function($) {
 			    $(document).ready(function(){

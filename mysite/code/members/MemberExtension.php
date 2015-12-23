@@ -231,4 +231,29 @@ class MemberExtension extends DataExtension {
 
 		$email->send();
 	}
+
+	public function IsLevelOneAccess() {
+		if ($this->owner->HasActiveChallenge() && $this->owner->getActiveChallengeReference()->MembershipPlan()->Level()->Code == 'LEVEL_1') {
+			return true;
+		}
+
+		return false;
+	}	
+
+
+	public function IsLevelTwoAccess() {
+		if ($this->owner->HasActiveChallenge() && $this->owner->getActiveChallengeReference()->MembershipPlan()->Level()->Code == 'LEVEL_2') {
+			return true;
+		}
+
+		return false;
+	}
+
+	public function IsLevelThreeAccess() {
+		if ($this->owner->HasActiveChallenge() && $this->owner->getActiveChallengeReference()->MembershipPlan()->Level()->Code == 'LEVEL_3') {
+			return true;
+		}
+
+		return false;
+	}	
 }

@@ -1,7 +1,8 @@
 <section>
     <div class="container">
         <div class="row">
-            <div class="col-md-9 col-md-push-3 mb-xs-24">
+            <% include MemberSidebar %>
+            <div class="col-md-10 mb-xs-24">
                 <div class="col-md-12">
                     <h3 class="uppercase mb16">Current and upcoming challenges</h3>
                     <hr>
@@ -14,7 +15,10 @@
                                     <div>
                                         <h5 class="uppercase">$ActiveChallenge.Title</h5>
                                     </div>
-                                    <a href="" class="btn">Log Points</a>
+                                    <% if $CurrentUser.IsLevelTwoAccess || $CurrentUser.IsLevelThreeAccess %>
+                                        <a href="" class="btn">Log Points</a>
+                                    <% end_if %>
+
                                     <a href="" class="btn">Individual Leaderboard</a>
                                     <a href="" class="btn">Team Leaderboard</a>
                                     <p class="uppercase">$ActiveChallenge.StartLabel $ActiveChallenge.StartDate.Format(jS M Y)</p>
@@ -58,7 +62,6 @@
                     </div>
                 <% end_if %>
             </div>
-            <% include MemberSidebar %>
         </div>
     </div>
 </section>

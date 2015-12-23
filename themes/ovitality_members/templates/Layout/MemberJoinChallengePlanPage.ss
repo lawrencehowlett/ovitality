@@ -10,9 +10,9 @@
                 <% if $Challenge.MembershipPlans %>
                     <% loop $Challenge.MembershipPlans %>
                         <div class="col-md-6 col-sm-6 mt16">
-                            <div class="pricing-table pt-1 text-center boxed">
+                            <div class="pricing-table pt-1 boxed text-center">
                                 <h5 class="uppercase">$Title</h5>
-                                <span class="price">$Price.Whole</span>
+                                <span class="price">$Price.Whole</span><br>
                                 <a class="btn btn-filled btn-lg" href="$SelectMembershipPlanLink">Select Plan</a>
                                 $Features
                             </div>

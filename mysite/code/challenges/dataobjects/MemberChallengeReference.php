@@ -100,5 +100,4 @@ class MemberChallengeReference extends DataObject {
 
 		return false;
 	}
-
 }

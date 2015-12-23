@@ -17,7 +17,10 @@
                     $ActiveChallenge.Content
 
                     <div>
-                        <a href="$MyLogPointsPage.Link" title="Go to Log Points Page" class="btn btn-sm btn-filled">Log Points</a> 
+                        <% if $CurrentUser.IsLevelTwoAccess || $CurrentUser.IsLevelThreeAccess %>
+                            <a href="$MyLogPointsPage.Link" title="Go to Log Points Page" class="btn btn-sm btn-filled">Log Points</a> 
+                        <% end_if %>
+
                         <a href="#" class="btn btn-sm btn-filled">Individual Leaderboard</a> 
                         <a href="#" class="btn btn-sm btn-filled">Team Leaderboard</a>
                     </div>
