@@ -15,7 +15,8 @@ class Team extends DataObject {
 
 	private static $many_many = array(
 		'Members' => 'Member', 
-		'Leaders' => 'Member'
+		'Leaders' => 'Member', 
+		'Coaches' => 'Member'
 	);
 
 	private static $summary_fields = array(
@@ -42,7 +43,9 @@ class Team extends DataObject {
 
 		$fields->removeByName('TeamLeaderID');
 		$fields->removeByName('ChallengeID');
-		$fields->removeByName('Type');
+
+		$fields->dataFieldByName('Type')
+			->setEmptyString('select type');
 
 		$fields->dataFieldByName('Limit')
 			->setTitle('Number of team members');

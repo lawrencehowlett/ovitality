@@ -148,7 +148,7 @@ class MemberTeamManagementPage_Controller extends MemberPage_Controller {
 			            	'Name' => $data['Name'][$i], 
 			            	'Challenge' => Member::currentUser()->getActiveChallenge()->Title,
 			            	'Member' => Member::currentUser(), 
-			            	'Link' => Member::currentUser()->getActiveChallengeReference()->getReferralSignupLink()
+			            	'Link' => ''
 			            )));
 
 					$email->send();

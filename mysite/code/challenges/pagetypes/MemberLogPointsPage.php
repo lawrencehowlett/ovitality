@@ -5,6 +5,10 @@ class MemberLogPointsPage extends MemberPage {
 
 class MemberLogPointsPage_Controller extends MemberPage_Controller {
 
+	private static $allowed_actions = array(
+		'Day'
+	);
+
 	public function init() {
 		parent::init();
 		if (Member::currentUser()) {
@@ -22,5 +26,7 @@ class MemberLogPointsPage_Controller extends MemberPage_Controller {
 		Requirements::javascript(THEMES_DIR . '/ovitality/js/logpoints.js');
 	}
 
-	
+	public function getDailyActivity() {
+
+	}
 }

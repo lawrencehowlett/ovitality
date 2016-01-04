@@ -20,6 +20,10 @@ class MemberChallengeReference extends DataObject {
 		'MembershipPlan' => 'ChallengeMembershipPlan'
 	);
 
+	private static $has_many = array(
+		'Points' => 'ChallengePoint'
+	);
+
 	public function onBeforeWrite() {
 		parent::onBeforeWrite();
 

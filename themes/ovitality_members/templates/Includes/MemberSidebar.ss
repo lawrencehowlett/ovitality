@@ -49,11 +49,26 @@
                 </li>
             <% end_if %>
 
-            <li>
-                <a href="" title="Go to my coach">
-                    <i class="ti-user"></i> My Coach
-                </a>
-            </li>
+            <% if not $CurrentUser.IsCoach && $CurrentUser.HasActiveChallenge && $CurrentUser.ActiveChallengeReference.IsTeam %>
+                <li>
+                    <a href="$getMemberPageInstance(MemberMyCoachPage).Link" title="Go to my coach">
+                        <i class="ti-user"></i> My Coach
+                    </a>
+                </li>
+            <% end_if %>
+
+            <% if $CurrentUser.IsCoach || $CurrentUser.IsTeamLeader %>
+                <li>
+                    <a href="{$getMemberPageInstance(MemberCoachPage).Link}ManageTeams" title="Go to my team coach page">
+                        <i class="ti-user"></i> Teams | Coach 
+                        <ul class="bullets" style="margin-left:15px;">
+                            <li><a href="{$getMemberPageInstance(MemberCoachPage).Link}ManageTeams">Manage Teams</a></li>
+                            <li><a href="">Team Points</a></li>
+                        </ul>
+                    </a>
+                </li>
+            <% end_if %>
+
         </ul>
     </div>    
 </div>

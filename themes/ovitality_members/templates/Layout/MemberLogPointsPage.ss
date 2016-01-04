@@ -4,7 +4,7 @@
             <% include MemberSidebar %>
             <div class="col-md-10 mb-xs-24">
                 <div class="col-md-12">
-                    <h3 class="uppercase mb16 pull-left">Login Points</h3>
+                    <h3 class="uppercase mb16 pull-left">Log Points</h3>
                     <a class="btn pull-right" href="$MyChallengesDetailsPage.Link" title="Go back to challenge dashboard">Back to Challenge Dashboard</a>
                     <div class="clearfix"></div>
                     <hr>
@@ -59,92 +59,54 @@
                 </div>
                 <div class="col-md-4 feature bordered">
                     <div class="testimonials text-slider slider-arrow-controls">
-                        <ul class="slides">
-                            <li>
-                                <div class="row mb16">
-                                    <div class="col-md-12">
-                                        <h3 class="mb36 uppercase text-center">Nov 10</h3>
-                                        <hr>
-                                        <p class="lead mb8">What is Lorem Ipsum</p>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                        <div class="quote-author">
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <div class="radio-option checked">
-                                                        <div class="inner"></div>
-                                                        <input type="radio" value="radio1" name="radio">
-                                                    </div>
-                                                    <span>Yes</span>
-                                                </div>
-                                                <div class="col-md-9">
-                                                    <div class="radio-option">
-                                                        <div class="inner"></div>
-                                                        <input type="radio" value="radio1" name="radio">
-                                                    </div>
-                                                    <span>No</span>
-                                                </div>
+                        <div class="row mb16">
+                            <div class="col-md-2 text-left">
+                                <a href="" title="Go to previous date"><i class="ti-arrow-left"></i></a>
+                            </div>
+
+                            <div class="col-md-8 text-center">
+                                <h3 class="mb36 uppercase">Feb 31</h3>
+                            </div>
+
+                            <div class="col-md-2 text-right">
+                                <a href="" title="Go to next date"><i class="ti-arrow-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="row mb16">
+                            <div class="col-md-12">
+                                <p class="lead mb8">What is Lorem Ipsum</p>
+                                <div class="quote-author">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="radio-option checked">
+                                                <div class="inner"></div>
+                                                <input type="radio" value="radio1" name="radio">
                                             </div>
+                                            <span>Yes</span>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <div class="radio-option">
+                                                <div class="inner"></div>
+                                                <input type="radio" value="radio1" name="radio">
+                                            </div>
+                                            <span>No</span>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row mb16">
-                                    <div class="col-md-12">
-                                        <p class="lead mb8">Why do we use it</p>
-                                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
-                                        <input type="text" placeholder="Enter a number">
-                                    </div>
-                                </div>
-                                <div class="row mb16">
-                                    <div class="col-md-12">                                  
-                                        <p class="lead mb8">Where can I get some</p>
-                                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration.</p>
-                                        <input id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="14"/>
-                                    </div>
-                                </div>                                
-                            </li>
-                            <li>
-                                <div class="row mb16">
-                                    <div class="col-md-12">
-                                        <h3 class="mb36 uppercase text-center">Nov 11</h3>
-                                        <hr>
-                                        <p class="lead mb8">What is Lorem Ipsum</p>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                        <div class="quote-author">
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <div class="radio-option checked">
-                                                        <div class="inner"></div>
-                                                        <input type="radio" value="radio1" name="radio">
-                                                    </div>
-                                                    <span>Yes</span>
-                                                </div>
-                                                <div class="col-md-9">
-                                                    <div class="radio-option">
-                                                        <div class="inner"></div>
-                                                        <input type="radio" value="radio1" name="radio">
-                                                    </div>
-                                                    <span>No</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mb16">
-                                    <div class="col-md-12">
-                                        <p class="lead mb8">Why do we use it</p>
-                                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
-                                        <input type="text" placeholder="Enter a number">
-                                    </div>
-                                </div>
-                                <div class="row mb16">
-                                    <div class="col-md-12">                                  
-                                        <p class="lead mb8">Where can I get some</p>
-                                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration.</p>
-                                        <input id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="14"/>
-                                    </div>
-                                </div>                                
-                            </li>                            
-                        </ul>
+                            </div>
+                        </div>
+                        <div class="row mb16">
+                            <div class="col-md-12">
+                                <p class="lead mb8">Why do we use it</p>
+                                <input type="text" placeholder="Enter a number">
+                            </div>
+                        </div>
+                        <div class="row mb16">
+                            <div class="col-md-12">                                  
+                                <p class="lead mb8">Where can I get some</p>
+                                <input id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="14"/>
+                            </div>
+                        </div>
                     </div>                    
                 </div>
             </div>

@@ -191,6 +191,10 @@ class MemberExtension extends DataExtension {
 		return null;
 	}
 
+	public function getCoachTeams() {
+		return Team::get()->filter(array('Coaches.ID' => $this->owner->ID));
+	}
+
 	public function LeaderActiveTeam() {
 		$team = $this->getActiveTeam();
 		$isLeader = $team->Leaders()->find('ID', $this->owner->ID);
@@ -255,5 +259,23 @@ class MemberExtension extends DataExtension {
 		}
 
 		return false;
-	}	
+	}
+
+	public function IsCoach() {
+		$coachGroup = $this->owner->Groups()->filter(array('Code' => 'coach'));
+		if ($coachGroup->exists()) {
+			return true;
+		}
+
+		return false;
+	}
+
+	public function IsTeamLeader() {
+		$teamLeadersGroup = $this->owner->Groups()->filter(array('Code' => 'team-leaders'));
+		if ($teamLeadersGroup->exists()) {
+			return true;
+		}
+
+		return false;
+	}
 }

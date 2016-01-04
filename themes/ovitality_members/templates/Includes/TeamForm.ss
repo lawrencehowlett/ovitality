@@ -29,6 +29,11 @@
 	</div>
 	<div class="col-md-6">
 		<div class="input-with-label">
+			<span>$Fields.dataFieldByName(Type).Title</span>			
+			$Fields.dataFieldByName(Type)
+		</div>
+
+		<div class="input-with-label">
 			<span>$Fields.dataFieldByName(Description).Title</span>			
 			$Fields.dataFieldByName(Description)
 		</div>
