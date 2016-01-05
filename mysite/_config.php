@@ -4,7 +4,7 @@ global $project;
 $project = 'mysite';
 
 global $database;
-$database = 'stagingo_db';
+$database = 'SS_ovitalitystage';
 
 require_once("conf/ConfigureFromEnv.php");
 

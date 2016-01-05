@@ -11,7 +11,7 @@
                                 <ul class="link-list recent-posts">
                                     <% loop $Pages %>
                                         <li>
-                                            <a href="$Link" title="Go to $Title.XML">$Title.XML</a>
+                                            <a href="$Page.Link" title="Go to $Title.XML">$Title.XML</a>
                                         </li>
                                     <% end_loop %>
                                 </ul>

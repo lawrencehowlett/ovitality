@@ -26,7 +26,8 @@ class ActionBox extends DataObject {
 	 */
 	private static $has_one = array(
 		'ActionBoxParent' => 'BlockActionBox', 
-		'RedirectPage' => 'SiteTree'
+		'RedirectPage' => 'SiteTree',
+		"ActionBoxImage" => "Image"
 	);
 
 	/**

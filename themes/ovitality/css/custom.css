@@ -17,3 +17,14 @@
 }
 
 footer .widget .title {font-size: 14px;}
+
+h6.title{text-transform: uppercase;}
+.UpperCaseMe{text-transform: uppercase;}
+
+
+.blockContent ul {list-style-type: circle; margin-left: 10px;}
+.blockContent li {margin-left: 10px;}
+
+p{margin-bottom: 10px;}
+img.ActionBoxImg{margin-bottom: 20px;}
+section.page-title {margin: 0 0 40px 0 !important;}

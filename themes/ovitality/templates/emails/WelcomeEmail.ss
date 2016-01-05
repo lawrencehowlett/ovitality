@@ -15,9 +15,12 @@
 
 	<p style="margin:0; padding:0; margin:0; margin-bottom:15px;">Welcome to OVitality</p>
 
-	<p style="margin:0; padding:0; margin:0; margin-bottom:15px;">We have created your free online account and you can access this service 24 hours a day 7 days a week.</p>
+	<p style="margin:0; padding:0; margin:0; margin-bottom:15px;">We are excited to have you join us to find out more about how to get fit and healthy, the natural way.</p>
 
-	<p style="margin:0; padding:0; margin:0; margin-bottom:15px;">You can now log into your <b>Members Area</b> <a href="{$DashboardPage.Link}">{$DashboardPage.Link}</a> section of our website. You can also update your contact details using this service.</p>
+
+	<p style="margin:0; padding:0; margin:0; margin-bottom:15px;">We have created your free 3 day trial account. </p>
+<p style="margin:0; padding:0; margin:0; margin-bottom:15px;">Are you ready to start your 80 day challenge? Who do you want on your team? Sign up now and Let’s get fit together!  *A link to pay for the trial.*</p>
+<p style="margin:0; padding:0; margin:0; margin-bottom:15px;">You can now log intoyour <a href="{$DashboardPage.Link}">Members Area</a> section of our website. You can also update your contact details using this service.</p>
 
 	<% if $GeneratedPassword %>
 		<div>
@@ -26,12 +29,6 @@
 		</div>
 	<% end_if %>
 	<br>
-
-	<% if $ContactNumber %>
-		<p style="margin:0; padding:0; margin:0; margin-bottom:20px;">
-			If you have any problems using the website, please contact us on $ContactNumber. 
-		</p>
-	<% end_if %>
 
 	<p style="margin:0; padding:0; margin:0; margin-bottom:10px;">For a fitter, happier &amp; healthier you!</p>
 	<p style="margin:0; padding:0; margin:0; margin-bottom:15px;">The ŌVITALity Team.</p>
