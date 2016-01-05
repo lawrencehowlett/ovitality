@@ -31,8 +31,8 @@
                                 <h4 class="uppercase">$CurrentProduct.Title</h4>
                                 $CurrentProduct.Summary
                             </div>
-                            <hr class="mb48 mb-xs-24">
-                            <a href="$CurrentProduct.PurchaseLink" target="_blank" class="btn btn-sn btn-filled" title="Go purchase $CurrentProduct.Title">Buy</a>
+                            <%-- <hr class="mb48 mb-xs-24">
+                            <a href="$CurrentProduct.PurchaseLink" target="_blank" class="btn btn-sn btn-filled" title="Go purchase $CurrentProduct.Title">Buy</a> --%>
                         </div>
                     </div>
                     <!--end of row-->

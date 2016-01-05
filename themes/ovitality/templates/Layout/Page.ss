@@ -1,11 +1,12 @@
+<div class="blocks">
 <% if $Blocks %>
     <% loop $Blocks %>
         <% if $ClassName == 'BlockPrice' %>
-            <section>
+            <section class="BlockPrice">
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-12">
-                            <h4 class="uppercase mb16">$Title</h4>
+                            <h4 class="UpperCaseMe mb16">$Title</h4>
                             $Content
                         </div>
                     </div>
@@ -13,7 +14,7 @@
                         <% loop $PriceTables %>
                             <div class="col-md-4 col-sm-6">
                                 <div class="pricing-table pt-2 <% if $MultipleOf(2) %>boxed<% else_if $MultipleOf(3) %>emphasis<% end_if %> text-center">
-                                    <h5 class="uppercase">$Title</h5>
+                                    <h5 class="UpperCaseMe">$Title</h5>
                                     <span class="price">$Price</span>
                                     <% if $RedirectPage %>
                                         <a class="btn <% if $MultipleOf(3) %>btn-white<% else %>btn-filled<% end_if %> btn-lg" href="$RedirectPage.Link">$ButtonText</a>
@@ -30,20 +31,20 @@
         <% end_if %>
 
         <% if $ClassName == 'BlockTeam' %>
-            <section>
+            <section class="BlockTeam">
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-12">
-                            <h4 class="uppercase mb16">$Title</h4>
+                            <h4 class="UpperCaseMe mb16">$Title</h4>
                             $Content
                         </div>
                     </div>
                     <div class="row">
-                        <% loop $TeamMembers %>
+                        <% loop $TeamMembers.Sort(SortOrder) %>
                             <div class="col-md-12 col-sm-12 mb40 mb-xs-24 p0">
                                 <% if $MultipleOf(2) %>
                                     <div class="col-sm-6 mb64 mb-xs-24">
-                                        <h5 class="uppercase mb0">$Title</h5>
+                                        <h5 class="UpperCaseMe mb0">$Title</h5>
                                         <span class="inline-block mb40 mb-xs-24">$Position</span>
                                         $Content
                                     </div>
@@ -56,7 +57,7 @@
                                         <img alt="$Image.Title" src="$Image.CroppedImage(577, 442).Link" />
                                     </div>
                                     <div class="col-sm-6 mb64 mb-xs-24">
-                                        <h5 class="uppercase mb0">$Title</h5>
+                                        <h5 class="UpperCaseMe mb0">$Title</h5>
                                         <span class="inline-block mb40 mb-xs-24">$Position</span>
                                         $Content
 
@@ -70,11 +71,11 @@
         <% end_if %>
 
         <% if $ClassName == 'BlockTab' %>
-            <section>
+            <section class="BlockTab">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2">
-                            <h4 class="uppercase mb80">$Title</h4>
+                            <h4 class="UpperCaseMe mb80">$Title</h4>
                             <div class="tabbed-content icon-tabs">
                                 <ul class="tabs">
                                     <% loop $Tabs %>
@@ -102,17 +103,17 @@
         <% end_if %>
 
         <% if $ClassName == 'BlockVideo' %>
-            <section>
+            <section class="BlockVideo">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-4 col-sm-5 mb-xs-24">
-                            <h3>$Title</h3>
+                        <div class="col-md-7 col-sm-5 col-xs-12">
+                            <h3 class="UpperCaseMe">$Title</h3>
                             $Content
                             <% if $RedirectPage %>
                                 <a class="btn" href="$RedirectPage.Link">$ButtonText</a>
                             <% end_if %>
                         </div>
-                        <div class="col-md-7 col-md-offset-1 col-sm-6 col-sm-offset-1">
+                        <div class="col-md-4 col-md-offset-1 col-sm-6 col-sm-offset-1 col-xs-12">
                             <% if $VideoURL %>
                                 <div class="embed-video-container embed-responsive embed-responsive-16by9">
                                     <% if $VideoChannel == 'Youtube' %>
@@ -131,7 +132,7 @@
         <% end_if %>        
 
         <% if $ClassName == 'BlockImage' %>
-            <section>
+            <section class="BlockImage">
                 <div class="container">
                     <div class="row">
                         <% if $Position == 'Left' %>
@@ -140,16 +141,16 @@
                             </div>
 
                             <div class="col-md-7 col-sm-5">
-                                <h3>$Title</h3>
-                                $Content
+                                <h3 class="UpperCaseMe">$Title</h3>
+                                <div class="blockContent">$Content</div>
                                 <% if $RedirectPage %>
                                     <a class="btn" href="$RedirectPage.Link">$ButtonText</a>
                                 <% end_if %>
                             </div>
                         <% else %>
                             <div class="col-md-7 col-sm-5">
-                                <h3>$Title</h3>
-                                $Content
+                                <h3 class="UpperCaseMe">$Title</h3>
+                                <div class="blockContent">$Content</div>
                                 <% if $RedirectPage %>
                                     <a class="btn" href="$RedirectPage.Link">$ButtonText</a>
                                 <% end_if %>
@@ -168,11 +169,11 @@
         <% end_if %>
 
         <% if $ClassName == 'BlockForm' %>
-            <section>
+            <section class="">
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-6 col-md-5">
-                            <h4 class="uppercase">$Title</h4>
+                            <h4 class="UpperCaseMe">$Title</h4>
                             $Content
                         </div>
                         <div class="col-sm-6 col-md-5 col-md-offset-1">
@@ -184,11 +185,11 @@
         <% end_if %>
 
         <% if $ClassName == 'BlockAccordion' %>
-            <section>
+            <section class="BlockAccordion">
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-12">
-                            <h4 class="uppercase mb16">$Title</h4>
+                            <h4 class="UpperCaseMe mb16">$Title</h4>
                             $Content
                         </div>
                     </div>
@@ -213,11 +214,11 @@
         <% end_if %>
 
         <% if $ClassName == 'BlockCarousel' %>
-<section>
+<section class="BlockCarousel">
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-12">
-                            <h4 class="uppercase mb16">Scrolling Carousel</h4>
+                            <h4 class="UpperCaseMe mb16">Scrolling Carousel</h4>
                             <p class="lead mb64">
                                 Initialize a carousel using the '.logo-carousel' class.
                             </p>
@@ -241,11 +242,11 @@
         <% end_if %>
 
         <% if $ClassName == 'BlockGallery' %>
-<section>
+<section class="BlockGallery">
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-12">
-                            <h4 class="uppercase mb16">$Title</h4>
+                            <h4 class="UpperCaseMe mb16">$Title</h4>
                             $Content
                         </div>
                     </div>
@@ -271,11 +272,11 @@
         <% end_if %>
 
         <% if $ClassName == 'BlockText' %>
-            <section>
+            <section class="BlockText">
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-12">
-                            <h4 class="uppercase mb16">$Title</h4>
+                            <h4 class="UpperCaseMe mb16">$Title</h4>
                             $Content
 
                             <% if $RedirectPage %>
@@ -293,7 +294,7 @@
                     <% loop $SpinningBanners %>
                         <li class="overlay image-bg bg-dark">
                             <div class="background-image-holder">
-                                <img alt="image" class="background-image" src="$Image.Link" />
+                                <img alt="image" class="background-image" src="<% loop Image %>$SetWidth(2400).URL<% end_loop %>" />
                             </div>
                             <div class="container v-align-transform">
                                 <div class="row">
@@ -321,7 +322,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <h2 class="uppercase mb8">$Title</h2>
+                            <h2 class="UpperCaseMe mb8">$Title</h2>
                             <p class="lead mb0">$Content</p>
                         </div>
                     </div>
@@ -330,19 +331,24 @@
         <% end_if %>
 
         <% if $ClassName == 'BlockActionBox' %>
-            <section>
+            <section class="BlockActionBox">
                 <div class="container">
                     <div class="row">
-                        <div class="col-sm-12">
-                            <h4 class="uppercase mb16">$Title</h4>
+                        <div class="col-sm-12"> 
+                            <h4 class="UpperCaseMe mb16">$Title</h4>
                         </div>
                     </div>
                     <div class="row">
                         <% loop $ActionBoxes %>
                             <div class="col-sm-4">
                                 <div class="feature feature-2 bordered text-center">
+                                    <% if ActionBoxImage %>
+                                        <% loop ActionBoxImage %>
+                                            <img src="$CroppedImage(400,400).URL" class="img-responsive ActionBoxImg">
+                                        <% end_loop %>
+                                    <% end_if %>
                                     <div class="text-center">
-                                        <h5 class="uppercase">$Title</h5>
+                                        <h5 class="UpperCaseMe">$Title</h5>
                                     </div>
                                     $Content
                                     <% if $RedirectPage %>
@@ -356,5 +362,7 @@
             </section>
         <% end_if %>
 
+
     <% end_loop %>
 <% end_if %>
+</div>
