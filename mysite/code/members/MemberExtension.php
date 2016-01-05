@@ -205,6 +205,9 @@ class MemberExtension extends DataExtension {
 		return false;
 	}
 
+	/**
+	 * @return bool
+     */
 	public function HasActiveChallenge() {
 		$references = $this->owner->ChallengeReferences()->filter(array(
 			'Status' => 'Active', 
@@ -218,6 +221,30 @@ class MemberExtension extends DataExtension {
 		return false;
 	}
 
+	/**
+	 * @return bool
+     */
+	public function GetCurrentChallenge() {
+//		get the current date.
+		$date = new DateTime("Yesterday");
+		$references = $this->owner->ChallengeReferences()->filter(array(
+				'Status' => 'Active',
+				'PaymentStatus' => 'Paid',
+				'Challenge.StartDate:LessThan' => $date->format("Y-m-d"),
+				'Challenge.EndDate:GreaterThan'    => $date->format("Y-m-d")
+			)
+		);
+
+		if ($references->exists()) {
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * @param null $optionalData
+     */
 	public function sendWelcomeEmail($optionalData = null) {
 		$email = new Email('no-reply@ovitality.com', $this->owner->Email, 'Welcome to OVitality', null);
 		$email->setTemplate('WelcomeEmail');
@@ -234,6 +261,17 @@ class MemberExtension extends DataExtension {
 		}
 
 		$email->send();
+	}
+
+	public function canAccess($RequiredLevel){
+		$return = false;
+		if ($this->owner->GetCurrentChallenge()){
+			if ($this->owner->getActiveChallengeReference()->MembershipPlan()->Level()->Code == $RequiredLevel){
+				$return = true;
+			}
+		}
+
+		return $return;
 	}
 
 	public function IsLevelOneAccess() {

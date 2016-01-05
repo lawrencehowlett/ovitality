@@ -36,7 +36,7 @@
                             <h5 class="uppercase"><a href="$ActiveChallenge.ChallengeDetailsPageLink">$ActiveChallenge.Title</a></h5>
                         </div>
 
-                        <% if $CurrentUser.IsLevelTwoAccess || $CurrentUser.IsLevelThreeAccess %>
+                        <% if $CurrentUser.canAccess(LEVEL_2) || $CurrentUser.canAccess(LEVEL_3) %>
                             <a href="$getMemberPageInstance('MemberLogPointsPage').Link" class="btn" title="Go Log Points">Log Points</a>
                         <% end_if %>
 

@@ -33,7 +33,7 @@
                 </a>
             </li>
 
-            <% if $CurrentUser.IsLevelTwoAccess || $CurrentUser.IsLevelThreeAccess %>
+            <% if $CurrentUser.canAccess(LEVEL_2) || $CurrentUser.canAccess(LEVEL_3) %>
                 <li>
                     <a href="$MyRecipesPage.Link" title="Go to my recipes page">
                         <i class="ti-pin-alt"></i> $MyRecipesPage.Title
@@ -41,7 +41,7 @@
                 </li>
             <% end_if %>
             
-            <% if $CurrentUser.IsLevelThreeAccess %>
+            <% if $CurrentUser.canAccess(LEVEL_3) %>
                 <li>
                     <a href="$MyWorkoutVideosPage.Link" title="Go to my workout videos page">
                         <i class="ti-basketball"></i> $MyWorkoutVideosPage.Title

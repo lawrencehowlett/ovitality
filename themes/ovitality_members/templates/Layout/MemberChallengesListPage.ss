@@ -15,7 +15,7 @@
                                     <div>
                                         <h5 class="uppercase">$ActiveChallenge.Title</h5>
                                     </div>
-                                    <% if $CurrentUser.IsLevelTwoAccess || $CurrentUser.IsLevelThreeAccess %>
+                                    <% if $CurrentUser.canAccess(LEVEL_2) || $CurrentUser.canAccess(LEVEL_3) %>
                                         <a href="" class="btn">Log Points</a>
                                     <% end_if %>
 
