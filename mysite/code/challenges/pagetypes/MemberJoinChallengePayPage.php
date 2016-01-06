@@ -109,7 +109,7 @@ JS
 				Session::clear('JoinChallenge');
 
 			} catch(\Stripe\Error\Card $e) {
-				$form->sessionMessage($e->getResult()->message(), 'bad');
+				$form->sessionMessage($e->getMessage(), 'bad');
 				return $this->redirectBack();
 			}
 
