@@ -10,7 +10,8 @@ class MemberChallengesListPage_Controller extends MemberPage_Controller {
 	}
 
 	public function getAvailableChallenges() {
-		$challengeIDS = Member::currentUser()->ChallengeReferences()->column('ChallengeID');
+		$challengeIDS = Member::currentUser()->ChallengeReferences()->filter(array('Status' => 'Active',
+			'PaymentStatus' => 'Paid'))->column('ChallengeID');
 		if (count($challengeIDS)) {
 			return Challenge::get()->filter(array('Status' => 'Published'))->exclude('ID', $challengeIDS);
 		}
@@ -24,5 +25,5 @@ class MemberChallengesListPage_Controller extends MemberPage_Controller {
 
 	public function getCompletedChallenges() {
 		return Member::currentUser()->getCompletedChallenges();
-	}	
+	}
 }

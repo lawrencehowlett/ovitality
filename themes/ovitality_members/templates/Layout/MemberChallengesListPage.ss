@@ -36,7 +36,7 @@
                                     <p class="uppercase">$StartLabel $StartDate.Format(jS M Y)</p>
                                 </div>
                             </div>
-                        <% end_loop %>                            
+                        <% end_loop %>
                     </div>
                 </div>
 

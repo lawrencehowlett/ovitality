@@ -34,34 +34,35 @@
                                 </div>
                             </div>
                         </div>
-                    <% end_if %>
+                    <% else %>
 
-                    <% if $ActiveChallenge.DailyChallenges %>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="testimonials text-slider challenge-today-slider">
-                                    <ul class="slides">
-                                        <% loop $ActiveChallenge.DailyChallenges %>
-                                            <li>
-                                                
-                                                <div class="image-tile outer-title">
-                                                    <% if $Image %>
-                                                        <img src="$Image.PaddedImage(577, 442).Link" alt="$Image.Title" />
-                                                    <% end_if %>
+                        <% if $ActiveChallenge.DailyChallenges %>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="testimonials text-slider challenge-today-slider">
+                                        <ul class="slides">
+                                            <% loop $ActiveChallenge.DailyChallenges %>
+                                                <li>
 
-                                                    <div class="title mt16 mb16">
-                                                        <h5 class="uppercase mb0">$Title</h5>
+                                                    <div class="image-tile outer-title">
+                                                        <% if $Image %>
+                                                            <img src="$Image.PaddedImage(577, 442).Link" alt="$Image.Title" />
+                                                        <% end_if %>
+
+                                                        <div class="title mt16 mb16">
+                                                            <h5 class="uppercase mb0">$Title</h5>
+                                                        </div>
+
+                                                        $Content
+
                                                     </div>
-
-                                                    $Content
-                                                    
-                                                </div>
-                                            </li>
-                                        <% end_loop %>
-                                    </ul>
+                                                </li>
+                                            <% end_loop %>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        <% end_if %>
                     <% end_if %>
 
                 </div>
