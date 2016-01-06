@@ -15,7 +15,7 @@
 
 	<% if $Fields.dataFieldByName(AutoAssignTeam) %>
 		<p class="input-with-label"><span>Would you like to be assigned to a team?</span></p>
-		<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+		<!--<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>-->
 		<span>$Fields.dataFieldByName(AutoAssignTeam).Title</span>
 		<div class="checkbox-option pull-right <% if $Fields.dataFieldByName(AutoAssignTeam).Value %>checked<% end_if %>">
 		    <div class="inner"></div>
