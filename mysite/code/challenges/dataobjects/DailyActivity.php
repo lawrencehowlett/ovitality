@@ -20,7 +20,11 @@ class DailyActivity extends DataObject {
 
 	private static $singular_name = 'Daily Activity';
 
-	private static $plural_name = 'Daily Activities';	
+	private static $plural_name = 'Daily Activities';
+
+	private static $summary_fields = array(
+		'Title', 'Type'
+	);
 
 	public function getCMSFields() {
 		$fields = parent::getCMSFields();

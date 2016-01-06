@@ -66,6 +66,22 @@
 				responsive: true
 			});
 		}
+
+		/**
+		 * Modal form submission
+		 */
+		if ($('.foundry_modal').length > 0) {
+			var modal = $('.foundry_modal');
+			modal.prepend($('<i class="ti-close close-modal">'));
+			modal.addClass('reveal-modal');
+			$('.modal-screen').addClass('reveal-modal');
+
+			jQuery('.close-modal:not(.modal-strip .close-modal)').unbind('click').click(function(){
+				var modal = jQuery(this).closest('.foundry_modal');
+			    modal.toggleClass('reveal-modal');
+			    jQuery('.modal-screen').removeClass('reveal-modal');
+			});			
+		};
 		
     });
 })(jQuery);

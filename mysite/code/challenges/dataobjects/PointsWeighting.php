@@ -28,4 +28,12 @@ class PointsWeighting extends DataObject {
 
 		return $fields;
 	}
+
+	public function onBeforeWrite() {
+		parent::onBeforeWrite();
+
+		if ($this->DailyActivity()->Type == 'Boolean') {
+			$this->Title = strtoupper($this->Title);
+		};
+	}
 }
