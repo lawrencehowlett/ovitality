@@ -16,6 +16,10 @@ class DailyChallenge extends DataObject {
 		'DailyActivities' => 'DailyActivity'
 	);
 
+	private static $many_many_extraFields = array(
+		'DailyActivities' => array('SortOrder' => 'Int')
+	);
+
 	private static $default_sort = 'Date ASC';
 
 	public function getCMSFields() {
@@ -47,9 +51,17 @@ class DailyChallenge extends DataObject {
 
 			$fields->dataFieldByName('Image')
 				->setFolderName('Challenge/' . $this->ChallengeID . '/DailyChallenges/');
+
+			$fields->dataFieldByName('DailyActivities')
+				->getConfig()
+				->addComponent(new GridFieldSortableRows('SortOrder'));
 		}
 
 		return $fields;
+	}
+
+	public function DailyActivities() {
+		return $this->getManyManyComponents('DailyActivities')->sort('SortOrder');
 	}
 
 	public function onBeforeWrite() {
