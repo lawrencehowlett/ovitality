@@ -40,6 +40,7 @@
                             </ul>
                         </div>
                     <% end_if %>
+
                 </div>
                 <div class="col-md-5 col-md-offset-1">
                     <div class="feature feature-1 boxed bordered text-center">

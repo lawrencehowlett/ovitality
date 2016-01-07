@@ -35,7 +35,6 @@
                             </div>
                         </div>
                     <% else %>
-
                         <% if $ActiveChallenge.DailyChallenges %>
                             <div class="row">
                                 <div class="col-md-12">
