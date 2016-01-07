@@ -93,13 +93,14 @@ JS
 
 		if ($this->getSesJoinChallenge()->ChallengeReferenceID) {
 			$reference = MemberChallengeReference::get()->byID($this->getSesJoinChallenge()->ChallengeReferenceID);
-
+			$member = $reference->Member()->FirstName . ' ' . $reference->Member()->Surname;
+			
 			try {
 				$charge = \Stripe\Charge::create(array(
 					"amount" => $this->getReference()->MembershipPlan()->WholePriceInCents(),
 					"currency" => "gbp",
 					"source" => $data['stripeToken'],
-					"description" => $this->getReference()->MembershipPlan()->Title . ' at £' . $this->getReference()->MembershipPlan()->WholePrice() 
+					"description" => $this->getReference()->MembershipPlan()->Title . ' at £' . $this->getReference()->MembershipPlan()->WholePrice()  . " For " . $member
 				));
 	
 				$reference->PaymentStatus = 'Paid';
