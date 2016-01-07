@@ -21,7 +21,7 @@
                             <a href="$MyLogPointsPage.Link" title="Go to Log Points Page" class="btn btn-sm btn-filled">Log Points</a> 
                         <% end_if %>
 
-                        <a href="#" class="btn btn-sm btn-filled">Individual Leaderboard</a> 
+                        <a href="$getMemberPageInstance('MemberIndividualLeaderboardPage').Link" class="btn btn-sm btn-filled">Individual Leaderboard</a> 
                         <a href="#" class="btn btn-sm btn-filled">Team Leaderboard</a>
                     </div>
 
@@ -34,35 +34,34 @@
                                 </div>
                             </div>
                         </div>
-                    <% else %>
+                    <% end_if %>
 
-                        <% if $ActiveChallenge.DailyChallenges %>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="testimonials text-slider challenge-today-slider">
-                                        <ul class="slides">
-                                            <% loop $ActiveChallenge.DailyChallenges %>
-                                                <li>
+                    <% if $ActiveChallenge.DailyChallenges %>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="testimonials text-slider challenge-today-slider">
+                                    <ul class="slides">
+                                        <% loop $ActiveChallenge.DailyChallenges %>
+                                            <li>
+                                                
+                                                <div class="image-tile outer-title">
+                                                    <% if $Image %>
+                                                        <img src="$Image.PaddedImage(577, 442).Link" alt="$Image.Title" />
+                                                    <% end_if %>
 
-                                                    <div class="image-tile outer-title">
-                                                        <% if $Image %>
-                                                            <img src="$Image.PaddedImage(577, 442).Link" alt="$Image.Title" />
-                                                        <% end_if %>
-
-                                                        <div class="title mt16 mb16">
-                                                            <h5 class="uppercase mb0">$Title</h5>
-                                                        </div>
-
-                                                        $Content
-
+                                                    <div class="title mt16 mb16">
+                                                        <h5 class="uppercase mb0">$Title</h5>
                                                     </div>
-                                                </li>
-                                            <% end_loop %>
-                                        </ul>
-                                    </div>
+
+                                                    $Content
+                                                    
+                                                </div>
+                                            </li>
+                                        <% end_loop %>
+                                    </ul>
                                 </div>
                             </div>
-                        <% end_if %>
+                        </div>
                     <% end_if %>
 
                 </div>

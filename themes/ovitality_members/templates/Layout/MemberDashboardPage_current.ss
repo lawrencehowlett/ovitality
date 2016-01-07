@@ -8,38 +8,27 @@
                     <hr>
                 </div>
                 <div class="col-md-5 col-md-offset-1">
-                    <% if $ActiveChallenge.ShowCountdown %>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="feature feature-1 boxed">
-                                <h4>Awaiting Challenge Start</h4>
-                                <div class="countdown mb40" style="font-size:50px;" data-date="$ActiveChallenge.StartDate.Format('Y/m/d')"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <% else %>
-                        <div class="testimonials text-slider challenge-today-slider">
-                            <ul class="slides">
-                                <% loop $ActiveChallenge.DailyChallenges %>
-                                    <li>
+                    <div class="testimonials text-slider challenge-today-slider">
+                        <ul class="slides">
+                            <% loop $ActiveChallenge.DailyChallenges %>
+                                <li>
+                                    
+                                    <div class="image-tile outer-title">
+                                        <% if $Image %>
+                                            <img src="$Image.PaddedImage(577, 442).Link" alt="$Image.Title" />
+                                        <% end_if %>
 
-                                        <div class="image-tile outer-title">
-                                            <% if $Image %>
-                                                <img src="$Image.PaddedImage(577, 442).Link" alt="$Image.Title" />
-                                            <% end_if %>
-
-                                            <div class="title mt16 mb16">
-                                                <h5 class="uppercase mb0">$Title</h5>
-                                            </div>
-
-                                            $Content
-
+                                        <div class="title mt16 mb16">
+                                            <h5 class="uppercase mb0">$Title</h5>
                                         </div>
-                                    </li>
-                                <% end_loop %>
-                            </ul>
-                        </div>
-                    <% end_if %>
+
+                                        $Content
+                                        
+                                    </div>
+                                </li>
+                            <% end_loop %>
+                        </ul>
+                    </div>
                 </div>
                 <div class="col-md-5 col-md-offset-1">
                     <div class="feature feature-1 boxed bordered text-center">
@@ -51,7 +40,7 @@
                             <a href="$getMemberPageInstance('MemberLogPointsPage').Link" class="btn" title="Go Log Points">Log Points</a>
                         <% end_if %>
 
-                        <a href="" class="btn" title="Checkout individual leaderboard">Individual Leaderboard</a>
+                        <a href="$getMemberPageInstance('MemberIndividualLeaderboardPage').Link" class="btn" title="Checkout individual leaderboard">Individual Leaderboard</a>
                         <a href="" class="btn" title="Checkout team leaderboard">Team Leaderboard</a>
 
                         <p class="uppercase">$ActiveChallenge.StartLabel $ActiveChallenge.StartDate.Format(jS M Y)</p>
