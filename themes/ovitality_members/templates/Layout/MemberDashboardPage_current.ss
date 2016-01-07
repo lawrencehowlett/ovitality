@@ -40,6 +40,7 @@
                             </ul>
                         </div>
                     <% end_if %>
+
                 </div>
                 <div class="col-md-5 col-md-offset-1">
                     <div class="feature feature-1 boxed bordered text-center">
@@ -51,7 +52,7 @@
                             <a href="$getMemberPageInstance('MemberLogPointsPage').Link" class="btn" title="Go Log Points">Log Points</a>
                         <% end_if %>
 
-                        <a href="" class="btn" title="Checkout individual leaderboard">Individual Leaderboard</a>
+                        <a href="$getMemberPageInstance('MemberIndividualLeaderboardPage').Link" class="btn" title="Checkout individual leaderboard">Individual Leaderboard</a>
                         <a href="" class="btn" title="Checkout team leaderboard">Team Leaderboard</a>
 
                         <p class="uppercase">$ActiveChallenge.StartLabel $ActiveChallenge.StartDate.Format(jS M Y)</p>

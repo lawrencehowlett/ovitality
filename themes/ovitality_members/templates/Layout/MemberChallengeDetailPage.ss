@@ -21,7 +21,7 @@
                             <a href="$MyLogPointsPage.Link" title="Go to Log Points Page" class="btn btn-sm btn-filled">Log Points</a> 
                         <% end_if %>
 
-                        <a href="#" class="btn btn-sm btn-filled">Individual Leaderboard</a> 
+                        <a href="$getMemberPageInstance('MemberIndividualLeaderboardPage').Link" class="btn btn-sm btn-filled">Individual Leaderboard</a>
                         <a href="#" class="btn btn-sm btn-filled">Team Leaderboard</a>
                     </div>
 
@@ -35,7 +35,6 @@
                             </div>
                         </div>
                     <% else %>
-
                         <% if $ActiveChallenge.DailyChallenges %>
                             <div class="row">
                                 <div class="col-md-12">
