@@ -15,6 +15,11 @@ class Page extends SiteTree {}
  */
 class Page_Controller extends ContentController implements PermissionProvider {
 
+	/**
+	 * Set allowed actions
+	 * 
+	 * @var array
+	 */
 	private static $allowed_actions = array(
 		'RegisterForm', 'SearchForm'
 	);
