@@ -245,14 +245,15 @@ JS
 	 */
 	public function getMyPerfectTotalPoints(){
 		$total = 0;
-		$activities = $this->getDailyChallenge()->DailyActivities();
-		if ($activities->exists()) {
-			foreach ($activities as $activity) {
-				$maxWeightPointsValue = $activity->Points()->max('Points');
-				$total += $maxWeightPointsValue;
+		if ($challenge = $this->getDailyChallenge()){
+			$activities = $challenge->DailyActivities();
+			if ($activities->exists()) {
+				foreach ($activities as $activity) {
+					$maxWeightPointsValue = $activity->Points()->max('Points');
+					$total += $maxWeightPointsValue;
+				}
 			}
 		}
-
 		return $total;
 	}
 
