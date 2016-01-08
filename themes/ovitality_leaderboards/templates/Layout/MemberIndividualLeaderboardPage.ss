@@ -42,33 +42,28 @@
                 <% end_if %>
 
                 <div class="col-md-12 mt64">
-                    <h4 class="uppercase">Week 6 Top Individuals</h4>
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Rank</th>
-                                <th>Name</th>
-                                <th>Team</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>John Doe</td>
-                                <td>Dixies Chicks</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Hanna Copeland</td>
-                                <td>Healthy Home Builders 2.0</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Danyel Turner</td>
-                                <td>Takin the Bacon</td>
-                            </tr>
-                        </tbody>                    
-                    </table>
+                    <h4 class="uppercase">Top Individuals</h4>
+
+                    <% if $TopIndividuals %>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Name</th>
+                                    <th>Team</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% loop $TopIndividuals %>
+                                    <tr>
+                                        <td>$Pos</td>
+                                        <td>$FullName</td>
+                                        <td>$Team</td>
+                                    </tr>
+                                <% end_loop %>
+                            </tbody>                    
+                        </table>
+                    <% end_if %>
                 </div>                
             </div>
         </div>

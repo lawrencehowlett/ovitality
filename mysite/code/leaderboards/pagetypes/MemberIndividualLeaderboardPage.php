@@ -79,17 +79,18 @@ JS
 		$weekList = new ArrayList();
 		$selectedChallenge = $this->getSelectedChallenge();
 		if ($selectedChallenge) {
-		    $startDate = DateTime::createFromFormat('Y-m-d', $selectedChallenge->StartDate);
-		    $endDate = DateTime::createFromFormat('Y-m-d', $selectedChallenge->EndDate);
-
-		    $numberOfWeeks = floor($startDate->diff($endDate)->days / 7);
+		    $startDateWeek = date('W', strtotime($selectedChallenge->StartDate));
+		    $endDateWeek = date('W', strtotime($selectedChallenge->EndDate));
+		    $numberOfWeeks = ($endDateWeek - $startDateWeek) + 1;
+ 
 		    if ($numberOfWeeks > 0) {
 		    	for ($i=1; $i <= $numberOfWeeks ; $i++) {
 
 		    		$weekList->push(new ArrayData(array(
 		    			'Title' => 'Week ' . $i, 
 		    			'Selected' => ($this->request->getVar('week') && $i == $this->request->getVar('week')) ? true : false, 
-		    			'WeekNumber' => $i
+		    			'WeekNumber' => $i, 
+		    			'CalendarWeekNumber' => '01',
 		    		)));
 		    	}
 		    }
@@ -121,5 +122,61 @@ JS
 		}
 
 		return json_encode($arrNumberOfWeeks);
+	}
+
+	/**
+	 * Get top individuals
+	 * 
+	 * @return DataList
+	 */
+	public function getTopIndividuals() {
+		$topIndividualsList = new ArrayList();
+
+		$challengeID = $this->request->getVar('challenge');
+		if ($challengeID) {
+
+			$references = MemberChallengeReference::get()->filter(array(
+				'ChallengeID' => $challengeID, 
+				'PaymentStatus' => 'Paid'
+			));
+
+			if ($references) {
+				foreach ($references as $reference) {
+					$total = 0;
+					$challenge = $reference->Challenge();
+					if ($challenge) {
+						$dailyChallenges = $challenge->DailyChallenges();
+						if ($dailyChallenges) {
+							$date = date('Y-m-d', strtotime('2016W01'));
+							for ($i=1; $i <=7 ; $i++) {
+								if ($i > 1) {
+									$date = date('Y-m-d', strtotime($date . ' +1 day'));
+								} else {
+									$date = date('Y-m-d', strtotime($date . ' -1 day'));
+								}
+
+								$dailyChallenge = $dailyChallenges->filter(array('Date' => $date));
+								if ($dailyChallenge->exists()) {
+									$challengePoints = $reference->Points()->filter(array('DailyChallengeID' => $dailyChallenge->First()->ID));
+									if ($challengePoints->exists()) {
+										$total += $challengePoints->First()->TotalPoints;
+									}
+								}
+							}
+						}
+					}
+
+					$topIndividualsList->push(new ArrayData(array(
+						'FullName' => $reference->Member()->FullName, 
+						'Team' => $reference->Team()->Title, 
+						'Points' => $total
+					)));
+				}
+			}
+		}
+
+		$topIndividualsList = $topIndividualsList->sort('Points DESC');
+
+		return $topIndividualsList;
 	}
 }
