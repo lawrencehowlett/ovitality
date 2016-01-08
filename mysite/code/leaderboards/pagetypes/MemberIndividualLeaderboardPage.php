@@ -82,18 +82,19 @@ JS
 		    $startDateWeek = date('W', strtotime($selectedChallenge->StartDate));
 		    $endDateWeek = date('W', strtotime($selectedChallenge->EndDate));
 		    $numberOfWeeks = ($endDateWeek - $startDateWeek) + 1;
- 
-		    if ($numberOfWeeks > 0) {
-		    	for ($i=1; $i <= $numberOfWeeks ; $i++) {
-
+			
+			if ($numberOfWeeks > 0) {
+				$counter = 1;
+				for ($i=$startDateWeek; $i <= $endDateWeek; $i++) { 
 		    		$weekList->push(new ArrayData(array(
-		    			'Title' => 'Week ' . $i, 
-		    			'Selected' => ($this->request->getVar('week') && $i == $this->request->getVar('week')) ? true : false, 
-		    			'WeekNumber' => $i, 
-		    			'CalendarWeekNumber' => '01',
+		    			'Title' => 'Week ' . (int)$i, 
+		    			'Selected' => ($this->request->getVar('week') && (int)$i == $this->request->getVar('week')) ? true : false, 
+		    			'WeekNumber' => '0' .(int)$i
 		    		)));
-		    	}
-		    }
+
+					$counter+=1;
+				} 					
+			}		
 		}
 
 		return $weekList;
@@ -133,7 +134,8 @@ JS
 		$topIndividualsList = new ArrayList();
 
 		$challengeID = $this->request->getVar('challenge');
-		if ($challengeID) {
+		$weekNumber = $this->request->getVar('week');
+		if ($challengeID && $weekNumber) {
 
 			$references = MemberChallengeReference::get()->filter(array(
 				'ChallengeID' => $challengeID, 
@@ -147,7 +149,7 @@ JS
 					if ($challenge) {
 						$dailyChallenges = $challenge->DailyChallenges();
 						if ($dailyChallenges) {
-							$date = date('Y-m-d', strtotime('2016W01'));
+							$date = date('Y-m-d', strtotime(date('Y', strtotime($challenge->StartDate)) . 'W' . $weekNumber));
 							for ($i=1; $i <=7 ; $i++) {
 								if ($i > 1) {
 									$date = date('Y-m-d', strtotime($date . ' +1 day'));
