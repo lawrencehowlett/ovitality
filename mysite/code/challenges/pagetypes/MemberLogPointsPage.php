@@ -23,8 +23,77 @@ class MemberLogPointsPage_Controller extends MemberPage_Controller {
 		Requirements::javascript(THEMES_DIR . '/ovitality/js/jquery.knob.min.js');
 		Requirements::javascript(THEMES_DIR . '/ovitality/js/Chart.min.js');
 		Requirements::javascript(THEMES_DIR . '/ovitality/js/logpoints.js');
+
+		$previousSevenDates = $this->getPreviousSevenDates();
+		$previousSevenDatesPoints = $this->getPreviousSevenDatesPoints();
+		Requirements::customScript(<<<JS
+			var lineChartDataLabels = "$previousSevenDates";
+			lineChartDataLabels = lineChartDataLabels.split(",");
+
+			var lineChartDataValues = "$previousSevenDatesPoints";
+			lineChartDataValues = lineChartDataValues.split(",");
+JS
+		);
 	}
 
+	/**
+	 * Get previous seven dates
+	 * 
+	 * @return string
+	 */
+	private function getPreviousSevenDates() {
+		$arrDates = array();
+		for ($i=1; $i <=7 ; $i++) { 
+			if ($i > 1) {
+				array_push($arrDates, date('M.d', strtotime(' -' .$i. ' days')));
+			} else {
+				array_push($arrDates, date('M.d', strtotime(' -' .$i. ' day')));
+			}
+		}
+
+		return implode(',', $arrDates);
+	}
+
+	/**
+	 * Get the points from the last seven days
+	 * 
+	 * @return string
+	 */
+	private function getPreviousSevenDatesPoints() {
+		$arrPoints = array();
+		for ($i=1; $i <= 7 ; $i++) { 
+			if ($i > 1) {
+				$dailyChallenge = $this->getDailyChallenges()->filter(array(
+					'Date' => date('Y-m-d', strtotime($this->getDailyChallenge()->Date . ' -' .$i. ' days'))
+				));
+			} else {
+				$dailyChallenge = $this->getDailyChallenges()->filter(array(
+					'Date' => date('Y-m-d', strtotime($this->getDailyChallenge()->Date . ' -' .$i. ' day'))
+				));
+			}
+
+			if ($dailyChallenge->exists()) {
+				$challengePoints = ChallengePoint::get()->filter(array(
+					'ReferenceID' => Member::currentUser()->getActiveChallengeReference()->ID, 
+					'DailyChallengeID' => $dailyChallenge->First()->ID
+				));
+
+				if ($challengePoints->exists()) {
+					array_push($arrPoints, $challengePoints->First()->TotalPoints);
+				}
+			} else {
+				array_push($arrPoints, 0);
+			}
+		}
+
+		return implode(',', $arrPoints);
+	}
+
+	/**
+	 * log points form
+	 *
+	 * @return Form
+	 */
 	public function PointsForm() {
 		$fields = new FieldList();
 

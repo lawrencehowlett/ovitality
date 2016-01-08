@@ -41,10 +41,10 @@
                 <span>$Fields.dataFieldByName(ReasonForJoining).Title</span>
                 $Fields.dataFieldByName(ReasonForJoining)
             </div>
-            <div class="input-with-label">
-                <span>Promo code</span>
-                <input type="text" name="password" />
-            </div>                                    
+            <!--<div class="input-with-label">-->
+                <!--<span>Promo code</span>-->
+                <!--<input type="text" name="password" />-->
+            <!--</div>                                    -->
         </div>
         <div class="col-md-12 col-sm-12">
             $Fields.dataFieldByName(SecurityID)

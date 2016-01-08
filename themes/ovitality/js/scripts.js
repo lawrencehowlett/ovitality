@@ -7,6 +7,82 @@ var mr_firstSectionHeight,
     mr_floatingProjectSections,
     mr_scrollTop = 0;
 
+function hasFormValidation() {
+    //return false;
+    return (typeof document.createElement( 'input' ).checkValidity == 'function');
+};
+
+$('form').submit(function(e){
+    if (!hasFormValidation()){
+
+        var required = $('[required]', this);
+        var error = false;
+        var firstWrong = false;
+        for(var i = 0; i <= (required.length - 1);i++)
+        {
+            var wrong = false;
+            var fieldType = required[i].type;
+            switch(fieldType){
+                case 'text':
+                    if(required[i].value == ''){
+                        console.log('1');
+                        wrong = true;
+                    }
+                    break;
+                case 'email':
+                    if(required[i].value == ''){
+                        console.log('too short');
+                        wrong = true;
+                    } else {
+                        var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+                        if (!emailReg.test( required[i].value )){
+                            console.log('wrong format');
+                            wrong = true;
+                        }
+                    }
+                    break;
+                case 'password':
+                    if(required[i].value < 8){
+                        console.log('2')
+                        wrong = true;
+                    }
+                    break;
+                default:
+                    if(required[i].value == ''){
+                        console.log('1');
+                        wrong = true;
+                    }
+                    break;
+            }
+
+            if (wrong == true){
+                // console.log(required[i].type);
+                // console.log('setting');
+                required[i].style.backgroundColor = 'rgb(220,0,0)';
+                if (!firstWrong){
+                    firstWrong = required[1];
+                }
+                error = true;
+            } else {
+                // console.log(required[i].type);
+                // console.log('clearing');
+                required[i].style.backgroundColor = '';
+            }
+        }
+
+        if(error) // if error is true;
+        {
+            $(firstWrong).focus();
+            return false; // stop the form from being submitted.
+        } else {
+            $('form').unbind('submit');
+            $(this).submit();
+            return true;
+        }
+    }
+
+});
+
 $(document).ready(function() { 
     "use strict";
 
