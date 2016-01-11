@@ -45,7 +45,7 @@
 		 * Line charts
 		 */
 		var lineChartData = {
-			labels : ["January","February","March","April","May","June","July"],
+			labels : lineChartDataLabels,
 			datasets : [
 				{
 					label: "My First dataset",
@@ -55,7 +55,7 @@
 					pointStrokeColor : "#fff",
 					pointHighlightFill : "#fff",
 					pointHighlightStroke : "rgba(151,187,205,1)",
-					data : [10,50,40,30,1,65,90]
+					data : lineChartDataValues
 				}
 			]
 		}

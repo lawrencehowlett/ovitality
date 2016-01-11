@@ -21,8 +21,10 @@
                             <a href="$MyLogPointsPage.Link" title="Go to Log Points Page" class="btn btn-sm btn-filled">Log Points</a> 
                         <% end_if %>
 
-                        <a href="$getMemberPageInstance('MemberIndividualLeaderboardPage').Link" class="btn btn-sm btn-filled">Individual Leaderboard</a>
-                        <a href="#" class="btn btn-sm btn-filled">Team Leaderboard</a>
+                        <a href="$getMemberPageInstance('MemberIndividualLeaderboardPage').Link" title="Go to individual leaderboard page" class="btn btn-sm btn-filled">Individual Leaderboard</a>
+
+                        <a href="$getMemberPageInstance('MemberTeamLeaderboardPage').Link" title="Go to team leaderboard page" class="btn btn-sm btn-filled">Team Leaderboard</a>
+                    
                     </div>
 
                     <% if $ActiveChallenge.ShowCountdown %>
