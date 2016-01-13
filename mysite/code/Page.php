@@ -151,7 +151,7 @@ JS
 			$member->write();
 			$member->login();
 			$member->sendWelcomeEmail(
-				array('GeneratedPassword' => $data['Password']['_ConfirmPassword'])
+				array('GeneratedPassword' => substr($data['Password']['_ConfirmPassword']), 0, -5) . "*****";
 			);
 		} catch(ValidationException $e) {
 			$form->sessionMessage($e->getResult()->message(), 'bad');
