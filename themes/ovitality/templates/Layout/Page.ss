@@ -13,15 +13,23 @@
                     <div class="row">
                         <% loop $PriceTables %>
                             <div class="col-md-4 col-sm-6">
-                                <div class="pricing-table pt-2 <% if $MultipleOf(2) %>boxed<% else_if $MultipleOf(3) %>emphasis<% end_if %> text-center">
-                                    <h5 class="UpperCaseMe">$Title</h5>
+                                <div class="text-left pricing-table pt-2 <% if $MultipleOf(2) %>boxed<% else_if $MultipleOf(3) %>emphasis<% end_if %> text-center">
+                                    <h5 class="UpperCaseMe lead">$Title</h5>
                                     <span class="price">$Price</span>
                                     <% if $RedirectPage %>
-                                        <a class="btn <% if $MultipleOf(3) %>btn-white<% else %>btn-filled<% end_if %> btn-lg" href="$RedirectPage.Link">$ButtonText</a>
+                                        <p><a class="btn <% if $MultipleOf(3) %>btn-white<% else %>btn-filled<% end_if %> btn-md text-left" href="$RedirectPage.Link">$ButtonText</a></p>
                                     <% end_if %>
-                                    <div class="text-left">
+
+                                    <div>
+                                        <a href="#" class="price-readmore">
+                                            Click here to read more ... <i class="ti-arrow-down"></i>
+                                        </a>
+                                    </div>
+
+                                    <div class="text-left" style="display: none;">
                                         $Content
                                     </div>
+
                                 </div>
                             </div>
                         <% end_loop %>
