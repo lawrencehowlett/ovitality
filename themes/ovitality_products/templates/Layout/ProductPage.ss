@@ -26,11 +26,14 @@
                                     <a href="$AbsoluteLink" title="Read more about $Title">
                                         <img alt="$Title" class="product-thumb" src="$GalleryImages.First.Image.PaddedImage(600, 800).Link" />
                                     </a>
-                                    <div class="title text-left">
+                                    <div class="title text-left" style="min-height:100px;">
                                         <h5 class="mb0">$Title</h5>
-                                        $Summary
+                                        $Summary.LimitCharacters(80)
+                                    </div>
+                                    <div class="mt16 text-left">
                                         <a href="$AbsoluteLink" class="btn btn-sm">Read More</a>
                                     </div>
+
                                 </div>
                             </div>
                         <% end_loop %>
