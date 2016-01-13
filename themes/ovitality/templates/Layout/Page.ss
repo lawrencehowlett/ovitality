@@ -13,15 +13,23 @@
                     <div class="row">
                         <% loop $PriceTables %>
                             <div class="col-md-4 col-sm-6">
-                                <div class="pricing-table pt-2 <% if $MultipleOf(2) %>boxed<% else_if $MultipleOf(3) %>emphasis<% end_if %> text-center">
-                                    <h5 class="UpperCaseMe">$Title</h5>
+                                <div class="text-left pricing-table pt-2 <% if $MultipleOf(2) %>boxed<% else_if $MultipleOf(3) %>emphasis<% end_if %> text-center">
+                                    <h5 class="UpperCaseMe lead">$Title</h5>
                                     <span class="price">$Price</span>
                                     <% if $RedirectPage %>
-                                        <a class="btn <% if $MultipleOf(3) %>btn-white<% else %>btn-filled<% end_if %> btn-lg" href="$RedirectPage.Link">$ButtonText</a>
+                                        <p><a class="btn <% if $MultipleOf(3) %>btn-white<% else %>btn-filled<% end_if %> btn-md text-left" href="$RedirectPage.Link">$ButtonText</a></p>
                                     <% end_if %>
-                                    <div class="text-left">
+
+                                    <div>
+                                        <a href="#" class="price-readmore">
+                                            Click here to read more ... <i class="ti-arrow-down"></i>
+                                        </a>
+                                    </div>
+
+                                    <div class="text-left" style="display: none;">
                                         $Content
                                     </div>
+
                                 </div>
                             </div>
                         <% end_loop %>
@@ -32,10 +40,10 @@
 
         <% if $ClassName == 'BlockTeam' %>
             <section class="BlockTeam">
-                <div class="container">
+                <!--<div class="container">
                     <div class="row">
                         <div class="col-sm-12">
-                            <h4 class="UpperCaseMe mb16">$Title</h4>
+                            <h3 class="mb64 uppercase">$Title</h3>
                             $Content
                         </div>
                     </div>
@@ -50,11 +58,11 @@
                                     </div>
 
                                     <div class="col-sm-6 mb64 mb-xs-24">
-                                        <img alt="$Image.Title" src="$Image.CroppedImage(577, 442).Link" />
+                                        <img alt="$Image.Title" src="$Image.Link" />
                                     </div>
                                 <% else %>
                                     <div class="col-sm-6 mb64 mb-xs-24">
-                                        <img alt="$Image.Title" src="$Image.CroppedImage(577, 442).Link" />
+                                        <img alt="$Image.Title" src="$Image.Link" />
                                     </div>
                                     <div class="col-sm-6 mb64 mb-xs-24">
                                         <h5 class="UpperCaseMe mb0">$Title</h5>
@@ -66,6 +74,26 @@
                             </div>
                         <% end_loop %>
                     </div>
+                </div>-->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h3 class="mb64 uppercase">$Title</h3>
+                            $Content
+                        </div>
+                        <% loop $TeamMembers.Sort(SortOrder) %>
+                            <div class="col-md-12 col-sm-12 mb40 mb-xs-24 p0">
+                                <div class="col-sm-7 mb64 mb-xs-24">
+                                    <img alt="$Image.Title" src="$Image.PaddedImage(577, 442, #000000).Link" />
+                                </div>
+                                <div class="col-sm-5 mb64 mb-xs-24">
+                                    <h5 class="uppercase mb0">$Title</h5>
+                                    <span class="inline-block mb40 mb-xs-24">$Position</span>
+                                    $Content
+                                </div>
+                            </div>
+                        <% end_loop %>
+                    </div>                   
                 </div>
             </section>
         <% end_if %>

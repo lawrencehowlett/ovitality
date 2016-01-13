@@ -22,6 +22,11 @@ class DailyChallenge extends DataObject {
 
 	private static $default_sort = 'Date ASC';
 
+	/**
+	 * Get CM Fields
+	 * 
+	 * @return FieldList
+	 */
 	public function getCMSFields() {
 		$fields = parent::getCMSFields();
 
@@ -41,7 +46,6 @@ class DailyChallenge extends DataObject {
 			->setConfig('dateformat', 'dd/MM/YYYY')
 			->setTitle('Choose the date of the challenge');
 
-
 		if (!$this->ID) {
 			$fields->removeFieldsFromTab(
 				'Root.Main', 
@@ -51,6 +55,10 @@ class DailyChallenge extends DataObject {
 
 			$fields->dataFieldByName('Image')
 				->setFolderName('Challenge/' . $this->ChallengeID . '/DailyChallenges/');
+			
+			$config = $fields->dataFieldByName('DailyActivities')->getConfig();
+			$autoCompleterField = $config->getComponentByType('GridFieldAddExistingAutocompleter');
+			$autoCompleterField->setSearchList($this->Challenge()->DailyActivities());
 
 			$fields->dataFieldByName('DailyActivities')
 				->getConfig()

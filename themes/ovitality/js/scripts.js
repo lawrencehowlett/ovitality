@@ -1223,4 +1223,12 @@ var mr_cookies = {
 |*|  END COOKIE LIBRARY
 \*/
 
+/**
+ * read more to expand features of the pricing block
+ */
+$('a.price-readmore').click(function(e){
+    e.preventDefault();
 
+    $(this).parent('div').next('div').slideDown();
+    $(this).parent('div').hide();
+});

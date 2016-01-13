@@ -246,7 +246,7 @@ class MemberExtension extends DataExtension {
 	 * @param null $optionalData
      */
 	public function sendWelcomeEmail($optionalData = null) {
-		$email = new Email('no-reply@ovitality.com', $this->owner->Email, 'Welcome to OVitality', null);
+		$email = new Email('no-reply@ovitality.com', $this->owner->Email, 'Welcome to ŌVITALity', null);
 		$email->setTemplate('WelcomeEmail');
 		$email->populateTemplate($this->owner);
 		$email->populateTemplate(array(

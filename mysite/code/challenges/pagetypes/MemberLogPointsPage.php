@@ -80,11 +80,16 @@ JS
 
 				if ($challengePoints->exists()) {
 					array_push($arrPoints, $challengePoints->First()->TotalPoints);
+				} else {
+					array_push($arrPoints, 0);
 				}
 			} else {
 				array_push($arrPoints, 0);
 			}
 		}
+
+		//Debug::dump($arrPoints);
+		//exit();
 
 		return implode(',', $arrPoints);
 	}
