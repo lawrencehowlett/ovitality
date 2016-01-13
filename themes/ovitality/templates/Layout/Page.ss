@@ -40,10 +40,10 @@
 
         <% if $ClassName == 'BlockTeam' %>
             <section class="BlockTeam">
-                <div class="container">
+                <!--<div class="container">
                     <div class="row">
                         <div class="col-sm-12">
-                            <h4 class="UpperCaseMe mb16">$Title</h4>
+                            <h3 class="mb64 uppercase">$Title</h3>
                             $Content
                         </div>
                     </div>
@@ -58,11 +58,11 @@
                                     </div>
 
                                     <div class="col-sm-6 mb64 mb-xs-24">
-                                        <img alt="$Image.Title" src="$Image.CroppedImage(577, 442).Link" />
+                                        <img alt="$Image.Title" src="$Image.Link" />
                                     </div>
                                 <% else %>
                                     <div class="col-sm-6 mb64 mb-xs-24">
-                                        <img alt="$Image.Title" src="$Image.CroppedImage(577, 442).Link" />
+                                        <img alt="$Image.Title" src="$Image.Link" />
                                     </div>
                                     <div class="col-sm-6 mb64 mb-xs-24">
                                         <h5 class="UpperCaseMe mb0">$Title</h5>
@@ -74,6 +74,26 @@
                             </div>
                         <% end_loop %>
                     </div>
+                </div>-->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h3 class="mb64 uppercase">$Title</h3>
+                            $Content
+                        </div>
+                        <% loop $TeamMembers.Sort(SortOrder) %>
+                            <div class="col-md-12 col-sm-12 mb40 mb-xs-24 p0">
+                                <div class="col-sm-7 mb64 mb-xs-24">
+                                    <img alt="$Image.Title" src="$Image.PaddedImage(577, 442, #000000).Link" />
+                                </div>
+                                <div class="col-sm-5 mb64 mb-xs-24">
+                                    <h5 class="uppercase mb0">$Title</h5>
+                                    <span class="inline-block mb40 mb-xs-24">$Position</span>
+                                    $Content
+                                </div>
+                            </div>
+                        <% end_loop %>
+                    </div>                   
                 </div>
             </section>
         <% end_if %>
