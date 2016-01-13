@@ -148,7 +148,10 @@ JS
 		$form->saveInto($member);
 
 		try {
-			$generatedPassword = substr($data['Password']['_ConfirmPassword'], 0, -4) . "****";
+
+			$str = $data['Password']['_ConfirmPassword'];
+			$len = strlen($str);
+			$generatedPassword = substr($str, 0,1). str_repeat('*', $len - 2) . substr($str, $len - 1, 1);
 
 			$member->write();
 			$member->login();
