@@ -8,7 +8,7 @@
 					</h3>
                     <hr>
                     <p class="lead">Hi $CurrentMember.FirstName</p>
-                    <p class="lead">Welcome to your OVitality members area. Please complete the following steps to finalise your profile.</p>
+                    <p class="lead">Welcome to your ŌVITALity members area. Please complete the following steps to finalise your profile.</p>
             	</div>
 
                 <div class="col-md-5 mt16">

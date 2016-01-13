@@ -13,7 +13,7 @@
 
 	<p style="margin:0; padding:0; margin:0; margin-bottom:15px;">Dear $FirstName,</p>
 
-	<p style="margin:0; padding:0; margin:0; margin-bottom:15px;">Welcome to OVitality</p>
+	<p style="margin:0; padding:0; margin:0; margin-bottom:15px;">Welcome to ŌVITALity</p>
 
 	<p style="margin:0; padding:0; margin:0; margin-bottom:15px;">We are excited to have you join us to find out more about how to get fit and healthy, the natural way.</p>
 
@@ -30,5 +30,5 @@
 	<br>
 
 	<p style="margin:0; padding:0; margin:0; margin-bottom:10px;">For a fitter, happier &amp; healthier you!</p>
-	<p style="margin:0; padding:0; margin:0; margin-bottom:15px;">ŌVITALity Sisters</p>
+	<p style="margin:0; padding:0; margin:0;">ŌVITALity Sisters</p>
 </div>
