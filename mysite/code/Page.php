@@ -148,10 +148,12 @@ JS
 		$form->saveInto($member);
 
 		try {
+			$generatedPassword = substr($data['Password']['_ConfirmPassword'], 0, -4) . "****";
+
 			$member->write();
 			$member->login();
 			$member->sendWelcomeEmail(
-				array('GeneratedPassword' => substr($data['Password']['_ConfirmPassword']), 0, -5) . "*****";
+				array('GeneratedPassword' => $generatedPassword)
 			);
 		} catch(ValidationException $e) {
 			$form->sessionMessage($e->getResult()->message(), 'bad');
