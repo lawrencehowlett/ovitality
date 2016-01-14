@@ -28,7 +28,8 @@ class BlockPrice extends Block{
 		return $fields;
 	}
 
-	public function ComponentName() {
-		return 'Price table widget';
+	public function getComponentTitle() {
+		return 'Price box';
 	}
+
 }

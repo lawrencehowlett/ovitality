@@ -50,4 +50,9 @@ class BlockVideo extends Block {
 
 		return $fields;
 	}	
+
+	public function getComponentTitle() {
+		return 'Video';
+	}
+
 }

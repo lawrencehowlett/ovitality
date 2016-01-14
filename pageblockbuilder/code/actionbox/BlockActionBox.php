@@ -51,4 +51,13 @@ class BlockActionBox extends Block {
 
 		return $fields;
 	}
+
+	public function ColumnNumber() {
+		return 12 / $this->ActionBoxes()->Count();
+	}
+
+	public function getComponentTitle() {
+		return 'Action Boxes';
+	}
+
 }

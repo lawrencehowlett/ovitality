@@ -32,4 +32,9 @@ class BlockForm extends Block {
 
 		return $fields;
 	}
+
+	public function getComponentTitle() {
+		return 'Form';
+	}
+
 }

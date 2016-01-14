@@ -70,12 +70,8 @@ class BlockImage extends Block {
 		return $fields;
 	}
 
-	/**
-	 * Get component name
-	 *
-	 * @return  string
-	 */
-	public function ComponentName() {
-		return 'Image text widget';
-	}	
+	public function getComponentTitle() {
+		return 'Image';
+	}
+
 }

@@ -368,7 +368,7 @@
                     </div>
                     <div class="row">
                         <% loop $ActionBoxes %>
-                            <div class="col-sm-4">
+                            <div class="col-sm-$Up.ColumnNumber">
                                 <div class="feature feature-2 bordered text-center">
                                     <% if ActionBoxImage %>
                                         <% loop ActionBoxImage %>
@@ -376,7 +376,7 @@
                                         <% end_loop %>
                                     <% end_if %>
                                     <div class="text-center">
-                                        <h5 class="UpperCaseMe">$Title</h5>
+                                        <h6 class="UpperCaseMe">$Title</h6>
                                     </div>
                                     $Content
                                     <% if $RedirectPage %>

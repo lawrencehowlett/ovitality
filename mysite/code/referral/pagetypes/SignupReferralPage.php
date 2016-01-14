@@ -111,6 +111,19 @@ JS
 
 			Session::set('ReferenceID', $reference->ID);
 
+			$settings = SiteConfig::current_site_config();
+			$MailChimp = new \Drewm\MailChimp($settings->APIKey);
+			$apiData = array(
+				'id'                => '0e51140d39',
+				'email'             => array('email' => $member->Email),
+				'merge_vars'        => array('Name' => $member->FullName),
+				'double_optin'      => false,
+				'update_existing'   => true,
+				'replace_interests' => false,
+				'send_welcome'      => false,
+			);
+			$result = $MailChimp->call('lists/subscribe', $apiData);
+
 		} catch(ValidationException $e) {
 			$form->sessionMessage($e->getResult()->message(), 'bad');
 			return $this->redirectBack();

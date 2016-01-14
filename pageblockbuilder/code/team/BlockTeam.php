@@ -46,4 +46,9 @@ class BlockTeam extends Block {
 
 		return $fields;
 	}
+
+	public function getComponentTitle() {
+		return 'Team';
+	}
+
 }
