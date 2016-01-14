@@ -398,25 +398,32 @@
                             <h4 class="UpperCaseMe mb16">$Title</h4>
                             $Content
                         </div>
-                    </div>                
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="image-slider slider-paging-controls controls-outside">
-                                <ul class="slides">
-                                    <% loop $Sliders %>
-                                        <li class="mb32 text-center">
-                                            <img alt="$Image.Title" src="$Image.Link" />
-                                            <h3 class="mt16">$Title</h3>
-                                            $Content
-                                            <% if $RedirectPage %>
-                                                <a class="btn btn-filled" href="$RedirectPage.Link" title="Go to $RedirectPage.Title">$ButtonText</a>
-                                            <% end_if %>
-                                        </li>
-                                    <% end_loop %>
-                                </ul>
-                            </div>
-                        </div>
                     </div>
+                    <div class="row">
+                        <div class="col-sm-12 cover fullscreen image-slider slider-all-controls controls-inside">
+                            <ul class="slides">
+                                <% loop $Sliders %>
+                                    <li class="overlay image-bg bg-dark">
+                                        <div class="background-image-holder">
+                                            <img alt="image" class="background-image" src="$Image.Link" />
+                                        </div>
+                                        <div class="container v-align-transform">
+                                            <div class="row">
+                                                <div class="col-sm-10 col-sm-offset-1">
+                                                    <h1 class="mb40 mb-xs-16 large">$Title</h1>
+                                                    $Content
+
+                                                    <% if $RedirectPage %>
+                                                        <a href="$RedirectPage.Link" class="btn">$ButtonText</a>
+                                                    <% end_if %>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                <% end_loop %>
+                            </ul>                            
+                        </div>
+                    </div>                    
                 </div>
             </section>
         <% end_if %>
