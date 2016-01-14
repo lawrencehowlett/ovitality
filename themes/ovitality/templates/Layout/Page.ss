@@ -390,6 +390,37 @@
             </section>
         <% end_if %>
 
+        <% if $ClassName == 'BlockSlider' %>
+            <section class="pt120 pb120 pt-xs-40 pb-xs-40">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12"> 
+                            <h4 class="UpperCaseMe mb16">$Title</h4>
+                            $Content
+                        </div>
+                    </div>                
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="image-slider slider-paging-controls controls-outside">
+                                <ul class="slides">
+                                    <% loop $Sliders %>
+                                        <li class="mb32 text-center">
+                                            <img alt="$Image.Title" src="$Image.Link" />
+                                            <h3 class="mt16">$Title</h3>
+                                            $Content
+                                            <% if $RedirectPage %>
+                                                <a class="btn btn-filled" href="$RedirectPage.Link" title="Go to $RedirectPage.Title">$ButtonText</a>
+                                            <% end_if %>
+                                        </li>
+                                    <% end_loop %>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        <% end_if %>
+
 
     <% end_loop %>
 <% end_if %>
