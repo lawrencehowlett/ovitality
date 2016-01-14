@@ -1,6 +1,11 @@
 <?php
 class BlockAccordion extends Block {
 
+	/**
+	 * Set has many
+	 * 
+	 * @var array
+	 */
 	private static $has_many = array(
 		'Accordions' => 'Accordion'
 	);
@@ -12,6 +17,11 @@ class BlockAccordion extends Block {
 	 */
 	protected $component_title = 'Action Box';
 
+	/**
+	 * Get CMS fields
+	 * 
+	 * @return FieldList
+	 */
 	public function getCMSFields() {
 		$fields = parent::getCMSFields();
 
@@ -29,5 +39,9 @@ class BlockAccordion extends Block {
 		);
 
 		return $fields;
+	}
+
+	public function getComponentTitle() {
+		return 'Accordion';
 	}
 }

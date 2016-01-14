@@ -38,4 +38,9 @@ class BlockBanner extends Block {
 
 		return $fields;
 	}
+
+	public function getComponentTitle() {
+		return 'Banner Image';
+	}
+
 }

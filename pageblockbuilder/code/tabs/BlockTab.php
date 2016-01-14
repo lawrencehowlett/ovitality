@@ -51,4 +51,9 @@ class BlockTab extends Block {
 
 		return $fields;
 	}
+
+	public function getComponentTitle() {
+		return 'Tabs';
+	}
+
 }

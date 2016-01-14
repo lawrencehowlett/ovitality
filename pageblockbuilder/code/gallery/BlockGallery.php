@@ -28,4 +28,9 @@ class BlockGallery extends Block {
 
 		return $fields;
 	}
+
+	public function getComponentTitle() {
+		return 'Image Gallery';
+	}
+
 }

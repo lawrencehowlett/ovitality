@@ -46,4 +46,9 @@ class BlockSlider extends Block {
 
 		return $fields;
 	}
+
+	public function getComponentTitle() {
+		return 'Slider';
+	}
+
 }

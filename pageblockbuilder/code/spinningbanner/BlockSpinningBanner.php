@@ -51,4 +51,9 @@ class BlockSpinningBanner extends Block {
 
 		return $fields;
 	}
+
+	public function getComponentTitle() {
+		return 'Spinning Banner';
+	}
+
 }
