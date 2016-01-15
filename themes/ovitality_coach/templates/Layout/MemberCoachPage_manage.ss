@@ -3,97 +3,77 @@
         <div class="row">
             <% include MemberSidebar %>        
             <div class="col-md-10 mb-xs-24">
-            	<div class="col-md-12">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h3 class="uppercase mb0">Teams I Coach</h3>
-                        </div>
-                        <div class="col-md-6 text-right">
-                            <!--<a href="{$Link}CreateTeam" class="btn btn-filled " title="Create team">Create New Team</a>-->
-                        </div>
-                    </div>
+            	
+                <div class="col-md-12">
+                    <h3 class="uppercase mb0">Teams I Coach</h3>
                     <hr />
             	</div>
+
                 <div class="col-md-12">
-                    <% if $FeedbackMessage %>
-                        <div class="alert alert-success" role="alert">$FeedbackMessage</div>
-                    <% end_if %>
-
                     <% if $CurrentUser.CoachTeams %>
-                    <ul class="accordion accordion-1">
-                        <% loop $CurrentUser.CoachTeams %>
-                            <li>
-                                <div class="title">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <h5 class="uppercase">$Title</h5>
-                                            <p>$Description</p>
+                        <ul class="accordion accordion-1 one-open">
+                            <% loop $CurrentUser.CoachTeams %>
+                                <li>
+
+                                    <% if $Title %>
+                                        <div class="title">
+                                            <span>$Title</span>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="content" style="padding:10px;">
-                                    <div class="row">
-                                        <% if $Leaders %>
-                                            <div class="col-md-12">
-                                                <h5>Team Leaders</h5>
-                                            </div>
-                                            <% loop $Leaders %>
-                                                <div class="col-md-6 mb16">
-                                                    <div class="row v-align-children">
-                                                        <div class="col-md-5 mb-xs-24">
-                                                            <% if $ProfileImage %>
-                                                                <img src="$ProfileImage.Link" alt="$ProfileImage.Title" class="cast-shadow">
-                                                            <% end_if %>
-                                                        </div>
-                                                        <div class="col-md-7">
-                                                            <h5 class="mb0">$FullName</h5>
-                                                            <p class="mb0">$Email</p>
-                                                            <p>$Phone</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            <% end_loop %>
+                                    <% end_if %>
+
+                                    <div class="content">
+
+                                        <% if $Description %>
+                                            <p>$Description</p>
                                         <% end_if %>
 
-                                        <div class="col-md-12">
-                                            <h5>Members</h5>
-                                        </div>
-                                        <% if $TeamMembersForFrontend %>
-                                            <% loop $TeamMembersForFrontend %>
-                                                <div class="col-md-6 mb16">
-                                                    <div class="row v-align-children">
-                                                        <div class="col-md-5 mb-xs-24">
-                                                            <% if $ProfileImage %>
-                                                                <img src="$ProfileImage.Link" alt="$ProfileImage.Title" class="cast-shadow">
-                                                            <% end_if %>
-                                                        </div>
-                                                        <div class="col-md-7">
-                                                            <h5 class="mb0">$FullName</h5>
-                                                            <p class="mb0">$Email</p>
-                                                            <p>$Phone</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            <% end_loop %>
-                                        <% else %>
-                                            <div class="col-md-12">
-                                                <p class="alert alert-info" role="alert">
-                                                    You don't have team members yet.
-                                                </p>
-                                            </div>
+                                        <% if $Leaders %>
+                                            <h5 class="uppercase mt8 mb8">Leaders</h5>
+                                            <table class="table cart mb48">
+                                                <tbody>
+                                                    <% loop $Leaders %>
+                                                        <tr>
+                                                            <td>
+                                                                <img src="$ProfileImage.PaddedImage(577, 442, #FFFFFF).Link" class="product-thumb" alt="Product">
+                                                            </td>
+                                                            <td>
+                                                                <span>julius.caamic@yahoo.com</span>
+                                                            </td>
+                                                            <td>
+                                                                <span>+63 999 483 8438</span>
+                                                            </td>
+                                                        </tr>
+                                                    <% end_loop %>
+                                                </tbody>
+                                            </table>
                                         <% end_if %>
-                                        <!--<div class="col-md-12 mt16">
-                                            <a href="{$Top.Link}InviteMembers/$ID" class="btn btn-filled">Invite Your Team Members</a>
-                                        </div>-->
+
+                                        <% if $Members %>
+                                            <h5 class="uppercase mt32 mb8">Members</h5>
+                                            <table class="table cart mb48">
+                                                <tbody>
+                                                    <% loop $Members %>
+                                                        <tr>
+                                                            <td>
+                                                                <img src="$ProfileImage.PaddedImage(577, 442, #FFFFFF).Link" class="product-thumb" alt="Product">
+                                                            </td>
+                                                            <td>
+                                                                <span>julius.caamic@yahoo.com</span>
+                                                            </td>
+                                                            <td>
+                                                                <span>+63 999 483 8438</span>
+                                                            </td>
+                                                        </tr>
+                                                    <% end_loop %>
+                                                </tbody>
+                                            </table>
+                                        <% end_if %>
                                     </div>
-                                </div>
-                            </li>
-                        <% end_loop %>
-                    </ul>
-                    <% else %>
-                        <div class="alert alert-info" role="alert">You don't have any teams for this challenge.</div>
+                                </li>
+                            <% end_loop %>
+                        </ul>
                     <% end_if %>
-                </div>
+                </div>                    
             </div>
         </div>
     </div>

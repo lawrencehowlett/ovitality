@@ -50,7 +50,7 @@ class MemberJoinChallengePage_Controller extends MemberPage_Controller {
 
 		$fields = $reference->getReferenceFields();
 
-        if ($this->getSesJoinChallenge()->IndividualOrTeam == 'team') {
+        if ($this->getSesJoinChallenge() && $this->getSesJoinChallenge()->IndividualOrTeam == 'team') {
 
         	$suggestTeamField = TextField::create(
         		'SuggestTeam', 
@@ -196,7 +196,11 @@ class MemberJoinChallengePage_Controller extends MemberPage_Controller {
 	}
 
 	public function getChallenge() {
-		return Challenge::get()->byID($this->getSesJoinChallenge()->ChallengeID);
+		if ($this->getSesJoinChallenge() && $this->getSesJoinChallenge()->ChallengeID) {
+			return Challenge::get()->byID($this->getSesJoinChallenge()->ChallengeID);
+		}
+
+		return null;
 	}
 
 	public function getSesJoinChallenge() {
@@ -205,7 +209,7 @@ class MemberJoinChallengePage_Controller extends MemberPage_Controller {
 
 	public function getReference() {
 		$sesJoinChallenge = $this->getSesJoinChallenge();
-		if ($sesJoinChallenge->ChallengeReferenceID) {
+		if ($sesJoinChallenge && $sesJoinChallenge->ChallengeReferenceID) {
 			return MemberChallengeReference::get()->byID($sesJoinChallenge->ChallengeReferenceID);
 		}
 

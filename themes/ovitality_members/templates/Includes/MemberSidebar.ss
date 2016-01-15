@@ -60,7 +60,7 @@
             <% if $CurrentUser.IsCoach || $CurrentUser.IsTeamLeader %>
                 <li>
                     <a href="{$getMemberPageInstance(MemberCoachPage).Link}ManageTeams" title="Go to my team coach page">
-                        <i class="ti-user"></i> Teams | Coach 
+                        <i class="ti-user"></i> Teams I Coach 
                         <ul class="bullets" style="margin-left:15px;">
                             <li><a href="{$getMemberPageInstance(MemberCoachPage).Link}ManageTeams">Manage Teams</a></li>
                             <li><a href="">Team Points</a></li>

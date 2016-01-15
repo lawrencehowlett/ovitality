@@ -2160,6 +2160,10 @@ button[type="submit"] .form-loading {
   letter-spacing: 2px;
   font-weight: 700;
 }
+.accordion-1 .title span.email, .accordion-1 .title span.phone {
+  font-size: 10px;
+  font-weight: normal;
+}
 .accordion-1 .active .title {
   background: #0093d0;
   color: #fff;
@@ -2172,7 +2176,7 @@ button[type="submit"] .form-loading {
   -moz-transition: all 0.3s ease;
   opacity: 0;
 }
-.accordion-1 .content p {
+.accordion-1 .content p, .accordion-1 .content h5, .accordion-1 .content .team-members{
   padding: 13px;
 }
 .accordion-1 .active .content {
