@@ -108,6 +108,17 @@ JS
 				$reference->Status = 'Active';
 				$reference->write();
 
+				$settings = SiteConfig::current_site_config();
+				$MailChimp = new \Drewm\MailChimp($settings->APIKey);
+				$apiData = array(
+					'id'                => '0e51140d39',
+					'email'             => array('email' => $reference->Member()->Email),
+					'delete_member'     => true,
+					'send_goodbye'   	=> false,
+					'send_notify' 		=> false
+				);
+				$result = $MailChimp->call('lists/unsubscribe', $apiData);
+
 				Session::clear('JoinChallenge');
 
 			} catch(\Stripe\Error\Card $e) {
