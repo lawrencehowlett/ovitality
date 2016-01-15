@@ -119,7 +119,23 @@ class MemberExtension extends DataExtension {
 		}
 
 		$fields->push(EmailField::create('EmailConfirm', 'Email (Again)'));
-		
+
+		// set tabindex
+		$fields->dataFieldByName('FirstName')
+			->setAttribute('tabindex', 1);
+		$fields->dataFieldByName('Surname')
+			->setAttribute('tabindex', 2);
+		$fields->dataFieldByName('Email')
+			->setAttribute('tabindex', 3);
+		$fields->dataFieldByName('EmailConfirm')
+			->setAttribute('tabindex', 4);
+		$fields->dataFieldByName('Password')
+			->setAttribute('tabindex', 5);
+		$fields->dataFieldByName('Phone')
+			->setAttribute('tabindex', 6);
+		$fields->dataFieldByName('ReasonForJoining')
+			->setAttribute('tabindex', 7);
+
 		return $fields;		
 	}
 
